@@ -55,7 +55,7 @@ function searchData(target){
         if((normalizeForSearch(dataSet[i][0]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
             found.push(dataSet[i])
         }
-    }
+    } 
     return found;
 }
 
