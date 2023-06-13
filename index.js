@@ -19,7 +19,7 @@ const express = require('express');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
-const defaultcells = ['A2','D10']; // default cell range is just header row
+const defaultcells = ['A1','W222']; // default cell range is just header row
 const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
     keys.client_email, // service acc
     null,
@@ -55,7 +55,7 @@ function searchData(target){
         if((normalizeForSearch(dataSet[i][0]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
             found.push(dataSet[i])
         }
-    } 
+    }
     return found;
 }
 
