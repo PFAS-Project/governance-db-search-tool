@@ -38,11 +38,11 @@ client.authorize(function(err,tokens){ // call the authorize method, which will 
     }
 });
 
-async function gsrun(client, cellRange = defaultcells){ // function which grabs data from sheet, within a particular range
+async function gsrun(client, sheet, cellRange = defaultcells){ // function which grabs data from sheet, within a particular range
     const gsAPI = google.sheets({version:"v4", auth:client});
     const opt = {
         spreadsheetId: keys.sheet_id, 
-        range: keys.sheet_name[0] + cellRange[0] + ':' + cellRange[1]
+        range: sheet + cellRange[0] + ':' + cellRange[1]
     };
     let data = await gsAPI.spreadsheets.values.get(opt);
     let dataArray = data.data.values;
@@ -54,7 +54,9 @@ async function gsrun(client, cellRange = defaultcells){ // function which grabs 
 function searchData(target){
     found = [];
     for(i in dataSet){
-        if((normalizeForSearch(dataSet[i][0]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
+        if(dataSet[i][3] == undefined)
+            console.log(dataSet[i][0])
+        else if((normalizeForSearch(dataSet[i][3]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
             found.push(dataSet[i])
         }
     }
@@ -65,7 +67,7 @@ app.listen(port, () => {console.log("localhost:" + port)});
 
 app.use(express.static('public'));
 
-gsrun(client);
+gsrun(client, keys.sheet_names[1]);
 
 app.get('/info', async (req,res) => {
     const target = req.query.param1.toString();
