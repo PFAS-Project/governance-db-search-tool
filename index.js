@@ -16,6 +16,7 @@ To access the webpage created by index.html, type: "localhost:9001" without the 
 const {google} = require('googleapis'); // include google api
 const keys = require('./keys.json'); // import API keys
 const express = require('express');
+//const listjs = require('list.js');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
@@ -41,11 +42,12 @@ async function gsrun(client, cellRange = defaultcells){ // function which grabs 
     const gsAPI = google.sheets({version:"v4", auth:client});
     const opt = {
         spreadsheetId: keys.sheet_id, 
-        range: keys.sheet_name + cellRange[0] + ':' + cellRange[1]
+        range: keys.sheet_name[0] + cellRange[0] + ':' + cellRange[1]
     };
     let data = await gsAPI.spreadsheets.values.get(opt);
     let dataArray = data.data.values;
     dataSet = dataArray;
+    console.log(dataSet)
     return dataArray;
 }
 
@@ -69,5 +71,6 @@ app.get('/info', async (req,res) => {
     const target = req.query.param1.toString();
     //console.log(target);
     const data = searchData(target);
+    //const data = dataSet;
     res.status(200).json({data: data})
 })

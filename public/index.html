@@ -58,19 +58,20 @@
                 $("#cards").empty();
 
                 //console.log(data.data);
-
                 data.data.map((item) => {
+                    console.log(item);
                     $("#cards").append(
                     "<div class='card' style='width: 100%; '>"+
                     "<div class='card-body'>"+
-                        "<h1 class='card-title'>"+item[0]+"</h1>"+
+                        "<h1 class='card-title'>"+item[2]+"</h1>"+
                         "<h5 class='card-subtitle mb-2 text-muted'>"+item[1]+"</h5>"+
-                        "<p class='card-tex mb-2'>"+item[2]+"</p>"+
-                        "<p class='card-text mb-2'>"+item[3]+"</p>"+
+                        "<p class='card-tex mb-2'>"+item[9]+"</p>"+
+                        "<p class='card-text mb-2'>"+item[11]+"</p>"+
                         "</div>"+
                         "</div>"+
                     "</div>"
                     ); // html injection can be handled here for each search result
+                    
                 });
             }
 
