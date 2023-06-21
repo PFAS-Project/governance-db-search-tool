@@ -29,6 +29,8 @@ const client = new google.auth.JWT( // create client object, which holds the pri
 );
 var dataSet;
 
+
+
 client.authorize(function(err,tokens){ // call the authorize method, which will reach out to the api address and attempt a connection
     if(err){
         console.log(err);
@@ -47,16 +49,16 @@ async function gsrun(client, sheet, cellRange = defaultcells){ // function which
     let data = await gsAPI.spreadsheets.values.get(opt);
     let dataArray = data.data.values;
     dataSet = dataArray;
-    console.log(dataSet)
+    //console.log(dataSet)
     return dataArray;
 }
 
 function searchData(target){
     found = [];
     for(i in dataSet){
-        if(dataSet[i][3] == undefined)
+        if(dataSet[i][3] == undefined)  // added this to skip the empty and label rows, may be problematic later
             console.log(dataSet[i][0])
-        else if((normalizeForSearch(dataSet[i][3]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
+        else if((normalizeForSearch(dataSet[i][1]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
             found.push(dataSet[i])
         }
     }
@@ -67,12 +69,12 @@ app.listen(port, () => {console.log("localhost:" + port)});
 
 app.use(express.static('public'));
 
-gsrun(client, keys.sheet_names[1]);
+gsrun(client, keys.sheet_names[0]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
 
 app.get('/info', async (req,res) => {
     const target = req.query.param1.toString();
     //console.log(target);
     const data = searchData(target);
     //const data = dataSet;
-    res.status(200).json({data: data})
+    res.status(200).json({data: data}) // this object can be specified to make data presentation easier
 })

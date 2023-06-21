@@ -5,3 +5,13 @@ Federal Data is arranged:
 State Date is arranged: 
 
 [0]State,[1]Name of governance action,[2]Display title,[3]Topics of governance action,[4]Date,[5]Date of initial proposal draft (old),[6]Legislative action,[7]Companion Bill,[8]summary of action,[9]key agencies and players,[10]PFAS definition,[11]Links to primary sources,[12]Other important sources,[13]Last Updated,[14]Date of initial proposal,[15]Date of final action,[16]Effective Date,[17]Scales of action,[18]Key supporters,[19]Key opponents,[20]SMO involvement,[21]Industry involvement
+
+Data used in prototype cards:
+
+Scope
+Type of governance action
+Date
+Topics of action
+Summary
+Definition
+Sources

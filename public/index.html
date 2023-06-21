@@ -14,10 +14,12 @@
     </head>
     <body>
         <form>
-            <button id='submit' type='submit'>get info</button>
             <form>
+                <div class="container" id="" style="align-content: center;">
+                <button id='submit' type='submit'>get info</button>
                 <lanel for="target">target</lanel>
                 <input type="text" id="target" name="target" placeholder="target" value="">
+                </div>
                 <div class="container vertical-scrollable" style=" max-width: 100%;max-height: 50%; background-color: aquamarine; overflow-y: scroll;" >
                     <div class="row g-5 justify-content-evenly" style="width: 100%;">
                       <div class="col-lg" style="width: 100%; " id="cards">
@@ -38,7 +40,7 @@
             const submitBtn = document.getElementById('submit');
             const baseURL = 'http://localhost:9001/info';
             var target = "";
- 
+            
            $("#target").on('change', function() {
                 target = $(this).val();
             }
