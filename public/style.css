@@ -1,0 +1,37 @@
+.form-check .form-check-input {
+    scale: 0.75;
+}
+.form-check .form-check-label {
+    font-size: 1rem;
+    margin-left: 0rem;
+}
+#datepicker {
+    scale: 0.75;
+}
+
+/* Styling for the hover effect on navbar links */
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: goldenrod !important;
+  }
+
+  /* Remove padding on the left and right sides of the navbar */
+  .navbar-expand-md {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Add margin to the right of the last item in the navbar */
+  .navbar-nav .nav-item:last-child .nav-link {
+    margin-right: 20px;
+  }
+
+  /* Style the form-inline in the navbar */
+  .navbar-nav .form-inline {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Add margin to the right of the form control in the form-inline */
+  .navbar-nav .form-inline .form-control {
+    margin-right: 5px;
+  }
