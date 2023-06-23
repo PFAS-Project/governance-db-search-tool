@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Bootstrap</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="/Bootstrap-practice/style.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    </head>
+    <body>
+    <!-- Start of navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a href="#" class="navbar-brand">PFAS</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_supported_content">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <div class="collapse navbar-collapse" id="navbar_supported_content">
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+              <!-- Home -->
+              <li class="nav-item active">
+                <a class="nav-link text-white" href="#">Home</a>
+              </li>
+              
+              <!-- About Us Dropdown -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="about_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                <ul class="dropdown-menu" aria-labelledby="about_dropdown">
+                  <li><a class="dropdown-item" href="#">What are PFAS?</a></li>
+                  <li><a class="dropdown-item" href="#">Our Team</a></li>
+                  <li><a class="dropdown-item" href="#">Our Partners</a></li>
+                  <li><a class="dropdown-item" href="#">Contact Us</a></li>
+                </ul>
+              </li>
+              
+              <!-- Publications & Presentations Dropdown -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="publication_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Publications &amp; Presentations</a>
+                <ul class="dropdown-menu" aria-labelledby="publication_dropdown">
+                  <li><a class="dropdown-item" href="#">2022 Third National PFAS Conference</a></li>
+                  <li><a class="dropdown-item" href="#">2019 National PFAS Conference</a></li>
+                </ul>
+              </li>
+              
+              <!-- PFAS Sites & Community Resources -->
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">PFAS Sites &amp; Community Resources</a>
+              </li>
+            </ul>
+  
+            <!-- Search Form -->
+            <form class="form-inline d-flex">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search Site" aria-label="Search">
+              <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+    </nav>
+      <!-- End of navbar -->
+        
+        <!--start of container-->
+        <div class="container-fluid border ">
+        <row class="row">
+            <!--dropdown start-->
+            <div class="col-3 pt-3" style="background-color: rgb(203, 201, 201);">
+                <div class="row justify-content-around align-items-center">
+                    <div class="col">
+                        <div class="accordion" id="advanced-search">
+                           <!--start of accordion item-->
+                           <!--State or federal agency-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#advSearch1" aria-expanded="false" aria-controls="advSearch1">
+                                    State or Federal Agency
+                                    </button>
+                                    <div id="advSearch1" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="advanced-search">
+                                        <div class="accordion-body">
+                                            <form class="form-check">
+                                                <label class="form-check-label" for="state">
+                                                    State
+                                                </label>
+                                                <input class="form-check-input" type="checkbox" value="" id="state">
+                                                <select class="selectpicker" data-width="fit" multiple id="stateSelect" data-selected-text-format="count" data-actions-box="true">
+                                                    <!--state options-->
+                                                </select>
+                                            </form>
+                                            <form class="form-check">
+                                                <label class="form-check-label" for="federal">
+                                                    Federal
+                                                </label>
+                                                <input class="form-check-input" type="checkbox" value="" id="federal">
+                                                <select class="selectpicker" data-width="fit" multiple id="fedSelect" data-selected-text-format="count" data-actions-box="true">
+                                                    <!--federal options-->
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                            </div>
+                            
+                            <!--end of accordion item-->
+
+                            <!--start of accordion item-->
+                            <!--Date-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#advOption2" aria-expanded="false" aria-controls="advOption2">
+                                    Date
+                                    </button>
+                                    <div id="advOption2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="advanced-search">
+                                        <div class="accordion-body justify-content-center">
+                                            <form>
+                                                <input type="number" min="1900" max="2099" step="1" value="1990" id="dateEntry"/>
+                                                -
+                                                <input type="number" min="1900" max="2099" step="1" value="2023" id="dateEntry"/>
+                                            </form>
+                                        </div>
+                                    </div>
+                            </div>
+                            <!--end of accordion item-->
+
+                            <!--start of accordion item-->
+                            <!--Type of action-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#advOption3" aria-expanded="false" aria-controls="advOption3">
+                                    Type of Action
+                                    </button>
+                                    <div id="advOption3" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="advanced-search">
+                                        <div class="accordion-body" id="actionTypeBody">
+                                            <!--action types injected here-->
+                                        </div>
+                                    </div>
+                            </div>
+                            <!--end of accordion item-->
+
+                            <!--start of accordion item-->
+                            <!--Topic of action-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#option4" aria-expanded="false" aria-controls="option4">
+                                    Topic of action
+                                    </button>
+                                    <div id="option4" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="advanced-search">
+                                        <div class="accordion-body" id="actionTopicBody">
+                                            <!--action topics injected here-->
+                                        </div>
+                                    </div>
+                            </div>
+                            <!--end of accordion item-->
+
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!--dropdown end-->
+            
+            <!--search bar and cards start-->
+            <div class="col-9 pt-2" style="background-color: rgb(203, 201, 201) ;">
+                <div class="row g-0 m-0 p-0">
+                    <div class="col-11">
+    
+                   <!--search bar -->
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-secondary" type="submit" id="submitBtn">Search</button>
+                      </form> 
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 gy-2 overflow-auto" id="cards">
+
+                         <!--first card start-->
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title ml-3">Clean Water Standards for PFAS Act H.R.5539
+
+                                    <!--download button-->
+                                    <!--I think it would be better to use actual images hosted from the server once we integrate to the database-->
+                                    <button type="button" class="btn btn-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                                    </svg>
+                                      </button>
+                                </h2>
+
+                                <!--Actor, Legislation, Date, and Topics of Action-->
+                                <h5 class="card-actor ml-3">Federal Agency or State: EPA</h5>
+                                <h5 class="card-type ml-3">Type of Governance Action: Legislation, regulation</h5>
+                                <h5 class="card-date ml-3">Date: N/A</h5>
+                                <h5 class="card-topicsOfAction ml-3">Topics of Action: standards-setting, drinking water; Appropriations-omnibus</h5>
+                               
+                                 <!--Accordion containing Summary, Definitions, and Sources-->
+                                 <div class="container mt-4">
+                                    <div id="accordion">
+                                      <div class="card">
+                                        <a class="card-link card-header" data-toggle="collapse" href="#collapseOne" >
+                                          Summary of Action
+                                        </a>
+
+                                        <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                          <div class="card-body">
+                                            Act would require EPA to develop water quality criteria under Clean Water Act for all measurable PFAS, 
+                                            develop effluent limitations guidelines and standards for all PFAS. Identifies 9 priority industry categories that EPA must establish standards for. 
+                                            Would authorize 200 million per year for grants to assist Publicly Owned Treatment Works with Implementation.                          
+                                        </div>
+                                      </div>
+                                      <div class="card">
+                                        <a class="collapsed card-link card-header" data-toggle="collapse" href="#collapseTwo">
+                                          PFAS Definition
+                                        </a>
+                                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                          <div class="card-body">
+                                            "The term “covered perfluoroalkyl substance” means perfluorooctanoic acid, perfluorooctane sulfonic acid, 
+                                            or a salt associated with perfluorooctanoic acid or perfluorooctane sulfonic acid." (6-7)                                           
+                                         </div>
+                                        </div>
+                                      </div>
+                                      <div class="card">
+                                        <a class="card-link card-header" data-toggle="collapse" href="#collapseThree">
+                                          Sources
+                                        </a>
+                                        <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                          <div class="card-body">
+                                            <p><a href="https://www.congress.gov/bill/116th-congress/house-bill/5539/text" class="link-underline-primary">https://www.congress.gov/bill/116th-congress/house-bill/5539/text</a></p>                                            
+                                         </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>  
+
+                    <!--Second Card Start-->
+                        
+                        <div class="card mt-2"> 
+                            <div class="card-body">
+                                <h2 class="card-title ml-3">SB 1720 2020 - Florida Safe Drinking Water Act
+                                    <!--download button-->
+                                    <button type="button" class="btn btn-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                                    </svg>
+                                    </button>
+                                </h2>
+
+                                <!--Actor, Legislation, Date, and Topics of Action-->
+                                <h5 class="card-actor ml-3">Federal Agency or State: FL</h5>
+                                <h5 class="card-type ml-3">Type of Governance Action: Legislation</h5>
+                                <h5 class="card-date ml-3">Date: 2020</h5>
+                                <h5 class="topics-of-action ml-3">Topics of Action: Drinking water, Standards setting, Multi-toxic omnibus</h5>
+                                <!--Accordion containing Summary, Definitions, and Sources-->
+                        <div class="container mt-4">
+                            <div id="accordion2">
+                            <div class="card">
+                                <a class="card-link card-header" data-toggle="collapse" href="#collapseOne2" >
+                                    Summary of Action
+                                </a>
+                                <div id="collapseOne2" class="collapse" data-parent="#accordion2">
+                                <div class="card-body">
+                                    Requires the Department of Environmental Protection (DEP) to develop Maximum Contaminant Levels for PFAS and other chemicals in drinking water.  
+                                </div>
+                            </div>
+                            <div class="card">
+                                <a class="collapsed card-link card-header" data-toggle="collapse" href="#collapseTwo2">
+                                PFAS Definitions
+                                </a>
+                                <div id="collapseTwo2" class="collapse" data-parent="#accordion2">
+                                <div class="card-body">
+                                    N/A                                             
+                                </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <a class="card-link card-header" data-toggle="collapse" href="#collapseThree2">
+                                Sources
+                                </a>
+                                <div id="collapseThree2" class="collapse" data-parent="#accordion2">
+                                <div class="card-body">
+                                    <p><a href="https://www.flsenate.gov/Session/Bill/2020/1720/BillText/Filed/PDF" class="link-underline-primary">https://www.flsenate.gov/Session/Bill/2020/1720/BillText/Filed/PDF</a></p>                                            
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--sear bar and cards end-->
+        </div> 
+        <!--end of container--> 
+        <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js" async defer></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.js" async defer></script>
+        <script>
+            const submitBtn = document.getElementById('submitBtn');
+            const baseURL = 'http://localhost:9001/info';
+
+            const actionType = [
+            "AFFF",
+            "Agriculture",
+            "Air",
+            "Alternatives Assessment",
+            "Appropriations-omnibus",
+            "Chemical ban/substitution",
+            "Clean-up and disposal",
+            "Data/research requirement",
+            "Definition",
+            "Drinking water",
+            "Food packaging",
+            "Funding mechanism",
+            "Groundwater",
+            "Hazardous Designation",
+            "Investigative orders",
+            "Litigation",
+            "Local/state testing",
+            "Medical",
+            "Multi-Toxics-omnibus",
+            "PFAS Task force",
+            "PFAS-omnibus",
+            "Permitting process",
+            "Product ban/restriction",
+            "Reporting requirement",
+            "Sludge",
+            "Soil/leachate",
+            "Standards-setting"
+            ];
+            const actionTopics = [
+            "Legislation",
+            "Regulation",
+            "Non-regulatory",
+            "Peri-governmental"
+            ];
+            const states = [
+            "Alabama",
+            "Alaska",
+            "Arizona",
+            "Arkansas",
+            "California",
+            "Colorado",
+            "Connecticut",
+            "Delaware",
+            "District of Columbia",
+            "Florida",
+            "Georgia",
+            "Guam",
+            "Hawaii",
+            "Idaho",
+            "Illinois",
+            "Indiana",
+            "Iowa",
+            "Kansas",
+            "Kentuky",
+            "Louisiana",
+            "Maine",
+            "Maryland",
+            "Massachusetts",
+            "Michigan",
+            "Minnesota",
+            "Mississippi",
+            "Missouri",
+            "Montana",
+            "Nationwide",
+            "Nebraska",
+            "Nevada",
+            "New Hampshire",
+            "New Jersey",
+            "New Mexico",
+            "New York",
+            "North Carolina",
+            "North Dakota",
+            "Northern Mariana Islands",
+            "Ohio",
+            "Oklahoma",
+            "Oregon",
+            "Pennsylvania",
+            "Puerto Rico",
+            "Rhode Island",
+            "South Carolina",
+            "South Dakota",
+            "Tennessee",
+            "Texas",
+            "U.S. Virgin Islands",
+            "Utah",
+            "Vermont",
+            "Virginia",
+            "Washington",
+            "West Virginia",
+            "Wisconsin",
+            "Wyoming"
+            ]
+            const federal = [
+            "example1",
+            "example2",
+            "example3"
+            ]
+            const stateSel = document.getElementById("state");
+
+            const fedSel = document.getElementById("federal");
+
+            $("#stateSelect").empty();
+
+            $("#fedSelect").empty();
+
+            states.map((item) =>{
+                $("#stateSelect").append(
+                    "<option>" + item + "</option>"
+                )
+            });
+
+            federal.map((item) =>{
+                $("#fedSelect").append(
+                    "<option>" + item + "</option>"
+                )
+            });
+
+            $("#actionTypeBody").empty();
+            actionType.map((item) =>{
+                $("#actionTypeBody").append(
+                    "<form class='form-check'>" +
+                    "<label class='form-check-label' for='" + item + "'>" +
+                        item +
+                    "</label>" +
+                    "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
+                    "</form>"
+                )
+            });
+
+            $("#actionTopicBody").empty();
+            actionTopics.map((item) =>{
+                $("#actionTopicBody").append(
+                    "<form class='form-check'>" +
+                    "<label class='form-check-label' for='" + item + "'>" +
+                        item +
+                    "</label>" +
+                    "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
+                    "</form>"
+                )
+            });
+
+
+            var target = "";
+            
+           $("#target").on('change', function() {
+                target = $(this).val();
+            }
+            );
+            
+            $("#submit").on('click', getInfo);
+
+            async function getInfo(e) {
+                e.preventDefault();
+                const searchParams = new URLSearchParams();
+                searchParams.append('param1', target);
+                const url = `${baseURL}?${searchParams.toString()}`;
+
+                const res = await fetch(url, { method: 'GET' });
+
+                const data = await res.json();
+                console.log(data);
+                
+            }
+        </script>
+    </body>
+</html>
