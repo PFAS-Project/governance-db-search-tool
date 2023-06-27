@@ -1,3 +1,8 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
 .form-check .form-check-input {
     scale: 0.75;
 }

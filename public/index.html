@@ -18,6 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
   </head>
   <body>
@@ -73,7 +74,7 @@
       <!-- End of navbar -->
         
         <!--start of container-->
-        <div class="container-fluid border ">
+        <div class="container-fluid border">
         <row class="row">
             <!--dropdown start-->
             <div class="col-3 pt-3" style="background-color: rgb(203, 201, 201);">
@@ -125,9 +126,9 @@
                                     <div id="advOption2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="advanced-search">
                                         <div class="accordion-body justify-content-center">
                                             <form>
-                                                <input type="number" min="1900" max="2099" step="1" value="1990" id="dateEntry"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="1990" id="dateStart"/>
                                                 -
-                                                <input type="number" min="1900" max="2099" step="1" value="2023" id="dateEntry"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="2023" id="dateEnd"/>
                                             </form>
                                         </div>
                                     </div>
@@ -165,7 +166,20 @@
                                     </div>
                             </div>
                             <!--end of accordion item-->
-
+                            <!--start of accordion item-->
+                            <!--sort by options-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#option5" aria-expanded="false" aria-controls="option5">
+                                    Sort by
+                                    </button>
+                                    <div id="option5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="advanced-search">
+                                        <div class="accordion-body" id="sort-by">
+                                            <!-- s<button class="sort asc">sort by title</button> -->
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,7 +194,7 @@
     
                    <!--search bar -->
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control me-2" type="search" id="target" placeholder="Search" aria-label="Search">
                         <button class="btn btn-secondary" type="submit" id="submitBtn">Search</button>
                     </form> 
                     </div>  
@@ -190,7 +204,7 @@
                     </div>
                 </div>
             <!--sear bar and cards end-->
-        </div> 
+            </div> 
         <!--end of container--> 
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -296,13 +310,16 @@
         "Wyoming"
         ]
         const federal = [
-        "example1",
-        "example2",
-        "example3"
+        
         ]
         const stateSel = document.getElementById("state");
-
         const fedSel = document.getElementById("federal");
+        var stateSelVal = $('#stateSelect').val(); // default vaules for search
+        var fedSelVal = $('#fedSelect').val();
+        var dateStart = $('#dateStart').val();
+        var dateEnd = $('#dateEnd').val();
+        var actionTypeVal = [];
+        var actionTopicVal = [];
 
         $("#stateSelect").empty();
 
@@ -320,6 +337,30 @@
             )
         });
 
+
+        /*
+        start of event listeners
+        */
+        $('#stateSelect').on('change',function() {
+            stateSelVal = $(this).val();
+            console.log(stateSelVal);
+        });
+        $('#fedSelect').on('change',function() {
+            fedSelVal = $(this).val();
+            console.log(fedSelVal);
+        });
+        $('#dateStart').on('change',function() {
+            dateStart = $(this).val();
+            console.log(dateStart);
+        });
+        $('#dateEnd').on('change',function() {
+            dateEnd = $(this).val();
+            console.log(dateEnd);
+        });
+        /*
+        end of event listeners
+        */
+       
         $("#actionTypeBody").empty();
         actionType.map((item) =>{
             $("#actionTypeBody").append(
@@ -346,13 +387,21 @@
 
         $("#target").on("change", function () {
             target = $(this).val();
+            console.log(target)
         });
+
         $("#submitBtn").on("click", getInfo);
 
         async function getInfo(e) {
             e.preventDefault();
             const searchParams = new URLSearchParams();
-            searchParams.append("param1", target);
+            searchParams.append("param1", target); // text search entry
+            searchParams.append("param2", stateSelVal)
+            searchParams.append("param3", fedSelVal)
+            searchParams.append("param4", dateStart)
+            searchParams.append("param5", dateEnd)
+            searchParams.append("param6", actionTypeVal)
+            searchParams.append("param7", actionTopicVal)
             const url = `${baseURL}?${searchParams.toString()}`;
 
             const res = await fetch(url, { method: "GET" });
@@ -363,7 +412,7 @@
             //console.log(data.data);
             accordionID = 0;
             data.data.map((item) => {
-            console.log(item);
+            //console.log(item);
             $("#search_results").append(
                 "<div class='card'> " +
                 "    <div class='card-body'>" +
@@ -484,9 +533,9 @@
                 "'>" +
                 "                  <div class='card-body'>" +
                 "                    <h6><p>Primary Sources:</p></h6>" +
-                "                    <p><a href='' class='link-underline-primary' target='_blank'>"+item[12]+"<!--***primary sources links goes here and in href***--></a></p>" +
+                "                    <p><a href='"+item[12]+"' class='link-underline-primary' target='_blank'>"+item[12]+"<!--***primary sources links goes here and in href***--></a></p>" +
                 "                    <h6><p>Other Impotant Sources:</p></h6>" +
-                "                    <p><a href='' class='link-underline-primary' target='_blank'>"+item[13]+"<!--***other important sources links goes here and in href***--></a></p>" +
+                "                    <p><a href='"+item[13]+"' class='link-underline-primary' target='_blank'>"+item[13]+"<!--***other important sources links goes here and in href***--></a></p>" +
                 "                  </div>" +
                 "                </div>" +
                 "            </div>" +
@@ -504,6 +553,6 @@
             accordionID++;
             });
         }
-    </script>
+        </script>
   </body>
 </html>

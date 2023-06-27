@@ -20,7 +20,7 @@ const express = require('express');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
-const defaultcells = ['A1','W222']; // default cell range is just header row
+const defaultcells = ['A3','W222']; // default cell range is just header row
 const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
     keys.client_email, // service acc
     null,
@@ -69,7 +69,7 @@ app.listen(port, () => {console.log("localhost:" + port)});
 
 app.use(express.static('public'));
 
-gsrun(client, keys.sheet_names[0]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
+gsrun(client, keys.sheet_names[1]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
 
 app.get('/info', async (req,res) => {
     const target = req.query.param1.toString();
