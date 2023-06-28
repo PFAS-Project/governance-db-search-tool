@@ -217,34 +217,34 @@
         var target = "";
         var accordionID = 0;
         const actionType = [
-            "AFFF",
-            "Agriculture",
-            "Air",
-            "Alternatives Assessment",
-            "Appropriations-omnibus",
-            "Chemical ban/substitution",
-            "Clean-up and disposal",
-            "Data/research requirement",
-            "Definition",
-            "Drinking water",
-            "Food packaging",
-            "Funding mechanism",
-            "Groundwater",
-            "Hazardous Designation",
-            "Investigative orders",
-            "Litigation",
-            "Local/state testing",
-            "Medical",
-            "Multi-Toxics-omnibus",
-            "PFAS Task force",
-            "PFAS-omnibus",
-            "Permitting process",
-            "Product ban/restriction",
-            "Reporting requirement",
-            "Sludge",
-            "Soil/leachate",
-            "Standards-setting"
-            ];
+        "AFFF",
+        "Agriculture",
+        "Air",
+        "Alternatives Assessment",
+        "Appropriations-omnibus",
+        "Chemical ban/substitution",
+        "Clean-up and disposal",
+        "Data/research requirement",
+        "Definition",
+        "Drinking water",
+        "Food packaging",
+        "Funding mechanism",
+        "Groundwater",
+        "Hazardous Designation",
+        "Investigative orders",
+        "Litigation",
+        "Local/state testing",
+        "Medical",
+        "Multi-Toxics-omnibus",
+        "PFAS Task force",
+        "PFAS-omnibus",
+        "Permitting process",
+        "Product ban/restriction",
+        "Reporting requirement",
+        "Sludge",
+        "Soil/leachate",
+        "Standards-setting"
+        ];
         const actionTopics = [
         "Legislation",
         "Regulation",
@@ -310,12 +310,7 @@
         "Wyoming"
         ]
         const federal = [
-        "Congress",
-        "DoD",
-        "DoE",
-        "EPA",
-        "FDA",
-        "USGS"
+        
         ]
         const stateSel = document.getElementById("state");
         const fedSel = document.getElementById("federal");
@@ -346,6 +341,7 @@
         /*
         start of event listeners
         */
+       
         $('#stateSelect').on('change',function() {
             stateSelVal = $(this).val();
             console.log(stateSelVal);
@@ -362,6 +358,7 @@
             dateEnd = $(this).val();
             console.log(dateEnd);
         });
+
         /*
         end of event listeners
         */
