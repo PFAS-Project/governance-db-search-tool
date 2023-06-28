@@ -1,8 +1,12 @@
-To run this web tool:
-- [Install node.js](https://nodejs.org/en/download)
+To install and run this web tool in a development environment:
+- Install [node.js](https://nodejs.org/en/download)
+- Install [Visual Studio Code](https://code.visualstudio.com/download)
+- Install and run [GitHub Desktop](https://desktop.github.com/)  
+- Clone https://github.com/PFAS-Project/governance-db-search-tool.git 
+- Open the project in Visual Studio Code
 - Get `keys.json` from Google Drive and place it in this folder
-- Open a terminal and type `npm install`
-- In the terminal, type `npm run dev`
+- Open a terminal and type `npm install` to install dependencies
+- In the terminal, type `npm run dev` to run the web server
 - In the web browser, navigate to [localhost:9001](http://localhost:9001)
 - Use CTRL-C to quit
 
