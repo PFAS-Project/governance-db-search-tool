@@ -390,10 +390,14 @@
             console.log(target)
         });
 
-        $("#submitBtn").on("click", getInfo);
+        $("#submitBtn").on("click", onSubmit);
 
-        async function getInfo(e) {
+        async function onSubmit(e) {
             e.preventDefault();
+            getInfo();
+        }
+
+        async function getInfo() {
             const searchParams = new URLSearchParams();
             searchParams.append("param1", target); // text search entry
             searchParams.append("param2", stateSelVal)
@@ -553,6 +557,7 @@
             accordionID++;
             });
         }
+        getInfo();
         </script>
   </body>
 </html>
