@@ -4,6 +4,7 @@ To run this web tool:
 - Open a terminal and type `npm install`
 - In the terminal, type `npm run dev`
 - In the web browser, navigate to [localhost:9001](http://localhost:9001)
+- Use CTRL-C to quit
 
 References:
 - [Node.js tutorial in Visual Studio Code](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial)
