@@ -22,44 +22,38 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
   </head>
   <body>
+
     <!-- Start of navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+    <!--Allows dropdown to be infront of sticky elements-->
+    <style>
+        .nav-item {
+            z-index: 1021;
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-md" style="background-color: rgb(189, 225, 70);"> <!--navbar-dark bg-dark-->
         <div class="container-fluid">
-          <a href="#" class="navbar-brand">PFAS</a>
+          <a href="#" class="navbar-brand" style="color: rgb(84, 84, 84);">PFAS</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_supported_content">
             <span class="navbar-toggler-icon"></span>
           </button>
   
           <div class="collapse navbar-collapse" id="navbar_supported_content">
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-              <!-- Home -->
-              <li class="nav-item active">
-                <a class="nav-link text-white" href="#">Home</a>
-              </li>
               
-              <!-- About Us Dropdown -->
+              <!-- About This Database Dropdown -->
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="about_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                <a class="nav-link dropdown-toggle" style="color: rgb(84, 84, 84)" href="#" id="about_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About This Database</a> <!--text-white-->
                 <ul class="dropdown-menu" aria-labelledby="about_dropdown">
-                  <li><a class="dropdown-item" href="#">What are PFAS?</a></li>
-                  <li><a class="dropdown-item" href="#">Our Team</a></li>
-                  <li><a class="dropdown-item" href="#">Our Partners</a></li>
-                  <li><a class="dropdown-item" href="#">Contact Us</a></li>
+                  <li><a class="dropdown-item" style="color: rgb(84, 84, 84)" href="#">What are PFAS?</a></li>
+                  <li><a class="dropdown-item" style="color: rgb(84, 84, 84)" href="#">Our Team</a></li>
                 </ul>
               </li>
               
-              <!-- Publications & Presentations Dropdown -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="publication_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Publications &amp; Presentations</a>
-                <ul class="dropdown-menu" aria-labelledby="publication_dropdown">
-                  <li><a class="dropdown-item" href="#">2022 Third National PFAS Conference</a></li>
-                  <li><a class="dropdown-item" href="#">2019 National PFAS Conference</a></li>
-                </ul>
-              </li>
-              
-              <!-- PFAS Sites & Community Resources -->
+              <!-- PFAS Project Lab -->
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">PFAS Sites &amp; Community Resources</a>
+                <a class="nav-link" style="color: rgb(84, 84, 84)" href="https://pfasproject.com" target="_blank">PFAS Project Lab</a>  <!--text-white-->
               </li>
             </ul>
   
@@ -76,9 +70,47 @@
         <!--start of container-->
         <div class="container-fluid border">
         <row class="row">
+
+            <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191);">  <!--rgb(203, 201, 201)-->
+                        
+                <!--search bar -->
+                <form class="d-flex col-11 mt-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-secondary" type="submit">Search</button>
+              </form> 
+              
+              <!--Export All Button-->
+              <div class="container" style="background-color: rgb(191, 191, 191);">  <!--rgb(203, 201, 201)-->
+                <div class="row">
+                    <div class="col-11 mt-3 text-right">
+                        <button type='button' class='btn btn-secondary'>Export All
+
+                            <!--
+                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'>
+                                <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'></path>
+                                <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'></path>
+                            </svg> -->
+                        </button>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Function for sticky top to not overlap-->
+            <style>
+                @supports ((position: -webkit-sticky) or (position: sticky)) {
+                 .sticky-top-filter {
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: 70px;
+                    z-index: 1019;
+                    }
+                } 
+            </style>
+
             <!--dropdown start-->
-            <div class="col-3 pt-3" style="background-color: rgb(203, 201, 201);">
-                <div class="row justify-content-around align-items-center">
+            <div class="col-3 pt-2" style="background-color: rgb(191, 191, 191);"> <!--rgb(203, 201, 201)-->
+                <div class="row justify-content-around align-items-center sticky-top-filter">
                     <div class="col">
                         <div class="accordion" id="advanced-search">
                            <!--start of accordion item-->
@@ -187,18 +219,15 @@
             </div>
             <!--dropdown end-->
             
-            <!--search bar and cards start-->
-            <div class="col-9 pt-2" style="background-color: rgb(203, 201, 201) ;">
+            <!--cards start-->
+            
+            <div class="col-9" style="background-color: rgb(191, 191, 191) ;"> <!--rgb(204, 201, 201)-->
                 <div class="row g-0 m-0 p-0">
                     <div class="col-11">
     
-                   <!--search bar -->
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" id="target" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-secondary" type="submit" id="submitBtn">Search</button>
-                    </form> 
-                    </div>  
-                </div>
+                        <!--search bar -->
+
+                    </div>
                 <div class="row">
                     <div class="col-lg-12 gy-2 overflow-auto" id="search_results">  
                     </div>
