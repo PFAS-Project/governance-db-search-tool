@@ -24,17 +24,9 @@
   <body>
 
     <!-- Start of navbar -->
-
-    <!--Allows dropdown to be infront of sticky elements-->
-    <style>
-        .nav-item {
-            z-index: 1021;
-        }
-    </style>
-
     <nav class="navbar navbar-expand-md" style="background-color: rgb(189, 225, 70);"> <!--navbar-dark bg-dark-->
         <div class="container-fluid">
-          <a href="#" class="navbar-brand" style="color: rgb(84, 84, 84);">PFAS</a>
+          <a href="#" class="navbar-brand" style="color: rgb(84, 84, 84);">PFAS Governance Database</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_supported_content">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -43,17 +35,38 @@
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
               
               <!-- About This Database Dropdown -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" style="color: rgb(84, 84, 84)" href="#" id="about_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About This Database</a> <!--text-white-->
-                <ul class="dropdown-menu" aria-labelledby="about_dropdown">
-                  <li><a class="dropdown-item" style="color: rgb(84, 84, 84)" href="#">What are PFAS?</a></li>
-                  <li><a class="dropdown-item" style="color: rgb(84, 84, 84)" href="#">Our Team</a></li>
-                </ul>
-              </li>
+              <li class="navbar">
+                <a class="nav-link " data-bs-toggle="modal" style="color: rgb(84, 84, 84)" href="#modalref">About This Database</a> 
+                    <div class="modal fade" id="modalref" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
+                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
+                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
+                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
+                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
+                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
+                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
+                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
+                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
+                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
+                            </div>
+
+                          </div>
+                        </div>
+                      
+
               
               <!-- PFAS Project Lab -->
-              <li class="nav-item">
-                <a class="nav-link" style="color: rgb(84, 84, 84)" href="https://pfasproject.com" target="_blank">PFAS Project Lab</a>  <!--text-white-->
+              <li class="navbar">
+                <a class="nav-link" style="color: rgb(84, 84, 84)" href="https://pfasproject.com" target="_blank">PFAS Project Lab</a> 
               </li>
             </ul>
   
@@ -71,16 +84,16 @@
         <div class="container-fluid border">
         <row class="row">
 
-            <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191);">  <!--rgb(203, 201, 201)-->
+            <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191);"> 
                         
                 <!--search bar -->
                 <form class="d-flex col-11 mt-3" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-secondary" type="submit">Search</button>
+                <button class="btn btn-secondary" style="color: rgb(84, 84, 84) type="submit">Search</button>
               </form> 
               
               <!--Export All Button-->
-              <div class="container" style="background-color: rgb(191, 191, 191);">  <!--rgb(203, 201, 201)-->
+              <div class="container"> 
                 <div class="row">
                     <div class="col-11 mt-3 text-right">
                         <button type='button' class='btn btn-secondary'>Export All
@@ -109,7 +122,7 @@
             </style>
 
             <!--dropdown start-->
-            <div class="col-3 pt-2" style="background-color: rgb(191, 191, 191);"> <!--rgb(203, 201, 201)-->
+            <div class="col-3 pt-2" style="background-color: rgb(191, 191, 191);"> 
                 <div class="row justify-content-around align-items-center sticky-top-filter">
                     <div class="col">
                         <div class="accordion" id="advanced-search">
@@ -221,7 +234,7 @@
             
             <!--cards start-->
             
-            <div class="col-9" style="background-color: rgb(191, 191, 191) ;"> <!--rgb(204, 201, 201)-->
+            <div class="col-9" style="background-color: rgb(191, 191, 191) ;"> 
                 <div class="row g-0 m-0 p-0">
                     <div class="col-11">
     
