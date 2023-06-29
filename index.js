@@ -1,18 +1,3 @@
-// https://youtu.be/MiPpQzW_ya0
-// https://youtu.be/5TxF9PQaq4U
-
-/*
-The first youtube video is a good explanation of setting up the API, follow it to make this work with your own
-sample spreadsheet.
-To utilize this you will need to create a google spreadsheet and service account. 
-Once you acquire your API key, I suggest renaming it "keys.json" and adding keys sheet_id and sheet_name
-The google cloud console used for creating the service account can be accessed at console.cloud.google.com
-once the account is created make sure to share the spreadsheet with the service account.
-Make sure you have npm installed on your machine. 
-To run the javascript below, type: "npm run dev" without the quotes into the terminal. 
-To access the webpage created by index.html, type: "localhost:9001" without the quotes into your browser.
-*/
-
 const {google} = require('googleapis'); // include google api
 const keys = require('./keys.json'); // import API keys
 const express = require('express');

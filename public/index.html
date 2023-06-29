@@ -636,34 +636,14 @@
             console.log(target)
         });
 
-        // var dataSet = getInfo();
+        $("#submitBtn").on("click", onSubmit);
 
-        $("#submitBtn").on("click", getInfo);
-
-
-        // function addData(e){
-        //     console.log(dataSet);
-        //     e.preventDefault();
-        //     dataSet.result.map((item)=>{
-        //         dataList.add({
-        //             Title: item[1], 
-        //             AgencyOrState: item[0], 
-        //             Date: item[5], 
-        //             ActionType: item[3], 
-        //             ActionTopic: item[4], 
-        //             AgenciesAndPlayers: item[10], 
-        //             Summary: item[9], 
-        //             Legislative: item[7], 
-        //             CompanionBills: item[8], 
-        //             PFASDef: item[11], 
-        //             Sources: item[12]
-        //         });
-        //         accordionID++;
-        //     });
-        // }
-
-        async function getInfo(e) {
+        async function onSubmit(e) {
             e.preventDefault();
+            getInfo();
+        }
+
+        async function getInfo() {
             const searchParams = new URLSearchParams();
             searchParams.append("param1", target); // text search entry
             // searchParams.append("param2", stateSelVal)
@@ -830,6 +810,7 @@
             // accordionID++;
             // });
         }
+        getInfo();
         </script>
   </body>
 </html>
