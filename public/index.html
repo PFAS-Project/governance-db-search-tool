@@ -484,13 +484,13 @@
 
         states.map((item) =>{
             $("#stateSelect").append(
-                "<option>" + item + "</option>"
+                "<option selected >" + item + "</option>"
             )
         });
 
         federal.map((item) =>{
             $("#fedSelect").append(
-                "<option>" + item + "</option>"
+                "<option selected>" + item + "</option>"
             )
         });
 
@@ -560,21 +560,36 @@
           dataList.search($('#searchTerm').val());
           filterDate();
           filterState();
+          filterFederal();
         });
 
-        // function filterState(){
-        //   dataList.filter((item)=>{
-        //     stateSelVal.forEach((term)=>{
-        //       console.log(term);
-        //       console.log(item.values().AgencyOrState);
-        //       if (item.values().AgencyOrState == term){
-        //         return true;
-        //       } else {
-        //         return false;
-        //       }
-        //     })
-        //   })
-        // };
+        // function compareEach (item, term){
+        //   if (item == term){
+        //     return true;
+        //   } else {
+        //     return false;
+        //   }
+        // }
+
+        function filterState(){
+          dataList.filter((item)=>{
+            if (stateSelVal.includes(item.values().AgencyOrState)){
+              return true;
+            } else {
+              return false;
+            }
+          })
+        };
+
+        function filterFederal(){
+          dataList.filter((item)=>{
+            if (fedSelVal.includes(item.values().AgencyOrState)){
+              return true;
+            } else {
+              return false;
+            }
+          })
+        };
 
         function filterDate(){
           dataList.filter((item)=>{
@@ -585,7 +600,7 @@
             }
           })
 
-        }
+        };
 
         async function getInfo() {
             const searchParams = new URLSearchParams();
