@@ -86,9 +86,9 @@
             <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191);"> 
                         
                 <!--search bar -->
-                <form class="d-flex col-11 mt-3" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-secondary" style="color: rgb(255, 255, 255)" type="submit">Search</button>
+              <form class="d-flex col-11 mt-3" role="search" id="basicSearch">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchTerm">
+                <button class="btn btn-secondary" style="color: rgb(255, 255, 255)" type="submit" id="submitBtn">Search</button>
               </form> 
               
               <!--Export All Button-->
@@ -413,62 +413,59 @@
         "Peri-governmental"
         ];
         const states = [
-        "Alabama",
-        "Alaska",
-        "Arizona",
-        "Arkansas",
-        "California",
-        "Colorado",
-        "Connecticut",
-        "Delaware",
-        "District of Columbia",
-        "Florida",
-        "Georgia",
-        "Guam",
-        "Hawaii",
-        "Idaho",
-        "Illinois",
-        "Indiana",
-        "Iowa",
-        "Kansas",
-        "Kentuky",
-        "Louisiana",
-        "Maine",
-        "Maryland",
-        "Massachusetts",
-        "Michigan",
-        "Minnesota",
-        "Mississippi",
-        "Missouri",
-        "Montana",
-        "Nationwide",
-        "Nebraska",
-        "Nevada",
-        "New Hampshire",
-        "New Jersey",
-        "New Mexico",
-        "New York",
-        "North Carolina",
-        "North Dakota",
-        "Northern Mariana Islands",
-        "Ohio",
-        "Oklahoma",
-        "Oregon",
-        "Pennsylvania",
-        "Puerto Rico",
-        "Rhode Island",
-        "South Carolina",
-        "South Dakota",
-        "Tennessee",
-        "Texas",
-        "U.S. Virgin Islands",
-        "Utah",
-        "Vermont",
-        "Virginia",
-        "Washington",
-        "West Virginia",
-        "Wisconsin",
-        "Wyoming"
+        "AL",
+        "AK",
+        "AZ",
+        "AR",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "DC",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "IA",
+        "KS",
+        "KY",
+        "LA",
+        "ME",
+        "MD",
+        "MA",
+        "MI",
+        "MN",
+        "MS",
+        "MO",
+        "MT",
+        "NE",
+        "NV",
+        "NH",
+        "NJ",
+        "NM",
+        "NY",
+        "NC",
+        "ND",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "PR",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VT",
+        "VA",
+        "VI",
+        "WA",
+        "WV",
+        "WI",
+        "WY"
         ]
         const federal = [ 
         ]
@@ -536,7 +533,7 @@
         });
 
         $("#actionTopicBody").empty();
-        actionTopics.map((item) =>{
+        actionTopics.map((item) =>
             $("#actionTopicBody").append(
                 "<form class='form-check'>" +
                 "<label class='form-check-label' for='" + item + "'>" +
@@ -545,18 +542,49 @@
                 "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
                 "</form>"
             )
-        });
+        );
 
-        $("#target").on("change", function () {
-            target = $(this).val();
-            console.log(target)
-        });
+        // $("#target").on("change", function () {
+        //     target = $(this).val();
+        //     console.log(target)
+        // });
 
-        $("#submitBtn").on("click", onSubmit);
+        // $("#submitBtn").on("click", onSubmit);
 
         async function onSubmit(e) {
             e.preventDefault();
-            getInfo();
+            //getInfo();
+        }
+
+        $('#basicSearch').on("submit", function() {
+          dataList.search($('#searchTerm').val());
+          filterDate();
+          filterState();
+        });
+
+        // function filterState(){
+        //   dataList.filter((item)=>{
+        //     stateSelVal.forEach((term)=>{
+        //       console.log(term);
+        //       console.log(item.values().AgencyOrState);
+        //       if (item.values().AgencyOrState == term){
+        //         return true;
+        //       } else {
+        //         return false;
+        //       }
+        //     })
+        //   })
+        // };
+
+        function filterDate(){
+          dataList.filter((item)=>{
+            if ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart)){
+              return true;
+            } else {
+              return false;
+            }
+          })
+
         }
 
         async function getInfo() {
