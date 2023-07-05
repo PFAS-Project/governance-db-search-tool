@@ -137,19 +137,19 @@
                                     <div id="advSearch1" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="advanced-search">
                                         <div class="accordion-body">
                                             <form class="form-check">
-                                                <label class="form-check-label" for="state">
+                                                <label class="form-check-label" for="stateSelect">
                                                     State
                                                 </label>
-                                                <input class="form-check-input" type="checkbox" value="" id="state">
+                                                <!-- <input class="form-check-input" type="checkbox" value="" id="state"> -->
                                                 <select class="selectpicker" data-width="fit" multiple id="stateSelect" data-selected-text-format="count" data-actions-box="true">
                                                     <!--state options-->
                                                 </select>
                                             </form>
                                             <form class="form-check">
-                                                <label class="form-check-label" for="federal">
+                                                <label class="form-check-label" for="fedSelect">
                                                     Federal
                                                 </label>
-                                                <input class="form-check-input" type="checkbox" value="" id="federal">
+                                                <!-- <input class="form-check-input" type="checkbox" value="" id="federal"> -->
                                                 <select class="selectpicker" data-width="fit" multiple id="fedSelect" data-selected-text-format="count" data-actions-box="true">
                                                     <!--federal options-->
                                                 </select>
@@ -228,7 +228,7 @@
                                     <div id="option5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="sort-by">
                                             <div class="row">
-                                                <span class="sort" data-sort="Date">Sort by: Date</span>
+                                                <span class="sort btn btn-secondary" data-sort="Date">Sort by: Date</span>
                                             </div>
                                         </div>
                                     </div>
@@ -476,6 +476,7 @@
         "WY"
         ]
         const federal = [ 
+
         ]
         const stateSel = document.getElementById("state");
         const fedSel = document.getElementById("federal");
@@ -587,7 +588,6 @@
           dataList.search($('#searchTerm').val());
           filterDate();
           filterState();
-          filterFederal();
           filterType();
           filterTopic();
           filterFederal(); //doesnt currently work bc search terms provided do not match the data
@@ -602,6 +602,10 @@
         // }
 
         function filterTopic(){
+          if(actionTopicVal == ""){
+            return;
+          }
+          console.log("running search topic with: "+actionTopicVal)
           dataList.filter((item)=>{
             if (actionTopicVal.includes(item.values().ActionTopic)){
               return true;
@@ -612,6 +616,10 @@
         }
 
         function filterType(){
+          if(actionTypeVal == ""){
+            return;
+          }
+          console.log("running search with: "+actionTypeVal)
           dataList.filter((item)=>{
             if (actionTypeVal.includes(item.values().ActionType)){
               return true;
@@ -622,6 +630,10 @@
         };
 
         function filterState(){
+          if(stateSelVal == ""){
+            return;
+          }
+          console.log("running search with: "+stateSelVal)
           dataList.filter((item)=>{
             if (stateSelVal.includes(item.values().AgencyOrState)){
               return true;
@@ -632,6 +644,10 @@
         };
 
         function filterFederal(){
+          if(fedSelVal == ""){
+            return;
+          }
+          console.log("running search with: "+fedSelVal)
           dataList.filter((item)=>{
             if (fedSelVal.includes(item.values().AgencyOrState)){
               return true;
@@ -642,6 +658,7 @@
         };
 
         function filterDate(){
+          console.log("running search with: "+dateStart+" and "+dateEnd)
           dataList.filter((item)=>{
             if ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart)){
               return true;
