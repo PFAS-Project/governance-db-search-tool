@@ -69,18 +69,14 @@
               </li>
             </ul>
   
-            <!-- Search Form
-            <form class="form-inline d-flex">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search Site" aria-label="Search">
-              <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-            </form> -->
+            <!-- Search Form -->
           </div>
         </div>
     </nav>
       <!-- End of navbar -->
         
         <!--start of container-->
-        <div class="container-fluid border">
+        <div class="container-fluid border" id="content">
         <row class="row">
 
             <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191);"> 
@@ -124,6 +120,11 @@
             <div class="col-3 pt-2" style="background-color: rgb(191, 191, 191);"> 
                 <div class="row justify-content-around align-items-center sticky-top-filter">
                     <div class="col">
+                        <div class="row mx-1">
+                            <!-- <button id="filterReset" class="btn btn-secondary" type="button">
+                              Reset Filters
+                            </button> -->
+                        </div>
                         <div class="accordion" id="advanced-search">
                            <!--start of accordion item-->
                            <!--State or federal agency-->
@@ -190,6 +191,9 @@
                                     <div id="advOption3" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="actionTypeBody">
                                             <!--action types injected here-->
+                                            <select class="selectpicker" data-width="fit" multiple id="typeSelect" data-selected-text-format="count" data-actions-box="true">
+                                              <!--type options-->
+                                          </select>
                                         </div>
                                     </div>
                             </div>
@@ -206,6 +210,9 @@
                                     <div id="option4" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="actionTopicBody">
                                             <!--action topics injected here-->
+                                            <select class="selectpicker" data-width="fit" multiple id="topicSelect" data-selected-text-format="count" data-actions-box="true">
+                                              <!--topic options-->
+                                          </select>
                                         </div>
                                     </div>
                             </div>
@@ -216,11 +223,13 @@
                                 <h2 class="accordion-header" id="headingFive">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#option5" aria-expanded="false" aria-controls="option5">
-                                    Sort by
+                                    Sort
                                     </button>
                                     <div id="option5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="sort-by">
-                                            <!-- s<button class="sort asc">sort by title</button> -->
+                                            <div class="row">
+                                                <span class="sort" data-sort="Date">Sort by: Date</span>
+                                            </div>
                                         </div>
                                     </div>
                             </div>
@@ -237,7 +246,7 @@
                 <div class="row">
                     <div class="col-lg-12 gy-2 overflow-auto" id="search_results">
                         <div class="list row gy-3 align-items-center">
-
+                            <!--cards injected here-->
                         </div>
                     </div>
                 </div>
@@ -368,16 +377,15 @@
                 }
         };
         var values = []; // list.js values (should stay empty)
-        var dataList = new List("search_results", options, values); // list.js object
+        var dataList = new List("content", options, values); // list.js object
 
-        
         const name = document.getElementById("name");
         const email = document.getElementById("email");
         const ID = document.getElementById("id");
         const submitBtn = document.getElementById("submitBtn");
         const baseURL = "http://localhost:9001/info";
         var target = "";
-        const actionType = [
+        const actionTopics = [
         "AFFF",
         "Agriculture",
         "Air",
@@ -406,7 +414,7 @@
         "Soil/leachate",
         "Standards-setting"
         ];
-        const actionTopics = [
+        const actionType = [
         "Legislation",
         "Regulation",
         "Non-regulatory",
@@ -484,16 +492,27 @@
 
         states.map((item) =>{
             $("#stateSelect").append(
-                "<option selected >" + item + "</option>"
+                "<option>" + item + "</option>" // something about having these as default to selected breaks the search filters
             )
         });
 
         federal.map((item) =>{
             $("#fedSelect").append(
-                "<option selected>" + item + "</option>"
+                "<option>" + item + "</option>"
             )
         });
 
+        actionType.map((item) =>{
+            $("#typeSelect").append(
+                "<option>" + item + "</option>"
+            )
+        });
+
+        actionTopics.map((item) =>{
+            $("#topicSelect").append(
+                "<option>" + item + "</option>"
+            )
+        });
 
         /*
         start of event listeners
@@ -515,34 +534,42 @@
             dateEnd = $(this).val();
             console.log(dateEnd);
         });
-
+        $('#typeSelect').on('change',function() {
+            actionTypeVal = $(this).val();
+            console.log(actionTypeVal);
+        });
+        $('#topicSelect').on('change',function() {
+            actionTopicVal = $(this).val();
+            console.log(actionTopicVal);
+        });
+        // $('#')
         /*
         end of event listeners
         */
        
-        $("#actionTypeBody").empty();
-        actionType.map((item) =>{
-            $("#actionTypeBody").append(
-                "<form class='form-check'>" +
-                "<label class='form-check-label' for='" + item + "'>" +
-                    item +
-                "</label>" +
-                "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
-                "</form>"
-            )
-        });
+        // $("#actionTypeBody").empty();
+        // actionType.map((item) =>{
+        //     $("#actionTypeBody").append(
+        //         "<form class='form-check'>" +
+        //         "<label class='form-check-label' for='" + item + "'>" +
+        //             item +
+        //         "</label>" +
+        //         "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
+        //         "</form>"
+        //     )
+        // });
 
-        $("#actionTopicBody").empty();
-        actionTopics.map((item) =>
-            $("#actionTopicBody").append(
-                "<form class='form-check'>" +
-                "<label class='form-check-label' for='" + item + "'>" +
-                    item +
-                "</label>" +
-                "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
-                "</form>"
-            )
-        );
+        // $("#actionTopicBody").empty();
+        // actionTopics.map((item) =>
+        //     $("#actionTopicBody").append(
+        //         "<form class='form-check'>" +
+        //         "<label class='form-check-label' for='" + item + "'>" +
+        //             item +
+        //         "</label>" +
+        //         "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
+        //         "</form>"
+        //     )
+        // );
 
         // $("#target").on("change", function () {
         //     target = $(this).val();
@@ -561,6 +588,9 @@
           filterDate();
           filterState();
           filterFederal();
+          filterType();
+          filterTopic();
+          filterFederal(); //doesnt currently work bc search terms provided do not match the data
         });
 
         // function compareEach (item, term){
@@ -570,6 +600,26 @@
         //     return false;
         //   }
         // }
+
+        function filterTopic(){
+          dataList.filter((item)=>{
+            if (actionTopicVal.includes(item.values().ActionTopic)){
+              return true;
+            } else {
+              return false;
+            }
+          })
+        }
+
+        function filterType(){
+          dataList.filter((item)=>{
+            if (actionTypeVal.includes(item.values().ActionType)){
+              return true;
+            } else {
+              return false;
+            }
+          })
+        };
 
         function filterState(){
           dataList.filter((item)=>{
@@ -631,6 +681,7 @@
             });
         }
         getInfo();
+        
         </script>
   </body>
 </html>
