@@ -120,10 +120,10 @@
             <div class="col-3 pt-2" style="background-color: rgb(191, 191, 191);"> 
                 <div class="row justify-content-around align-items-center sticky-top-filter">
                     <div class="col">
-                        <div class="row mx-1">
-                            <!-- <button id="filterReset" class="btn btn-secondary" type="button">
+                        <div class="row mx-1 mb-1">
+                            <button id="filterReset" class="btn btn-secondary" type="button">
                               Reset Filters
-                            </button> -->
+                            </button>
                         </div>
                         <div class="accordion" id="advanced-search">
                            <!--start of accordion item-->
@@ -543,7 +543,9 @@
             actionTopicVal = $(this).val();
             console.log(actionTopicVal);
         });
-        // $('#')
+        $('#filterReset').on('click', function(){
+          resetFilters();
+        });
         /*
         end of event listeners
         */
@@ -600,6 +602,19 @@
         //     return false;
         //   }
         // }
+        
+        function resetFilters(){
+          dataList.filter();
+          $('#dateStart').val(1990);
+          $('#dateEnd').val(2023);
+          $('.selectpicker').selectpicker('deselectAll');
+          stateSelVal = "";
+          fedSelVal = "";
+          dateStart = "";
+          dateEnd = "";
+          actionTypeVal = "";
+          actionTopicVal = "";
+        }
 
         function filterTopic(){
           if(actionTopicVal == ""){
