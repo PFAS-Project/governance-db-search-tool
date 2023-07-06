@@ -254,466 +254,479 @@
             </div> 
         <!--end of container--> 
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" crossorigin="anonymous" type="text/javascript"></script>
-        <script>
-        var accordionID = 0;
-        var options = { // list.js options, fill with html template and column names
-            valueNames: [
-            "Title", 
-            "AgencyOrState", 
-            "Date", 
-            "ActionType", 
-            "ActionTopic", 
-            "AgenciesAndPlayers", 
-            "Summary", 
-            "Legislative", 
-            "CompanionBills", 
-            "PFASDef", 
-            "Sources",
-            "ID"
-        ],
-            item:
-                function (values){
-                    return `<div class='card'>  
-                    <div class='card-body'> 
-                        <h2 class='card-title ml-3'>  
-                        ${values.Title}
-                <!--***Name of Governance Action/title goes here***--> 
-                            <!--download button--> 
-                            <button type='button' class='btn btn-secondary'> 
-                                <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'> 
-                            <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'></path> 
-                            <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'></path> 
-                              </svg> 
-                              </button> 
-                        </h2> 
-                        <!--Actor, Date, Legislation, Topics of Action, and Key Agencies/Players--> 
-                        <h5 class='card-actor ml-3'>Federal Agency or State:  
-                ${values.AgencyOrState} 
-                <!--***Name of Federal Agency/State goes here***--></h5> 
-                        <h5 class='card-date ml-3'>Date:  
-                ${values.Date}
-                <!--***Date of governance goes here***--></h5> 
-                        <h5 class='card-type ml-3'>Type of Governance Action:  
-                ${values.ActionType} 
-                <!--***Type of governance action goes here***--></h5> 
-                        <h5 class='card-topicsOfAction ml-3'>Topics of Governance Action:  
-                ${values.ActionTopic}
-                <!--***Topics of action goes here***--></h5> 
-                        <h5 class='card-keyAgencyPlayers ml-3'>Key Agencies and Players:  
-                ${values.AgenciesAndPlayers} 
-                <!--***Key agencies/players goes here***--></h5> 
-                          <!--Accordion${values.ID}Info Start--> 
-                          <div class='container mt-4'> 
-                            <div id='accordion${values.ID}'> 
-                            <!--Summary of Action--> 
-                              <div class='card'> 
-                                <a class='card-link card-header' data-toggle='collapse' href='#collapseOne${values.ID}' > 
-                                  Summary of Action 
-                                </a> 
-                                <div id='collapseOne${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
-                                  <div class='card-body'> 
-                                    ${values.Summary}
-                                </div> 
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" crossorigin="anonymous" type="text/javascript"></script>
+      <script>
+      var accordionID = 0;
+      var options = { // list.js options, fill with html template and column names
+          valueNames: [
+          "Title", 
+          "AgencyOrState", 
+          "Date", 
+          "ActionType", 
+          "ActionTopic", 
+          "AgenciesAndPlayers", 
+          "Summary", 
+          "Legislative", 
+          "CompanionBills", 
+          "PFASDef", 
+          "Sources",
+          "ID"
+      ],
+          item:
+              function (values){
+                  return `<div class='card'>  
+                  <div class='card-body'> 
+                      <h2 class='card-title ml-3'>  
+                      ${values.Title}
+              <!--***Name of Governance Action/title goes here***--> 
+                          <!--download button--> 
+                          <button type='button' class='btn btn-secondary'> 
+                              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'> 
+                          <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'></path> 
+                          <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'></path> 
+                            </svg> 
+                            </button> 
+                      </h2> 
+                      <!--Actor, Date, Legislation, Topics of Action, and Key Agencies/Players--> 
+                      <h5 class='card-actor ml-3'>Federal Agency or State:  
+              ${values.AgencyOrState} 
+              <!--***Name of Federal Agency/State goes here***--></h5> 
+                      <h5 class='card-date ml-3'>Date:  
+              ${values.Date}
+              <!--***Date of governance goes here***--></h5> 
+                      <h5 class='card-type ml-3'>Type of Governance Action:  
+              ${values.ActionType} 
+              <!--***Type of governance action goes here***--></h5> 
+                      <h5 class='card-topicsOfAction ml-3'>Topics of Governance Action:  
+              ${values.ActionTopic}
+              <!--***Topics of action goes here***--></h5> 
+                      <h5 class='card-keyAgencyPlayers ml-3'>Key Agencies and Players:  
+              ${values.AgenciesAndPlayers} 
+              <!--***Key agencies/players goes here***--></h5> 
+                        <!--Accordion${values.ID}Info Start--> 
+                        <div class='container mt-4'> 
+                          <div id='accordion${values.ID}'> 
+                          <!--Summary of Action--> 
+                            <div class='card'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseOne${values.ID}' > 
+                                Summary of Action 
+                              </a> 
+                              <div id='collapseOne${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                                <div class='card-body'> 
+                                  ${values.Summary}
                               </div> 
-                              <!--Legislative outcome--> 
-                              <div class='card'> 
-                                <a class='card-link card-header' data-toggle='collapse' href='#collapseTwo${values.ID}' > 
-                                  Legislative Outcome 
-                                </a> 
-                                <div id='collapseTwo${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
-                                  <div class='card-body'>   
-                                    ${values.Legislative}
-                                </div> 
-                              </div> 
-                              <!--Companion Bills--> 
-                              <div class='card'> 
-                                <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${values.ID}' > 
-                                  Companion Bills 
-                                </a> 
-                                <div id='collapseThree${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
-                                  <div class='card-body'>
-                                    ${values.CompanionBills}
-                                </div> 
-                              </div> 
-                              <!--PFAS Definition--> 
-                              <div class='card'> 
-                                <a class='collapsed card-link card-header' data-toggle='collapse' href='#collapseFour${values.ID}'> 
-                                  PFAS Definition 
-                                </a> 
-                                <div id='collapseFour${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
-                                  <div class='card-body'>
-                                    ${values.PFASDef}
-                                    <!--***PFAS definition goes here***--> 
-                                  </div> 
-                                </div> 
-                              </div> 
-                              <!--Sources--> 
-                              <div class='card'> 
-                                <a class='card-link card-header' data-toggle='collapse' href='#collapseFive${values.ID}'> 
-                                  Sources 
-                                </a> 
-                                <div id='collapseFive${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
-                                  <div class='card-body'> 
-                                    <h6><p>Primary Sources:</p></h6> 
-                                    <p><a href='${values.Sources}' class='link-underline-primary' target='_blank'>${values.Sources}<!--***primary sources links goes here and in href***--></a></p> 
-                                    <h6><p>Other Impotant Sources:</p></h6> 
-                                    <p><a href='${values.Sources}' class='link-underline-primary' target='_blank'>${values.Sources}<!--***other important sources links goes here and in href***--></a></p> 
-                                  </div> 
-                                </div> 
                             </div> 
-                        </div> 
-                    </div> 
-                </div> 
-                </div> 
-                </div> 
-                </div> 
-                </div> 
-                </div> 
-                </div> 
-                </div> ` ;
-                }
-        };
-        var values = []; // list.js values (should stay empty)
-        var dataList = new List("content", options, values); // list.js object
+                            <!--Legislative outcome--> 
+                            <div class='card'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseTwo${values.ID}' > 
+                                Legislative Outcome 
+                              </a> 
+                              <div id='collapseTwo${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                                <div class='card-body'>   
+                                  ${values.Legislative}
+                              </div> 
+                            </div> 
+                            <!--Companion Bills--> 
+                            <div class='card'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${values.ID}' > 
+                                Companion Bills 
+                              </a> 
+                              <div id='collapseThree${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                                <div class='card-body'>
+                                  ${values.CompanionBills}
+                              </div> 
+                            </div> 
+                            <!--PFAS Definition--> 
+                            <div class='card'> 
+                              <a class='collapsed card-link card-header' data-toggle='collapse' href='#collapseFour${values.ID}'> 
+                                PFAS Definition 
+                              </a> 
+                              <div id='collapseFour${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                                <div class='card-body'>
+                                  ${values.PFASDef}
+                                  <!--***PFAS definition goes here***--> 
+                                </div> 
+                              </div> 
+                            </div> 
+                            <!--Sources--> 
+                            <div class='card'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseFive${values.ID}'> 
+                                Sources 
+                              </a> 
+                              <div id='collapseFive${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                                <div class='card-body'> 
+                                  <h6><p>Primary Sources:</p></h6> 
+                                  <p><a href='${values.Sources}' class='link-underline-primary' target='_blank'>${values.Sources}<!--***primary sources links goes here and in href***--></a></p> 
+                                  <h6><p>Other Impotant Sources:</p></h6> 
+                                  <p><a href='${values.Sources}' class='link-underline-primary' target='_blank'>${values.Sources}<!--***other important sources links goes here and in href***--></a></p> 
+                                </div> 
+                              </div> 
+                          </div> 
+                      </div> 
+                  </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> ` ;
+              }
+      };
+      var values = []; // list.js values (should stay empty)
+      var dataList = new List("content", options, values); // list.js object
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const ID = document.getElementById("id");
+      const submitBtn = document.getElementById("submitBtn");
+      const baseURL = "http://localhost:9001/info";
+      var target = "";
+      const actionTopics = [
+      "Drinking water",
+      "Groundwater",
+      "Soil/leachate",
+      "Air",
+      "Alternatives Assessment",
+      "Permitting process",
+      "Chemical ban/substitution",
+      "Food packaging",
+      "Data/research requirement",
+      "Local/state testing",
+      "AFFF",
+      "Litigation",
+      "Standards-setting",
+      "PFAS Task force",
+      "Funding mechanism",
+      "Clean-up and disposal",
+      "Hazardous Designation",
+      "Reporting requirement",
+      "Medical",
+      "Product ban/restriction",
+      "Investigative orders",
+      "Sludge",
+      "Agriculture",
+      "Definition",
+      "PFAS-omnibus",
+      "Multi-Toxics-omnibus",
+      "Appropriations-omnibus"
+      ];
+      const actionType = [
+      "legislation",
+      "regulation",
+      "non-regulatory",
+      "peri-governmental"
+      ];
+      const states = [
+      "AL",
+      "AK",
+      "AZ",
+      "AR",
+      "CA",
+      "CO",
+      "CT",
+      "DE",
+      "DC",
+      "FL",
+      "GA",
+      "HI",
+      "ID",
+      "IL",
+      "IN",
+      "IA",
+      "KS",
+      "KY",
+      "LA",
+      "ME",
+      "MD",
+      "MA",
+      "MI",
+      "MN",
+      "MS",
+      "MO",
+      "MT",
+      "NE",
+      "NV",
+      "NH",
+      "NJ",
+      "NM",
+      "NY",
+      "NC",
+      "ND",
+      "OH",
+      "OK",
+      "OR",
+      "PA",
+      "PR",
+      "RI",
+      "SC",
+      "SD",
+      "TN",
+      "TX",
+      "UT",
+      "VT",
+      "VA",
+      "VI",
+      "WA",
+      "WV",
+      "WI",
+      "WY"
+      ]
+      const federal = [ 
+      "United States Congress",
+      "United States Department of Defense (DOD)",
+      "United States Environmental Protection Agency (EPA)",
+      "United States Department of Energy (DOE)",
+      "United States Food and Drug Administration (FDA)",
+      "United States Geological Survey (USGS)",
+      "White House"
+      ]
+      const stateSel = document.getElementById("state");
+      const fedSel = document.getElementById("federal");
+      var stateSelVal = $('#stateSelect').val(); // default vaules for search
+      var fedSelVal = $('#fedSelect').val();
+      var dateStart = $('#dateStart').val();
+      var dateEnd = $('#dateEnd').val();
+      var actionTypeVal = [];
+      var actionTopicVal = [];
 
-        const name = document.getElementById("name");
-        const email = document.getElementById("email");
-        const ID = document.getElementById("id");
-        const submitBtn = document.getElementById("submitBtn");
-        const baseURL = "http://localhost:9001/info";
-        var target = "";
-        const actionTopics = [
-        "AFFF",
-        "Agriculture",
-        "Air",
-        "Alternatives Assessment",
-        "Appropriations-omnibus",
-        "Chemical ban/substitution",
-        "Clean-up and disposal",
-        "Data/research requirement",
-        "Definition",
-        "Drinking water",
-        "Food packaging",
-        "Funding mechanism",
-        "Groundwater",
-        "Hazardous Designation",
-        "Investigative orders",
-        "Litigation",
-        "Local/state testing",
-        "Medical",
-        "Multi-Toxics-omnibus",
-        "PFAS Task force",
-        "PFAS-omnibus",
-        "Permitting process",
-        "Product ban/restriction",
-        "Reporting requirement",
-        "Sludge",
-        "Soil/leachate",
-        "Standards-setting"
-        ];
-        const actionType = [
-        "Legislation",
-        "Regulation",
-        "Non-regulatory",
-        "Peri-governmental"
-        ];
-        const states = [
-        "AL",
-        "AK",
-        "AZ",
-        "AR",
-        "CA",
-        "CO",
-        "CT",
-        "DE",
-        "DC",
-        "FL",
-        "GA",
-        "HI",
-        "ID",
-        "IL",
-        "IN",
-        "IA",
-        "KS",
-        "KY",
-        "LA",
-        "ME",
-        "MD",
-        "MA",
-        "MI",
-        "MN",
-        "MS",
-        "MO",
-        "MT",
-        "NE",
-        "NV",
-        "NH",
-        "NJ",
-        "NM",
-        "NY",
-        "NC",
-        "ND",
-        "OH",
-        "OK",
-        "OR",
-        "PA",
-        "PR",
-        "RI",
-        "SC",
-        "SD",
-        "TN",
-        "TX",
-        "UT",
-        "VT",
-        "VA",
-        "VI",
-        "WA",
-        "WV",
-        "WI",
-        "WY"
-        ]
-        const federal = [ 
+      $("#stateSelect").empty();
 
-        ]
-        const stateSel = document.getElementById("state");
-        const fedSel = document.getElementById("federal");
-        var stateSelVal = $('#stateSelect').val(); // default vaules for search
-        var fedSelVal = $('#fedSelect').val();
-        var dateStart = $('#dateStart').val();
-        var dateEnd = $('#dateEnd').val();
-        var actionTypeVal = [];
-        var actionTopicVal = [];
+      $("#fedSelect").empty();
 
-        $("#stateSelect").empty();
+      states.map((item) =>{
+          $("#stateSelect").append(
+              "<option>" + item + "</option>" // something about having these as default to selected breaks the search filters
+          )
+      });
 
-        $("#fedSelect").empty();
+      federal.map((item) =>{
+          $("#fedSelect").append(
+              "<option>" + item + "</option>"
+          )
+      });
 
-        states.map((item) =>{
-            $("#stateSelect").append(
-                "<option>" + item + "</option>" // something about having these as default to selected breaks the search filters
-            )
-        });
+      actionType.map((item) =>{
+          $("#typeSelect").append(
+              "<option>" + item + "</option>"
+          )
+      });
 
-        federal.map((item) =>{
-            $("#fedSelect").append(
-                "<option>" + item + "</option>"
-            )
-        });
+      actionTopics.map((item) =>{
+          $("#topicSelect").append(
+              "<option>" + item + "</option>"
+          )
+      });
 
-        actionType.map((item) =>{
-            $("#typeSelect").append(
-                "<option>" + item + "</option>"
-            )
-        });
+      /*
+      start of event listeners
+      */
+      
+      $('#stateSelect').on('change',function() {
+          stateSelVal = $(this).val();
+          console.log(stateSelVal);
+      });
+      $('#fedSelect').on('change',function() {
+          fedSelVal = $(this).val();
+          console.log(fedSelVal);
+      });
+      $('#dateStart').on('change',function() {
+          dateStart = $(this).val();
+          console.log(dateStart);
+      });
+      $('#dateEnd').on('change',function() {
+          dateEnd = $(this).val();
+          console.log(dateEnd);
+      });
+      $('#typeSelect').on('change',function() {
+          actionTypeVal = $(this).val();
+          console.log(actionTypeVal);
+      });
+      $('#topicSelect').on('change',function() {
+          actionTopicVal = $(this).val();
+          console.log(actionTopicVal);
+      });
+      $('#filterReset').on('click', function(){
+        resetFilters();
+      });
+      /*
+      end of event listeners
+      */
+      
+      // $("#actionTypeBody").empty();
+      // actionType.map((item) =>{
+      //     $("#actionTypeBody").append(
+      //         "<form class='form-check'>" +
+      //         "<label class='form-check-label' for='" + item + "'>" +
+      //             item +
+      //         "</label>" +
+      //         "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
+      //         "</form>"
+      //     )
+      // });
 
-        actionTopics.map((item) =>{
-            $("#topicSelect").append(
-                "<option>" + item + "</option>"
-            )
-        });
+      // $("#actionTopicBody").empty();
+      // actionTopics.map((item) =>
+      //     $("#actionTopicBody").append(
+      //         "<form class='form-check'>" +
+      //         "<label class='form-check-label' for='" + item + "'>" +
+      //             item +
+      //         "</label>" +
+      //         "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
+      //         "</form>"
+      //     )
+      // );
 
-        /*
-        start of event listeners
-        */
-       
-        $('#stateSelect').on('change',function() {
-            stateSelVal = $(this).val();
-            console.log(stateSelVal);
-        });
-        $('#fedSelect').on('change',function() {
-            fedSelVal = $(this).val();
-            console.log(fedSelVal);
-        });
-        $('#dateStart').on('change',function() {
-            dateStart = $(this).val();
-            console.log(dateStart);
-        });
-        $('#dateEnd').on('change',function() {
-            dateEnd = $(this).val();
-            console.log(dateEnd);
-        });
-        $('#typeSelect').on('change',function() {
-            actionTypeVal = $(this).val();
-            console.log(actionTypeVal);
-        });
-        $('#topicSelect').on('change',function() {
-            actionTopicVal = $(this).val();
-            console.log(actionTopicVal);
-        });
-        $('#filterReset').on('click', function(){
-          resetFilters();
-        });
-        /*
-        end of event listeners
-        */
-       
-        // $("#actionTypeBody").empty();
-        // actionType.map((item) =>{
-        //     $("#actionTypeBody").append(
-        //         "<form class='form-check'>" +
-        //         "<label class='form-check-label' for='" + item + "'>" +
-        //             item +
-        //         "</label>" +
-        //         "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
-        //         "</form>"
-        //     )
-        // });
+      // $("#target").on("change", function () {
+      //     target = $(this).val();
+      //     console.log(target)
+      // });
 
-        // $("#actionTopicBody").empty();
-        // actionTopics.map((item) =>
-        //     $("#actionTopicBody").append(
-        //         "<form class='form-check'>" +
-        //         "<label class='form-check-label' for='" + item + "'>" +
-        //             item +
-        //         "</label>" +
-        //         "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
-        //         "</form>"
-        //     )
-        // );
+      // $("#submitBtn").on("click", onSubmit);
 
-        // $("#target").on("change", function () {
-        //     target = $(this).val();
-        //     console.log(target)
-        // });
+      async function onSubmit(e) {
+          e.preventDefault();
+          //getInfo();
+      }
 
-        // $("#submitBtn").on("click", onSubmit);
+      $('#basicSearch').on("submit", function() {
+        dataList.search($('#searchTerm').val());
+        filterState();
+        filterFederal();
+        filterType();
+        filterTopic();
+        filterDate();
+      });
 
-        async function onSubmit(e) {
-            e.preventDefault();
-            //getInfo();
+      // function compareEach (item, term){
+      //   if (item == term){
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // }
+      
+      function resetFilters(){
+        dataList.filter();
+        $('#dateStart').val(1990);
+        $('#dateEnd').val(2023);
+        $('.selectpicker').selectpicker('deselectAll');
+        stateSelVal = "";
+        fedSelVal = "";
+        dateStart = "";
+        dateEnd = "";
+        actionTypeVal = "";
+        actionTopicVal = "";
+      }
+
+      function filterTopic(){ // revamp this filter
+        if(actionTopicVal == ""){
+          return;
         }
+        console.log("running search topic with: "+actionTopicVal)
+        dataList.filter((item)=>{
+          return actionTopicVal.some(
+            (topic) => {
+              // console.log("comparing "+topic+" to "+item.values().ActionTopic)
+              if (normalizeForSearch(item.values().ActionTopic).includes(normalizeForSearch(topic))){
+                // console.log("found")
+                return true;
+              } else {
+                // console.log("not found")
+                return false;
+              }
+            }
+          )
+        })
+      };
 
-        $('#basicSearch').on("submit", function() {
-          dataList.search($('#searchTerm').val());
-          filterDate();
-          filterState();
-          filterType();
-          filterTopic();
-          filterFederal(); //doesnt currently work bc search terms provided do not match the data
-        });
-
-        // function compareEach (item, term){
-        //   if (item == term){
-        //     return true;
-        //   } else {
-        //     return false;
-        //   }
-        // }
-        
-        function resetFilters(){
-          dataList.filter();
-          $('#dateStart').val(1990);
-          $('#dateEnd').val(2023);
-          $('.selectpicker').selectpicker('deselectAll');
-          stateSelVal = "";
-          fedSelVal = "";
-          dateStart = "";
-          dateEnd = "";
-          actionTypeVal = "";
-          actionTopicVal = "";
+      function filterType(){ // revamp this filter
+        if(actionTypeVal == ""){
+          return;
         }
-
-        function filterTopic(){
-          if(actionTopicVal == ""){
-            return;
-          }
-          console.log("running search topic with: "+actionTopicVal)
-          dataList.filter((item)=>{
-            if (actionTopicVal.includes(item.values().ActionTopic)){
-              return true;
-            } else {
-              return false;
-            }
-          })
+        console.log("running search with: "+actionTypeVal)
+        dataList.filter((item)=>{
+          console.log("comparing "+item.values().ActionType+" to "+actionTypeVal)
+          if (actionTypeVal.includes(item.values().ActionType)){
+            return true;
+          } else {
+            return false;
         }
+        })
+      };
 
-        function filterType(){
-          if(actionTypeVal == ""){
-            return;
-          }
-          console.log("running search with: "+actionTypeVal)
-          dataList.filter((item)=>{
-            if (actionTypeVal.includes(item.values().ActionType)){
-              return true;
-            } else {
-              return false;
-            }
-          })
-        };
-
-        function filterState(){
-          if(stateSelVal == ""){
-            return;
-          }
-          console.log("running search with: "+stateSelVal)
-          dataList.filter((item)=>{
-            if (stateSelVal.includes(item.values().AgencyOrState)){
-              return true;
-            } else {
-              return false;
-            }
-          })
-        };
-
-        function filterFederal(){
-          if(fedSelVal == ""){
-            return;
-          }
-          console.log("running search with: "+fedSelVal)
-          dataList.filter((item)=>{
-            if (fedSelVal.includes(item.values().AgencyOrState)){
-              return true;
-            } else {
-              return false;
-            }
-          })
-        };
-
-        function filterDate(){
-          console.log("running search with: "+dateStart+" and "+dateEnd)
-          dataList.filter((item)=>{
-            if ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart)){
-              return true;
-            } else {
-              return false;
-            }
-          })
-
-        };
-
-        async function getInfo() {
-            const searchParams = new URLSearchParams();
-            searchParams.append("param1", target); // text search entry
-            const url = `${baseURL}?${searchParams.toString()}`;
-
-            const res = await fetch(url, { method: "GET" });
-
-            const data = await res.json();
-            console.log(data.data);
-            // return data.data;
-
-            data.data.map((item)=>{
-                dataList.add({
-                    Title: item[1], 
-                    AgencyOrState: item[0], 
-                    Date: item[5], 
-                    ActionType: item[3], 
-                    ActionTopic: item[4], 
-                    AgenciesAndPlayers: item[10], 
-                    Summary: item[9], 
-                    Legislative: item[7], 
-                    CompanionBills: item[8], 
-                    PFASDef: item[11], 
-                    Sources: item[12],
-                    ID: accordionID++
-                });
-            });
+      function filterState(){
+        if(stateSelVal == ""){
+          return;
         }
-        getInfo();
-        
-        </script>
+        console.log("running search with: "+stateSelVal)
+        dataList.filter((item)=>{
+          if (stateSelVal.includes(item.values().AgencyOrState)){
+            return true;
+          } else {
+            return false;
+          }
+        })
+      };
+
+      function filterFederal(){
+        if(fedSelVal == ""){
+          return;
+        }
+        console.log("running search with: "+fedSelVal)
+        dataList.filter((item)=>{
+          if (fedSelVal.includes(item.values().AgencyOrState)){
+            return true;
+          } else {
+            return false;
+          }
+        })
+      };
+
+      function filterDate(){
+        console.log("running search with: "+dateStart+" and "+dateEnd)
+        dataList.filter((item)=>{
+          if ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart)){
+            return true;
+          } else {
+            return false;
+          }
+        })
+
+      };
+
+      async function getInfo() {
+          const searchParams = new URLSearchParams();
+          searchParams.append("param1", target); // text search entry
+          const url = `${baseURL}?${searchParams.toString()}`;
+
+          const res = await fetch(url, { method: "GET" });
+
+          const data = await res.json();
+          console.log(data.data);
+          // return data.data;
+
+          data.data.map((item)=>{
+              dataList.add({
+                  Title: item[1], 
+                  AgencyOrState: item[0], 
+                  Date: item[5], 
+                  ActionType: item[3], 
+                  ActionTopic: item[4], 
+                  AgenciesAndPlayers: item[10], 
+                  Summary: item[9], 
+                  Legislative: item[7], 
+                  CompanionBills: item[8], 
+                  PFASDef: item[11], 
+                  Sources: item[12],
+                  ID: accordionID++
+              });
+          });
+      }
+      getInfo();
+      
+      </script>
   </body>
 </html>
