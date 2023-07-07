@@ -32,8 +32,9 @@ async function gsrun(client, sheet){ // function which grabs data from sheet, wi
     };
     let data = await gsAPI.spreadsheets.values.get(opt);
     let dataArray = data.data.values;
-    dataSet = dataArray;
-    //console.log(dataSet)
+    dataHeader = dataArray[0];
+    dataInfo = dataArray[1];
+    dataSet = dataArray.slice(2);
     return dataArray;
 }
 
