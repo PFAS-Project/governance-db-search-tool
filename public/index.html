@@ -689,9 +689,9 @@
             // searchParams.append("param5", dateEnd)
             // searchParams.append("param6", actionTypeVal)
             // searchParams.append("param7", actionTopicVal)
-            const url = `${baseURL}?${searchParams.toString()}`;
+            //const url = `${baseURL}?${searchParams.toString()}`;
 
-            const res = await fetch(url, { method: "GET" });
+            const res = await fetch(baseURL, { method: "GET" });
 
             const data = await res.json();
             console.log(data.data);

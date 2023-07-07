@@ -56,7 +56,7 @@ app.use(express.static('public'));
 gsrun(client, keys.sheet_names[0]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
 
 app.get('/info', async (req,res) => {
-    const target = req.query.param1.toString();
-    const data = searchData(target);
-    res.status(200).json({data: data}) // this object can be specified to make data presentation easier
+    //const target = req.query.param1.toString();
+    //const data = searchData(target);
+    res.status(200).json({data: dataSet}) // this object can be specified to make data presentation easier
 })
