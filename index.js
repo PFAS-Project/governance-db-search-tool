@@ -34,7 +34,7 @@ async function gsrun(client, sheet, cellRange = defaultcells){ // function which
     let data = await gsAPI.spreadsheets.values.get(opt);
     let dataArray = data.data.values;
     dataSet = dataArray;
-    //console.log(dataSet)
+    // console.log(dataSet)
     return dataArray;
 }
 
@@ -45,8 +45,10 @@ function searchData(target){
             console.log(dataSet[i][0])
         else if((normalizeForSearch(dataSet[i][1]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
             found.push(dataSet[i])
+
         }
     }
+    // console.log(found);
     return found;
 }
 
@@ -54,12 +56,14 @@ app.listen(port, () => {console.log("localhost:" + port)});
 
 app.use(express.static('public'));
 
-gsrun(client, keys.sheet_names[1]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
+// gsrun(client, keys.sheet_names[1]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
 
 app.get('/info', async (req,res) => {
-    const target = req.query.param1.toString();
-    //console.log(target);
-    const data = searchData(target);
+    // const target = req.query.param1.toString();
+    // console.log(target);
+    const stateData = await gsrun(client, keys.sheet_names[1]);
+    const fedData = await gsrun(client, keys.sheet_names[0]);
+    // const fedData = "placeholder";
     //const data = dataSet;
-    res.status(200).json({data: data}) // this object can be specified to make data presentation easier
+    res.status(200).json({state: stateData, federal: fedData}); // this object can be specified to make data presentation easier
 })

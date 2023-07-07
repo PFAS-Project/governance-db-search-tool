@@ -358,9 +358,9 @@
                               <div id='collapseFive${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
                                 <div class='card-body'> 
                                   <h6><p>Primary Sources:</p></h6> 
-                                  <p><a href='${values.Sources}' class='link-underline-primary' target='_blank'>${values.Sources}<!--***primary sources links goes here and in href***--></a></p> 
+                                  <p><a href='${values.primarySources}' class='link-underline-primary' target='_blank'>${values.primarySources}<!--***primary sources links goes here and in href***--></a></p> 
                                   <h6><p>Other Impotant Sources:</p></h6> 
-                                  <p><a href='${values.Sources}' class='link-underline-primary' target='_blank'>${values.Sources}<!--***other important sources links goes here and in href***--></a></p> 
+                                  <p><a href='${values.secondarySources}' class='link-underline-primary' target='_blank'>${values.secondarySources}<!--***other important sources links goes here and in href***--></a></p> 
                                 </div> 
                               </div> 
                           </div> 
@@ -551,10 +551,18 @@
       $('#filterReset').on('click', function(){
         resetFilters();
       });
+      $('#basicSearch').on("submit", function() {
+        dataList.search($('#searchTerm').val());
+        filterState();
+        filterFederal();
+        filterType();
+        filterTopic();
+        filterDate();
+      });
+
       /*
       end of event listeners
       */
-      
       // $("#actionTypeBody").empty();
       // actionType.map((item) =>{
       //     $("#actionTypeBody").append(
@@ -579,34 +587,10 @@
       //     )
       // );
 
-      // $("#target").on("change", function () {
-      //     target = $(this).val();
-      //     console.log(target)
-      // });
-
-      // $("#submitBtn").on("click", onSubmit);
-
       async function onSubmit(e) {
           e.preventDefault();
           //getInfo();
       }
-
-      $('#basicSearch').on("submit", function() {
-        dataList.search($('#searchTerm').val());
-        filterState();
-        filterFederal();
-        filterType();
-        filterTopic();
-        filterDate();
-      });
-
-      // function compareEach (item, term){
-      //   if (item == term){
-      //     return true;
-      //   } else {
-      //     return false;
-      //   }
-      // }
       
       function resetFilters(){
         dataList.filter();
@@ -705,10 +689,10 @@
           const res = await fetch(url, { method: "GET" });
 
           const data = await res.json();
-          console.log(data.data);
+          console.log(data.state);
           // return data.data;
 
-          data.data.map((item)=>{
+          data.state.map((item)=>{
               dataList.add({
                   Title: item[1], 
                   AgencyOrState: item[0], 
@@ -720,11 +704,30 @@
                   Legislative: item[7], 
                   CompanionBills: item[8], 
                   PFASDef: item[11], 
-                  Sources: item[12],
+                  primarySources: item[12],
+                  secondarySources: item[13],
+                  ID: accordionID++
+              });
+          });
+          data.federal.map((item)=>{
+              dataList.add({
+                  Title: item[1], 
+                  AgencyOrState: item[0], 
+                  Date: item[5], 
+                  ActionType: item[3], 
+                  ActionTopic: item[4], 
+                  AgenciesAndPlayers: item[10], 
+                  Summary: item[9], 
+                  Legislative: item[7], 
+                  CompanionBills: item[8], 
+                  PFASDef: item[11], 
+                  primarySources: item[12],
+                  secondarySources: item[13],
                   ID: accordionID++
               });
           });
       }
+      
       getInfo();
       
       </script>
