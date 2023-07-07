@@ -4,7 +4,6 @@ const express = require('express');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
-const defaultcells = ['A3','W222']; // default cell range is just header row
 const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
     keys.client_email, // service acc
     null,
@@ -24,11 +23,12 @@ client.authorize(function(err,tokens){ // call the authorize method, which will 
     }
 });
 
-async function gsrun(client, sheet, cellRange = defaultcells){ // function which grabs data from sheet, within a particular range
+async function gsrun(client, sheet){ // function which grabs data from sheet, within a particular range
     const gsAPI = google.sheets({version:"v4", auth:client});
     const opt = {
         spreadsheetId: keys.sheet_id, 
-        range: sheet + cellRange[0] + ':' + cellRange[1]
+        range: "FEDERAL" // get all rows/columms from the sheet
+        // TODO: Get data from both FEDERAL and STATE sheets
     };
     let data = await gsAPI.spreadsheets.values.get(opt);
     let dataArray = data.data.values;
