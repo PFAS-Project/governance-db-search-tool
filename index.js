@@ -1,7 +1,6 @@
 const {google} = require('googleapis'); // include google api
 const keys = require('./keys.json'); // import API keys
 const express = require('express');
-//const listjs = require('list.js');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
@@ -43,10 +42,8 @@ function searchData(target){
             console.log(dataSet[i][0])
         else{ // second index can be changed depending on which column is being searched
             found.push(dataSet[i])
-
         }
     }
-    // console.log(found);
     return found;
 }
 
@@ -58,7 +55,7 @@ app.use(express.static('public'));
 
 app.get('/info', async (req,res) => {
 
-    const stateData = await searchData(gsrun(client, keys.sheet_names[1]));
+    const stateData = await searchData(gsrun(client, keys.sheet_names[0]));
 
     res.status(200).json({state: stateData}); // this object can be specified to make data presentation easier
 })

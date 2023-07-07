@@ -552,7 +552,7 @@
         resetFilters();
       });
       $('#basicSearch').on("submit", function() { 
-        dataList.search($('#searchTerm').val());     
+        dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
 
