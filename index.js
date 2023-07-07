@@ -1,7 +1,6 @@
 const {google} = require('googleapis'); // include google api
 const keys = require('./keys.json'); // import API keys
 const express = require('express');
-//const listjs = require('list.js');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
@@ -58,8 +57,6 @@ gsrun(client, keys.sheet_names[0]); // second parameter index can be changed to 
 
 app.get('/info', async (req,res) => {
     const target = req.query.param1.toString();
-    //console.log(target);
     const data = searchData(target);
-    //const data = dataSet;
     res.status(200).json({data: data}) // this object can be specified to make data presentation easier
 })
