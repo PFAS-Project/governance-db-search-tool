@@ -37,18 +37,6 @@ async function gsrun(client, sheet, cellRange = defaultcells){ // function which
     return dataArray;
 }
 
-function searchData(target){
-    found = [];
-    for(i in dataSet){
-        if(dataSet[i][3] == undefined)  // added this to skip the empty and label rows, may be problematic later
-            console.log(dataSet[i][0])
-        else if((normalizeForSearch(dataSet[i][1]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
-            found.push(dataSet[i])
-        }
-    }
-    return found;
-}
-
 app.listen(port, () => {console.log("localhost:" + port)});
 
 app.use(express.static('public'));
@@ -56,7 +44,5 @@ app.use(express.static('public'));
 gsrun(client, keys.sheet_names[0]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
 
 app.get('/info', async (req,res) => {
-    //const target = req.query.param1.toString();
-    //const data = searchData(target);
     res.status(200).json({data: dataSet}) // this object can be specified to make data presentation easier
 })
