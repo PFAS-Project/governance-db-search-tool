@@ -14,8 +14,6 @@ const client = new google.auth.JWT( // create client object, which holds the pri
 );
 var dataSet;
 
-
-
 client.authorize(function(err,tokens){ // call the authorize method, which will reach out to the api address and attempt a connection
     if(err){
         console.log(err);
@@ -59,11 +57,8 @@ app.use(express.static('public'));
 // gsrun(client, keys.sheet_names[1]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
 
 app.get('/info', async (req,res) => {
-    // const target = req.query.param1.toString();
-    // console.log(target);
+
     const stateData = await searchData(gsrun(client, keys.sheet_names[1]));
-    const fedData = await searchData(gsrun(client, keys.sheet_names[0]));
-    // const fedData = "placeholder";
-    //const data = dataSet;
-    res.status(200).json({state: stateData, federal: fedData}); // this object can be specified to make data presentation easier
+
+    res.status(200).json({state: stateData}); // this object can be specified to make data presentation easier
 })

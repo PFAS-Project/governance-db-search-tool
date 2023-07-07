@@ -498,7 +498,7 @@
 
       states.map((item) =>{
           $("#stateSelect").append(
-              "<option>" + item + "</option>" // something about having these as default to selected breaks the search filters
+              "<option>" + item + "</option>"
           )
       });
 
@@ -551,60 +551,49 @@
       $('#filterReset').on('click', function(){
         resetFilters();
       });
-      $('#basicSearch').on("submit", function() {
-        
-        dataList.search($('#searchTerm').val());
-
-        if (stateSelVal != ""){
-          console.log("searching with state filter");
-          filterState();
-        }
-        if (fedSelVal != ""){
-          console.log("searching with federal filter");
-          filterFederal();
-        }
-        if (actionTypeVal != ""){
-          console.log("searching with type filter");
-          filterType();
-        }
-        if (actionTopicVal != ""){
-          console.log("searching with topic filter");
-          filterTopic();
-        }
-
-        // if (){
-        //   console.log("searching with date filter");
-        //   filterDate();
-        // }
-        // filterDate();
+      $('#basicSearch').on("submit", function() { 
+        dataList.search($('#searchTerm').val());     
+        megaFilter();
       });
 
-      /*
-      end of event listeners
-      */
-      // $("#actionTypeBody").empty();
-      // actionType.map((item) =>{
-      //     $("#actionTypeBody").append(
-      //         "<form class='form-check'>" +
-      //         "<label class='form-check-label' for='" + item + "'>" +
-      //             item +
-      //         "</label>" +
-      //         "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
-      //         "</form>"
-      //     )
-      // });
+      function megaFilter(){
 
-      // $("#actionTopicBody").empty();
-      // actionTopics.map((item) =>
-      //     $("#actionTopicBody").append(
-      //         "<form class='form-check'>" +
-      //         "<label class='form-check-label' for='" + item + "'>" +
-      //             item +
-      //         "</label>" +
-      //         "<input class='form-check-input' type='checkbox' value=' id='" + item + "'>" +
-      //         "</form>"
-      //     )
-      // );
+        var filterTopic = true;
+        var filterType = true;
+        var filterState = true;
+        var filterFederal = true;
+        var filterDate = true;
+
+        dataList.filter((item)=>{
+
+          if (stateSelVal != ""){
+          // console.log("searching with state filter");
+          filterState = stateSelVal.includes(item.values().AgencyOrState);
+          }
+
+          if (fedSelVal != ""){
+            // console.log("searching with federal filter");
+            filterFederal = fedSelVal.includes(item.values().AgencyOrState);     
+          }
+
+          if (actionTypeVal != ""){
+            // console.log("searching with type filter");
+            filterType = actionTypeVal.some((type) => { return ((item.values().ActionType).includes((type)))  });
+          }
+
+          if (actionTopicVal != ""){
+            // console.log("searching with topic filter = "+actionTopicVal);
+            filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
+          }
+
+          if ((dateStart != 1990) || (dateEnd != 2023)){
+            // console.log("searching with "+ dateStart + " and " + dateEnd);
+            filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
+          }
+
+          return filterTopic && filterType && filterState && filterFederal && filterDate;
+        })
+      };
 
       async function onSubmit(e) {
           e.preventDefault();
@@ -622,125 +611,14 @@
         actionTopicVal = "";
       }
 
-      function filterTopic(){ // revamp this filter
-        if(actionTopicVal == ""){
-          return;
-        }
-        console.log("running search topic with: "+actionTopicVal)
-        dataList.filter((item)=>{
-          return actionTopicVal.some(
-            (topic) => {
-              console.log("comparing "+topic+" to "+item.values().ActionTopic)
-              if ((item.values().ActionTopic).includes((topic))){
-                console.log("found")
-                return true;
-              } else {
-                console.log("not found")
-                return false;
-              }
-            }
-          )
-        })
-      };
-
-      function filterType(){ // revamp this filter
-        if(actionTypeVal == ""){
-          return;
-        }
-        console.log("running search with: "+actionTypeVal)
-        dataList.filter((item)=>{
-          // console.log("comparing "+item.values().ActionType+" to "+actionTypeVal)
-          return actionTypeVal.some(
-            (type) => {
-              console.log("comparing "+type+" to "+item.values().ActionType)
-              if ((item.values().ActionType).includes((type))){
-                console.log("found")
-                return true;
-              } else {
-                console.log("not found")
-                return false;
-              }
-            }
-          )
-        //   if (actionTypeVal.includes(item.values().ActionType)){
-        //     console.log("found match")
-        //     return true;
-        //   } else {
-        //     console.log("no match")
-        //     return false;
-        // }
-        })
-      };
-
-      function filterState(){
-        if(stateSelVal == ""){
-          return;
-        }
-        console.log("running search with: "+stateSelVal)
-        dataList.filter((item)=>{
-          if (stateSelVal.includes(item.values().AgencyOrState)){
-            return true;
-          } else {
-            return false;
-          }
-        })
-      };
-
-      function filterFederal(){
-        if(fedSelVal == ""){
-          return;
-        }
-        console.log("running search with: "+fedSelVal)
-        dataList.filter((item)=>{
-          if (fedSelVal.includes(item.values().AgencyOrState)){
-            return true;
-          } else {
-            return false;
-          }
-        })
-      };
-
-      function filterDate(){
-        console.log("running search with: "+dateStart+" and "+dateEnd)
-        dataList.filter((item)=>{
-          if ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart)){
-            return true;
-          } else {
-            return false;
-          }
-        })
-
-      };
-
       async function getInfo() {
           const searchParams = new URLSearchParams();
           searchParams.append("param1", target); // text search entry
           const url = `${baseURL}?${searchParams.toString()}`;
-
           const res = await fetch(url, { method: "GET" });
-
           const data = await res.json();
           console.log(data.state);
-          // return data.data;
 
-          
-          data.federal.map((item)=>{
-              dataList.add({
-                  Title: item[1], 
-                  AgencyOrState: item[0], 
-                  Date: item[5], 
-                  ActionType: item[3], 
-                  ActionTopic: item[4], 
-                  AgenciesAndPlayers: item[10], 
-                  Summary: item[9], 
-                  Legislative: item[7], 
-                  CompanionBills: item[8], 
-                  PFASDef: item[11], 
-                  primarySources: item[12],
-                  secondarySources: item[13],
-                  ID: accordionID++
-              });
-          });
           data.state.map((item)=>{
               dataList.add({
                   Title: item[1], 
