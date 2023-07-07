@@ -551,7 +551,8 @@
       $('#filterReset').on('click', function(){
         resetFilters();
       });
-      $('#basicSearch').on("submit", function() { 
+      $('#basicSearch').on("submit", function(e) { 
+        e.preventDefault();
         dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
