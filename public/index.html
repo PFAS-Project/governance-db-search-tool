@@ -552,12 +552,31 @@
         resetFilters();
       });
       $('#basicSearch').on("submit", function() {
+        
         dataList.search($('#searchTerm').val());
-        filterState();
-        filterFederal();
-        filterType();
-        filterTopic();
-        filterDate();
+
+        if (stateSelVal != ""){
+          console.log("searching with state filter");
+          filterState();
+        }
+        if (fedSelVal != ""){
+          console.log("searching with federal filter");
+          filterFederal();
+        }
+        if (actionTypeVal != ""){
+          console.log("searching with type filter");
+          filterType();
+        }
+        if (actionTopicVal != ""){
+          console.log("searching with topic filter");
+          filterTopic();
+        }
+
+        // if (){
+        //   console.log("searching with date filter");
+        //   filterDate();
+        // }
+        // filterDate();
       });
 
       /*
@@ -599,8 +618,6 @@
         $('.selectpicker').selectpicker('deselectAll');
         stateSelVal = "";
         fedSelVal = "";
-        dateStart = "";
-        dateEnd = "";
         actionTypeVal = "";
         actionTopicVal = "";
       }
@@ -613,12 +630,12 @@
         dataList.filter((item)=>{
           return actionTopicVal.some(
             (topic) => {
-              // console.log("comparing "+topic+" to "+item.values().ActionTopic)
-              if (normalizeForSearch(item.values().ActionTopic).includes(normalizeForSearch(topic))){
-                // console.log("found")
+              console.log("comparing "+topic+" to "+item.values().ActionTopic)
+              if ((item.values().ActionTopic).includes((topic))){
+                console.log("found")
                 return true;
               } else {
-                // console.log("not found")
+                console.log("not found")
                 return false;
               }
             }
@@ -632,12 +649,26 @@
         }
         console.log("running search with: "+actionTypeVal)
         dataList.filter((item)=>{
-          console.log("comparing "+item.values().ActionType+" to "+actionTypeVal)
-          if (actionTypeVal.includes(item.values().ActionType)){
-            return true;
-          } else {
-            return false;
-        }
+          // console.log("comparing "+item.values().ActionType+" to "+actionTypeVal)
+          return actionTypeVal.some(
+            (type) => {
+              console.log("comparing "+type+" to "+item.values().ActionType)
+              if ((item.values().ActionType).includes((type))){
+                console.log("found")
+                return true;
+              } else {
+                console.log("not found")
+                return false;
+              }
+            }
+          )
+        //   if (actionTypeVal.includes(item.values().ActionType)){
+        //     console.log("found match")
+        //     return true;
+        //   } else {
+        //     console.log("no match")
+        //     return false;
+        // }
         })
       };
 
@@ -692,7 +723,8 @@
           console.log(data.state);
           // return data.data;
 
-          data.state.map((item)=>{
+          
+          data.federal.map((item)=>{
               dataList.add({
                   Title: item[1], 
                   AgencyOrState: item[0], 
@@ -709,7 +741,7 @@
                   ID: accordionID++
               });
           });
-          data.federal.map((item)=>{
+          data.state.map((item)=>{
               dataList.add({
                   Title: item[1], 
                   AgencyOrState: item[0], 

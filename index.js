@@ -43,7 +43,7 @@ function searchData(target){
     for(i in dataSet){
         if(dataSet[i][3] == undefined)  // added this to skip the empty and label rows, may be problematic later
             console.log(dataSet[i][0])
-        else if((normalizeForSearch(dataSet[i][1]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
+        else{ // second index can be changed depending on which column is being searched
             found.push(dataSet[i])
 
         }
@@ -61,8 +61,8 @@ app.use(express.static('public'));
 app.get('/info', async (req,res) => {
     // const target = req.query.param1.toString();
     // console.log(target);
-    const stateData = await gsrun(client, keys.sheet_names[1]);
-    const fedData = await gsrun(client, keys.sheet_names[0]);
+    const stateData = await searchData(gsrun(client, keys.sheet_names[1]));
+    const fedData = await searchData(gsrun(client, keys.sheet_names[0]));
     // const fedData = "placeholder";
     //const data = dataSet;
     res.status(200).json({state: stateData, federal: fedData}); // this object can be specified to make data presentation easier
