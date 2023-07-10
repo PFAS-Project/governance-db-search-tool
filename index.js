@@ -4,7 +4,6 @@ const express = require('express');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
-const defaultcells = ['A3','W222']; // default cell range is just header row
 const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
     keys.client_email, // service acc
     null,
@@ -22,40 +21,27 @@ client.authorize(function(err,tokens){ // call the authorize method, which will 
     }
 });
 
-async function gsrun(client, sheet, cellRange = defaultcells){ // function which grabs data from sheet, within a particular range
+async function gsrun(client){ // function which grabs data from sheet, within a particular range
     const gsAPI = google.sheets({version:"v4", auth:client});
     const opt = {
         spreadsheetId: keys.sheet_id, 
-        range: sheet + cellRange[0] + ':' + cellRange[1]
+        range: "STATE" // get all rows/columms from the sheet
+        // TODO: Get data from both FEDERAL and STATE sheets
     };
     let data = await gsAPI.spreadsheets.values.get(opt);
     let dataArray = data.data.values;
-    dataSet = dataArray;
-    // console.log(dataSet)
+    dataHeader = dataArray[0];
+    dataInfo = dataArray[1];
+    dataSet = dataArray.slice(2);
     return dataArray;
-}
-
-function searchData(target){
-    found = [];
-    for(i in dataSet){
-        if(dataSet[i][3] == undefined)  // added this to skip the empty and label rows, may be problematic later
-            console.log(dataSet[i][0])
-        else{ // second index can be changed depending on which column is being searched
-            found.push(dataSet[i])
-        }
-    }
-    return found;
 }
 
 app.listen(port, () => {console.log("localhost:" + port)});
 
 app.use(express.static('public'));
 
-// gsrun(client, keys.sheet_names[1]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
+gsrun(client);
 
 app.get('/info', async (req,res) => {
-
-    const stateData = await searchData(gsrun(client, keys.sheet_names[1]));
-
-    res.status(200).json({state: stateData}); // this object can be specified to make data presentation easier
+    res.status(200).json({data: dataSet}) // this object can be specified to make data presentation easier
 })

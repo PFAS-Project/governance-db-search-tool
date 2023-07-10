@@ -607,11 +607,10 @@
           const searchParams = new URLSearchParams();
           searchParams.append("param1", target); // text search entry
           const url = `${baseURL}?${searchParams.toString()}`;
-          const res = await fetch(url, { method: "GET" });
+          const res = await fetch('/info', { method: "GET" });
           const data = await res.json();
-          console.log(data.state);
 
-          data.state.map((item)=>{
+          data.data.map((item)=>{
               dataList.add({
                   Title: item[1], 
                   AgencyOrState: item[0], 
