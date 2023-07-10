@@ -367,8 +367,6 @@
       const email = document.getElementById("email");
       const ID = document.getElementById("id");
       const submitBtn = document.getElementById("submitBtn");
-      const baseURL = "http://localhost:9001/info";
-      var target = "";
       const actionTopics = [
       "Drinking water",
       "Groundwater",
@@ -604,9 +602,6 @@
       }
 
       async function getInfo() {
-          const searchParams = new URLSearchParams();
-          searchParams.append("param1", target); // text search entry
-          const url = `${baseURL}?${searchParams.toString()}`;
           const res = await fetch('/info', { method: "GET" });
           const data = await res.json();
 
