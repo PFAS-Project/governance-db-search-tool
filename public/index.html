@@ -60,9 +60,6 @@
 
                           </div>
                         </div>
-                      
-
-              
               <!-- PFAS Project Lab -->
               <li class="navbar">
                 <a class="nav-link" style="color: rgb(84, 84, 84)" href="https://pfasproject.com" target="_blank">PFAS Project Lab</a> 
@@ -159,7 +156,7 @@
                                     <div id="advOption2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="advanced-search">
                                         <div class="accordion-body justify-content-center">
                                             <form>
-                                                <input type="number" min="1900" max="2099" step="1" value="1990" id="dateStart"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="1905" id="dateStart"/>
                                                 -
                                                 <input type="number" min="1900" max="2099" step="1" value="2023" id="dateEnd"/>
                                             </form>
@@ -579,7 +576,7 @@
             filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
           }
 
-          if ((dateStart != 1990) || (dateEnd != 2023)){
+          if ((dateStart != 1905) || (dateEnd != 2023)){
             // console.log("searching with "+ dateStart + " and " + dateEnd);
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
@@ -595,13 +592,15 @@
       
       function resetFilters(){
         dataList.filter();
-        $('#dateStart').val(1990);
+        $('#dateStart').val(1905);
         $('#dateEnd').val(2023);
         $('.selectpicker').selectpicker('deselectAll');
         stateSelVal = "";
         fedSelVal = "";
         actionTypeVal = "";
         actionTopicVal = "";
+        dateStart = 1905;
+        dateEnd = 2023;
       }
 
       async function getInfo() {
@@ -629,10 +628,8 @@
                   ID: accordionID++
               });
           });
-      }
-      
+        }
       getInfo();
-      
       </script>
   </body>
 </html>
