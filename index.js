@@ -55,7 +55,7 @@ app.use(express.static('public'));
 
 app.get('/info', async (req,res) => {
 
-    const stateData = await searchData(gsrun(client, keys.sheet_names[0]));
+    const stateData = await searchData(gsrun(client, keys.sheet_names[1]));
 
     res.status(200).json({state: stateData}); // this object can be specified to make data presentation easier
 })

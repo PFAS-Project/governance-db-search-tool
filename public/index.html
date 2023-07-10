@@ -79,7 +79,7 @@
         <div class="container-fluid border" id="content">
         <row class="row">
 
-            <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191);"> 
+            <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191); z-index: 0;"> 
                         
                 <!--search bar -->
               <form class="d-flex col-11 mt-3" role="search" id="basicSearch">
@@ -103,18 +103,6 @@
                 </div>
               </div>
             </div>
-
-            <!--Function for sticky top to not overlap-->
-            <style>
-                @supports ((position: -webkit-sticky) or (position: sticky)) {
-                 .sticky-top-filter {
-                    position: -webkit-sticky;
-                    position: sticky;
-                    top: 70px;
-                    z-index: 1019;
-                    }
-                } 
-            </style>
 
             <!--dropdown start-->
             <div class="col-3 pt-2" style="background-color: rgb(191, 191, 191);"> 
@@ -554,6 +542,10 @@
       $('#basicSearch').on("submit", function(e) { 
         e.preventDefault();
         dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
+        megaFilter();
+      });
+      $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
+        e.preventDefault();
         megaFilter();
       });
 

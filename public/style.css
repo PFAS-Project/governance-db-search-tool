@@ -49,3 +49,12 @@ html, body {
     content: "\002B07";
     padding-left: 3px
     }
+
+    @supports ((position: -webkit-sticky) or (position: sticky)) {
+      .sticky-top-filter {
+         position: -webkit-sticky;
+         position: sticky;
+         top: 70px;
+         z-index: 1019;
+         }
+     } 
