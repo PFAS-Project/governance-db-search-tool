@@ -60,9 +60,6 @@
 
                           </div>
                         </div>
-                      
-
-              
               <!-- PFAS Project Lab -->
               <li class="navbar">
                 <a class="nav-link" style="color: rgb(84, 84, 84)" href="https://pfasproject.com" target="_blank">PFAS Project Lab</a> 
@@ -602,6 +599,8 @@
         fedSelVal = "";
         actionTypeVal = "";
         actionTopicVal = "";
+        dateStart = 1990;
+        dateEnd = 2023;
       }
 
       async function getInfo() {
@@ -629,10 +628,8 @@
                   ID: accordionID++
               });
           });
-      }
-      
+        }
       getInfo();
-      
       </script>
   </body>
 </html>
