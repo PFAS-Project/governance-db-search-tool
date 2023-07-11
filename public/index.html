@@ -76,7 +76,7 @@
         <div class="container-fluid border" id="content">
         <row class="row">
 
-            <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191); z-index: 0;"> 
+            <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191); z-index: 2;"> 
                         
                 <!--search bar -->
               <form class="d-flex col-11 mt-3" role="search" id="basicSearch">
@@ -554,28 +554,32 @@
 
         dataList.filter((item)=>{
 
+          if(item == undefined){
+            return false;
+          }
+
           if (stateSelVal != ""){
-          // console.log("searching with state filter");
+          console.log("searching with state filter");
           filterState = stateSelVal.includes(item.values().AgencyOrState);
           }
 
           if (fedSelVal != ""){
-            // console.log("searching with federal filter");
+            console.log("searching with federal filter");
             filterFederal = fedSelVal.includes(item.values().AgencyOrState);     
           }
 
           if (actionTypeVal != ""){
-            // console.log("searching with type filter");
+            console.log("searching with type filter");
             filterType = actionTypeVal.some((type) => { return ((item.values().ActionType).includes((type)))  });
           }
 
           if (actionTopicVal != ""){
-            // console.log("searching with topic filter = "+actionTopicVal);
+            console.log("searching with topic filter = "+actionTopicVal);
             filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
           }
 
           if ((dateStart != 1905) || (dateEnd != 2023)){
-            // console.log("searching with "+ dateStart + " and " + dateEnd);
+            console.log("searching with "+ dateStart + " and " + dateEnd);
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
 
@@ -604,7 +608,7 @@
       async function getInfo() {
           const res = await fetch('/info', { method: "GET" });
           const data = await res.json();
-
+          console.log(data.data);
           data.data.map((item)=>{
               dataList.add({
                   Title: item[1], 

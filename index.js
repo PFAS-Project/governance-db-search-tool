@@ -10,7 +10,7 @@ const client = new google.auth.JWT( // create client object, which holds the pri
     keys.private_key, // private key
     ['https://www.googleapis.com/auth/spreadsheets'] // api address
 );
-var dataSet;
+// var dataSet;
 
 client.authorize(function(err,tokens){ // call the authorize method, which will reach out to the api address and attempt a connection
     if(err){
@@ -20,6 +20,18 @@ client.authorize(function(err,tokens){ // call the authorize method, which will 
         console.log("connected to google cloud API")
     }
 });
+
+function cleanData(dataSet){ // this function is used to clean out rows containing empty and undefined rows. 
+    found = [];
+    for(i in dataSet){
+        if(dataSet[i][3] == undefined) 
+            console.log(dataSet[i][0])
+        else{ 
+            found.push(dataSet[i])
+        }
+    }
+    return found;
+};
 
 async function gsrun(client){ // function which grabs data from sheet, within a particular range
     const gsAPI = google.sheets({version:"v4", auth:client});
@@ -32,16 +44,18 @@ async function gsrun(client){ // function which grabs data from sheet, within a 
     let dataArray = data.data.values;
     dataHeader = dataArray[0];
     dataInfo = dataArray[1];
-    dataSet = dataArray.slice(2);
-    return dataArray;
+    let dataSet = dataArray.slice(2);
+    // cleanData();
+    return dataSet;
 }
 
 app.listen(port, () => {console.log("localhost:" + port)});
 
 app.use(express.static('public'));
 
-gsrun(client);
+// gsrun(client);
 
 app.get('/info', async (req,res) => {
-    res.status(200).json({data: dataSet}) // this object can be specified to make data presentation easier
-})
+    const dataSet = await gsrun(client);
+    res.status(200).json({data: cleanData(dataSet)}) // this object can be specified to make data presentation easier
+});
