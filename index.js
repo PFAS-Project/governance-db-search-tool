@@ -46,18 +46,22 @@ async function gsrun(client){ // function which grabs data from sheet, within a 
     let dataArray = data.data.values;
     dataHeader = dataArray[0];
     dataInfo = dataArray[1];
-    let dataSet = dataArray.slice(2);
-    // cleanData();
-    return dataSet;
+    dataSet = dataArray.slice(2);
+    
+    responseObject = {
+        types: dataInfo[3].split('; '),
+        topics: dataInfo[4].split(/;\s*/),
+        data: cleanData(dataSet)
+    };
 }
+
+gsrun(client);
 
 app.listen(port, () => {console.log("localhost:" + port)});
 
 app.use(express.static('public'));
 
-// gsrun(client);
 
 app.get('/info', async (req,res) => {
-    const dataSet = await gsrun(client);
-    res.status(200).json({data: cleanData(dataSet)}) // this object can be specified to make data presentation easier
+    res.status(200).json(responseObject) // this object can be specified to make data presentation easier
 });
