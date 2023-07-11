@@ -343,9 +343,9 @@
                               <div id='collapseFive${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
                                 <div class='card-body'> 
                                   <h6><p>Primary Sources:</p></h6> 
-                                  <p><a href='${values.primarySources}' class='link-underline-primary' target='_blank'>${values.primarySources}<!--***primary sources links goes here and in href***--></a></p> 
+                                  <p><a ${(values.primarySources == 'N/A') ? '':`href=${values.primarySources} class='link-underline-primary' target='_blank'`}>${values.primarySources}<!--***primary sources links goes here and in href***--></a></p> 
                                   <h6><p>Other Impotant Sources:</p></h6> 
-                                  <p><a href='${values.secondarySources}' class='link-underline-primary' target='_blank'>${values.secondarySources}<!--***other important sources links goes here and in href***--></a></p> 
+                                  <p><a ${(values.secondarySources == 'N/A') ? '':`href=${values.secondarySources} class='link-underline-primary' target='_blank'`}>${values.secondarySources}<!--***other important sources links goes here and in href***--></a></p> 
                                 </div> 
                               </div> 
                           </div> 
