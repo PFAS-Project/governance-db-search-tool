@@ -40,3 +40,21 @@ html, body {
   .navbar-nav .form-inline .form-control {
     margin-right: 5px;
   }
+
+  .sort.desc::after {
+    content: "\002B06";
+    padding-left: 3px;
+    }
+  .sort.asc::after {
+    content: "\002B07";
+    padding-left: 3px
+    }
+
+    @supports ((position: -webkit-sticky) or (position: sticky)) {
+      .sticky-top-filter {
+         position: -webkit-sticky;
+         position: sticky;
+         top: 70px;
+         z-index: 1019;
+         }
+     } 
