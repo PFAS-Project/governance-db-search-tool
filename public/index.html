@@ -491,17 +491,7 @@
           )
       });
 
-      actionType.map((item) =>{
-          $("#typeSelect").append(
-              "<option>" + item + "</option>"
-          )
-      });
 
-      actionTopics.map((item) =>{
-          $("#topicSelect").append(
-              "<option>" + item + "</option>"
-          )
-      });
 
       /*
       start of event listeners
@@ -607,9 +597,22 @@
 
       async function getInfo() {
           const res = await fetch('/info', { method: "GET" });
-          const data = await res.json();
-          console.log(data.data);
-          data.data.map((item)=>{
+          const info = await res.json();
+          console.log(info);
+
+          info.types.map((item) =>{
+            $("#typeSelect").append(
+                "<option>" + item + "</option>"
+            )
+          });
+    
+          info.topics.map((item) =>{
+              $("#topicSelect").append(
+                  "<option>" + item + "</option>"
+              )
+          });
+
+          info.data.map((item)=>{
               dataList.add({
                   Title: item[1], 
                   AgencyOrState: item[0], 
@@ -626,6 +629,7 @@
                   ID: accordionID++
               });
           });
+
         }
       getInfo();
       </script>
