@@ -23,13 +23,15 @@ client.authorize(function(err,tokens){ // call the authorize method, which will 
 
 function cleanData(dataSet){ // this function is used to clean out rows containing empty and undefined rows. 
     found = [];
+    cleaned = [];
     for(i in dataSet){
         if(dataSet[i][3] == undefined) 
-            console.log(dataSet[i][0])
+            cleaned.push(dataSet[i])
         else{ 
             found.push(dataSet[i])
         }
     }
+    console.log('%d rows have missing data:', cleaned.length, cleaned)
     return found;
 };
 
