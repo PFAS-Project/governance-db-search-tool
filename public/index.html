@@ -45,7 +45,7 @@
                                 
                               </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body" id="aboutModal">
                                 The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
                                 and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
                                 The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
@@ -605,13 +605,13 @@
         dateEnd = 2023;
       }
 
-      async function getAbout() {
-            const res = await fetch(textURL, { method: "GET" });
+      async function getAboutText() {
+            const res = await fetch('/about.txt', { method: "GET" });
             const data = await res.text();
             $('#aboutModal').text(data);
         }
 
-        getAbout();
+        getAboutText();
 
       async function getInfo() {
           const res = await fetch('/info', { method: "GET" });
