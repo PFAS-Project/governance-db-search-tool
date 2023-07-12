@@ -607,7 +607,11 @@
       }
 
       function exportSelected() {
-          console.log("Exported!");
+        const selected = dataList.matchingItems;
+        console.log("Exported:");
+        for (i=0; i<selected.length; i++) {
+          console.log(selected[i].values());
+        }
       }
 
       async function getInfo() {
