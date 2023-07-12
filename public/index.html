@@ -605,6 +605,14 @@
         dateEnd = 2023;
       }
 
+      async function getAbout() {
+            const res = await fetch(textURL, { method: "GET" });
+            const data = await res.text();
+            $('#aboutModal').text(data);
+        }
+
+        getAbout();
+
       async function getInfo() {
           const res = await fetch('/info', { method: "GET" });
           const data = await res.json();
