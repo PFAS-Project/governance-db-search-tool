@@ -475,15 +475,7 @@
       var actionTypeVal = [];
       var actionTopicVal = [];
 
-      $("#stateSelect").empty();
-
       $("#fedSelect").empty();
-
-      states.map((item) =>{
-          $("#stateSelect").append(
-              "<option>" + item + "</option>"
-          )
-      });
 
       federal.map((item) =>{
           $("#fedSelect").append(
@@ -599,6 +591,12 @@
           const res = await fetch('/info', { method: "GET" });
           const info = await res.json();
           console.log(info);
+
+          info.states.map((item) =>{
+            $("#stateSelect").append(
+                "<option>" + item + "</option>"
+            )
+          });
 
           info.types.map((item) =>{
             $("#typeSelect").append(
