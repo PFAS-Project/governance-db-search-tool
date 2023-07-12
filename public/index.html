@@ -612,7 +612,9 @@
         const selected = dataList.matchingItems;
         let fileContent = '';
 
-        // TODO: Add header row to fileContent
+        // Add header row to fileContent
+        const headerRow = fields.map(field => `"${field}"`).join(',');
+        fileContent += headerRow + '\n';
         // Add selected records to fileContent
         for (i=0; i < selected.length; i++) {
           const record = selected[i].values();
