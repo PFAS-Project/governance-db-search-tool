@@ -4,22 +4,6 @@ const express = require('express');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
-const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
-    keys.client_email, // service acc
-    null,
-    keys.private_key, // private key
-    ['https://www.googleapis.com/auth/spreadsheets'] // api address
-);
-
-// call the authorize method, which will reach out to the api address and attempt a connection
-client.authorize(function(err,tokens){ 
-    if(err){
-        console.log(err);
-        return;
-    } else {
-        console.log("connected to google cloud API")
-    }
-});
 
 /**
  * Returns a copy of dataSet after removing any rows 
@@ -82,10 +66,30 @@ async function getData(client) { // get data from both federal and state sheets
     };
 }
 
-getData(client);
-app.use(express.static('public'));
-app.listen(port, () => {console.log("localhost:" + port)});
+async function startup() {
+    const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
+        keys.client_email, // service acc
+        null,
+        keys.private_key, // private key
+        ['https://www.googleapis.com/auth/spreadsheets'] // api address
+    );
 
-app.get('/info', async (req,res) => {
-    res.status(200).json(responseObject);
-});
+    // call the authorize method, which will reach out to the api address and attempt a connection
+    client.authorize(function(err,tokens){ 
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            console.log("connected to google cloud API")
+        }
+    });
+
+    await getData(client);
+    app.use(express.static('public'));
+    app.get('/info', async (req,res) => {
+        res.status(200).json(responseObject);
+    });
+    app.listen(port, () => {console.log("localhost:" + port)});
+}
+
+startup();
