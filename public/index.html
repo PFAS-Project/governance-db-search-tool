@@ -592,23 +592,16 @@
           const info = await res.json();
           console.log(info);
 
-          info.states.map((item) =>{
-            $("#stateSelect").append(
-                "<option>" + item + "</option>"
-            )
-          });
-
-          info.types.map((item) =>{
-            $("#typeSelect").append(
-                "<option>" + item + "</option>"
-            )
-          });
-    
-          info.topics.map((item) =>{
-              $("#topicSelect").append(
+          function makeOptions(items, selectID) {
+            items.map((item) =>{
+              $(`#${selectID}`).append(
                   "<option>" + item + "</option>"
               )
-          });
+            });
+          }
+          makeOptions(info.states, 'stateSelect');
+          makeOptions(info.types, 'typeSelect');
+          makeOptions(info.topics, 'topicSelect');
 
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
 
