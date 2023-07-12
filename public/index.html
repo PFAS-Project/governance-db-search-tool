@@ -126,7 +126,7 @@
                                                     State
                                                 </label>
                                                 <!-- <input class="form-check-input" type="checkbox" value="" id="state"> -->
-                                                <select class="selectpicker" data-width="fit" multiple id="stateSelect" data-selected-text-format="count" data-actions-box="true">
+                                                <select data-width="fit" multiple id="stateSelect" data-selected-text-format="count" data-actions-box="true">
                                                     <!--state options-->
                                                 </select>
                                             </form>
@@ -135,7 +135,7 @@
                                                     Federal
                                                 </label>
                                                 <!-- <input class="form-check-input" type="checkbox" value="" id="federal"> -->
-                                                <select class="selectpicker" data-width="fit" multiple id="fedSelect" data-selected-text-format="count" data-actions-box="true">
+                                                <select data-width="fit" multiple id="fedSelect" data-selected-text-format="count" data-actions-box="true">
                                                     <!--federal options-->
                                                 </select>
                                             </form>
@@ -176,7 +176,7 @@
                                     <div id="advOption3" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="actionTypeBody">
                                             <!--action types injected here-->
-                                            <select class="selectpicker" data-width="fit" multiple id="typeSelect" data-selected-text-format="count" data-actions-box="true">
+                                            <select data-width="fit" multiple id="typeSelect" data-selected-text-format="count" data-actions-box="true">
                                               <!--type options-->
                                           </select>
                                         </div>
@@ -195,7 +195,7 @@
                                     <div id="option4" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="actionTopicBody">
                                             <!--action topics injected here-->
-                                            <select class="selectpicker" data-width="fit" multiple id="topicSelect" data-selected-text-format="count" data-actions-box="true">
+                                            <select data-width="fit" multiple id="topicSelect" data-selected-text-format="count" data-actions-box="true">
                                               <!--topic options-->
                                           </select>
                                         </div>
@@ -586,7 +586,7 @@
         dataList.filter();
         $('#dateStart').val(1905);
         $('#dateEnd').val(2023);
-        $('.selectpicker').selectpicker('deselectAll');
+        $('select').selectpicker('deselectAll');
         stateSelVal = "";
         fedSelVal = "";
         actionTypeVal = "";
@@ -611,6 +611,8 @@
                   "<option>" + item + "</option>"
               )
           });
+
+          $('select').selectpicker(); // Apply bootstrap-select to all select tags
 
           info.data.map((item)=>{
               dataList.add({
