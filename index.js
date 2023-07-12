@@ -35,14 +35,18 @@ function cleanData(dataSet){ // this function is used to clean out rows containi
     return found;
 };
 
-async function gsrun(client){ // function which grabs data from sheet, within a particular range
+async function getSheetData(client,sheet) {
     const gsAPI = google.sheets({version:"v4", auth:client});
     const opt = {
         spreadsheetId: keys.sheet_id, 
-        range: "STATE" // get all rows/columms from the sheet
-        // TODO: Get data from both FEDERAL and STATE sheets
+        range: sheet // get all rows/columms from the sheet
     };
-    const data = await gsAPI.spreadsheets.values.get(opt);
+    const data = await gsAPI.spreadsheets.values.get(opt);    
+    return data;
+}
+
+async function gsrun(client){ // function which grabs data from sheet, within a particular range
+    const data = await getSheetData(client, "STATE");
     const dataArray = data.data.values;
     dataHeader = dataArray[0];
     dataInfo = dataArray[1];
