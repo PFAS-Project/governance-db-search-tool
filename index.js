@@ -30,7 +30,8 @@ function cleanData(dataSet){ // this function is used to clean out rows containi
             found.push(dataSet[i])
         }
     }
-    console.log('%d rows have missing data', cleaned.length);
+    console.log('Removed %d rows with missing data', cleaned.length);
+    console.log('Found %d valid rows', found.length);
     return found;
 };
 
