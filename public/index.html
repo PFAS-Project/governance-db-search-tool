@@ -497,6 +497,7 @@
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
 
           info.data.map((item)=>{
+              item = item.map(str => str.trim());
               dataList.add({
                   Title: item[1], 
                   AgencyOrState: item[0], 
