@@ -42,14 +42,18 @@ async function gsrun(client){ // function which grabs data from sheet, within a 
         range: "STATE" // get all rows/columms from the sheet
         // TODO: Get data from both FEDERAL and STATE sheets
     };
-    let data = await gsAPI.spreadsheets.values.get(opt);
-    let dataArray = data.data.values;
+    const data = await gsAPI.spreadsheets.values.get(opt);
+    const dataArray = data.data.values;
     dataHeader = dataArray[0];
     dataInfo = dataArray[1];
     dataSet = dataArray.slice(2);
     
+    console.log(dataInfo);
+
+
     responseObject = {
-        types: dataInfo[3].split('; '),
+        states: dataInfo[0].split(/;\s*/),
+        types: dataInfo[3].split(/;\s*/),
         topics: dataInfo[4].split(/;\s*/),
         data: cleanData(dataSet)
     };
