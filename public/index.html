@@ -623,7 +623,8 @@
         // Save fileContent as a new CSV file
         const bb = new Blob([fileContent], { type: 'text/csv' });
         const a = document.createElement('a');
-        a.download = 'pfas-policy.csv';
+        // TODO: Add date and time to filename
+        a.download = 'pfas-policy-export-DATETIME.csv';
         a.href = window.URL.createObjectURL(bb);
         a.click();
       }
