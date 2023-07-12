@@ -10,7 +10,6 @@ const client = new google.auth.JWT( // create client object, which holds the pri
     keys.private_key, // private key
     ['https://www.googleapis.com/auth/spreadsheets'] // api address
 );
-// var dataSet;
 
 client.authorize(function(err,tokens){ // call the authorize method, which will reach out to the api address and attempt a connection
     if(err){
@@ -31,7 +30,7 @@ function cleanData(dataSet){ // this function is used to clean out rows containi
             found.push(dataSet[i])
         }
     }
-    console.log('%d rows have missing data:', cleaned.length, cleaned)
+    console.log('%d rows have missing data', cleaned.length);
     return found;
 };
 
@@ -45,7 +44,7 @@ async function getSheetData(client,sheet) {
     return data;
 }
 
-async function getSheetData(client) { 
+async function getData(client) { 
     const federalSheetData = await getSheetData(client, 'FEDERAL');
     const federalArray = federalSheetData.data.values;
     const federalInfo = federalArray[1];
@@ -65,7 +64,7 @@ async function getSheetData(client) {
     };
 }
 
-getSheetData(client);
+getData(client);
 app.use(express.static('public'));
 app.listen(port, () => {console.log("localhost:" + port)});
 
