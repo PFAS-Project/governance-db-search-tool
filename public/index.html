@@ -259,6 +259,9 @@
           "Sources",
           "ID"
       ],
+      fuzzySearch: {
+        threshold: 0.4,
+      },
           item:
               function (values){
                   return `<div class='card'>  
@@ -536,7 +539,7 @@
       });
       $('#basicSearch').on("submit", function(e) { 
         e.preventDefault();
-        dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
+        dataList.fuzzySearch($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers','AgencyOrState']);     
         megaFilter();
       });
       $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
@@ -611,7 +614,7 @@
           console.log(data.data);
           data.data.map((item)=>{
               dataList.add({
-                  Title: item[1], 
+                  Title: item[2], 
                   AgencyOrState: item[0], 
                   Date: item[5], 
                   ActionType: item[3], 
