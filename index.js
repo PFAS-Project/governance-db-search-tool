@@ -45,7 +45,7 @@ async function getSheetData(client,sheet) {
     return data;
 }
 
-async function gsrun(client){ // function which grabs data from sheet, within a particular range
+async function getSheetData(client) { 
     const federalSheetData = await getSheetData(client, 'FEDERAL');
     const federalArray = federalSheetData.data.values;
     const federalInfo = federalArray[1];
@@ -65,12 +65,9 @@ async function gsrun(client){ // function which grabs data from sheet, within a 
     };
 }
 
-gsrun(client);
-
-app.listen(port, () => {console.log("localhost:" + port)});
-
+getSheetData(client);
 app.use(express.static('public'));
-
+app.listen(port, () => {console.log("localhost:" + port)});
 
 app.get('/info', async (req,res) => {
     res.status(200).json(responseObject) // this object can be specified to make data presentation easier
