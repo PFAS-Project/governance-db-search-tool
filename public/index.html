@@ -626,8 +626,12 @@
         const bb = new Blob([fileContent], { type: 'text/csv' });
         const a = document.createElement('a');
         // Add date and time to filename
-        const dateTime = new Date().toISOString().replace(/[-:.]/g, '');
+        const now = new Date();
+        const date = now.toLocalDateString().replaceAll('/', '');
+        const time = now.toLocalTimeString().replace(/:/g, '');
+        const exportDateTime = `${date}-${time}`;
         a.download = 'pfas-policy-export-DATETIME.csv';
+        
         a.href = window.URL.createObjectURL(bb);
         a.click();
       }
