@@ -88,7 +88,8 @@
               <div class="container"> 
                 <div class="row">
                     <div class="col-11 mt-3 text-right">
-                        <button type='button' class='btn btn-secondary'>Export All
+                        <button type='button' class='btn btn-secondary'
+                                onclick="exportSelected()">Export Selected
 
                             <!--
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'>
@@ -603,6 +604,10 @@
         actionTopicVal = "";
         dateStart = 1905;
         dateEnd = 2023;
+      }
+
+      function exportSelected() {
+          console.log("Exported!");
       }
 
       async function getInfo() {
