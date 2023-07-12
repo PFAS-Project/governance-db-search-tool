@@ -607,14 +607,20 @@
       }
 
       function exportSelected() {
+        // TODO: Add remaining fields
         const fields = ['Title', 'AgencyOrState','Date','ActionType']
         const selected = dataList.matchingItems;
         let fileContent = '';
+
+        // TODO: Add header row to fileContent
+        // Add selected records to fileContent
         for (i=0; i < selected.length; i++) {
           const record = selected[i].values();
           const row = fields.map(field => `"${record[field]}"`).join(',');
           fileContent += row + '\n';
         }
+
+        // Save fileContent as a new CSV file
         const bb = new Blob([fileContent], { type: 'text/csv' });
         const a = document.createElement('a');
         a.download = 'pfas-policy.csv';
