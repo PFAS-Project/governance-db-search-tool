@@ -58,10 +58,10 @@ async function getData(client) { // get data from both federal and state sheets
     const stateData = stateArray.slice(2);
 
     responseObject = {
-        states: stateInfo[0].split(/;\s*/),
-        agencies: federalInfo[0].split(/;\s*/),
-        types: stateInfo[3].split(/;\s*/),
-        topics: stateInfo[4].split(/;\s*/),
+        states: stateInfo[0].split(/\s*;\s*/),
+        agencies: federalInfo[0].split(/\s*;\s*/),
+        types: stateInfo[3].split(/\s*;\s*/),
+        topics: stateInfo[4].split(/\s*;\s*/),
         data: cleanData(federalData.concat(stateData))
     };
 }
