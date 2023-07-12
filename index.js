@@ -11,7 +11,8 @@ const client = new google.auth.JWT( // create client object, which holds the pri
     ['https://www.googleapis.com/auth/spreadsheets'] // api address
 );
 
-client.authorize(function(err,tokens){ // call the authorize method, which will reach out to the api address and attempt a connection
+// call the authorize method, which will reach out to the api address and attempt a connection
+client.authorize(function(err,tokens){ 
     if(err){
         console.log(err);
         return;
@@ -20,7 +21,12 @@ client.authorize(function(err,tokens){ // call the authorize method, which will 
     }
 });
 
-function cleanData(dataSet){ // this function is used to clean out rows containing empty and undefined rows. 
+/**
+ * Returns a copy of dataSet after removing any rows 
+ * containing empty and undefined values.
+ * @param {*} dataSet A 2D array of data
+ */
+function cleanData(dataSet){ 
     found = [];
     cleaned = [];
     for(i in dataSet){
@@ -35,7 +41,13 @@ function cleanData(dataSet){ // this function is used to clean out rows containi
     return found;
 };
 
-async function getSheetData(client,sheet) { // get all rows/columms from the sheet
+/**
+ * Gets all data from a given Google Sheet.
+ * @param {*} client Authorized connection to Google Sheets API
+ * @param {*} sheet Which sheet to access, 'STATE' or 'FEDERAL'
+ * @returns A 2D array of data
+ */
+async function getSheetData(client,sheet) { 
     const gsAPI = google.sheets({version:"v4", auth:client});
     const opt = {
         spreadsheetId: keys.sheet_id, 
@@ -45,6 +57,11 @@ async function getSheetData(client,sheet) { // get all rows/columms from the she
     return data;
 }
 
+/**
+ * Gets data and metadata from both 'FEDERAL' and 'STATE' sheets.
+ * Defines responseObject.
+ * @param {*} client Authorized connection to Google Sheets API
+ */
 async function getData(client) { // get data from both federal and state sheets
     const federalSheetData = await getSheetData(client, 'FEDERAL');
     const federalArray = federalSheetData.data.values;
@@ -70,5 +87,5 @@ app.use(express.static('public'));
 app.listen(port, () => {console.log("localhost:" + port)});
 
 app.get('/info', async (req,res) => {
-    res.status(200).json(responseObject) // this object can be specified to make data presentation easier
+    res.status(200).json(responseObject);
 });
