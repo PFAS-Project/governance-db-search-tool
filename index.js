@@ -51,18 +51,17 @@ async function gsrun(client){ // function which grabs data from sheet, within a 
     const federalInfo = federalArray[1];
     const federalData = federalArray.slice(2);
     
-    const data = await getSheetData(client, 'STATE');
-    const dataArray = data.data.values;
-    dataHeader = dataArray[0];
-    dataInfo = dataArray[1];
-    dataSet = dataArray.slice(2);
+    const stateSheetData = await getSheetData(client, 'STATE');
+    const stateArray = stateSheetData.data.values;
+    const stateInfo = stateArray[1];
+    const stateData = stateArray.slice(2);
 
     responseObject = {
-        states: dataInfo[0].split(/;\s*/),
+        states: stateInfo[0].split(/;\s*/),
         agencies: federalInfo[0].split(/;\s*/),
-        types: dataInfo[3].split(/;\s*/),
-        topics: dataInfo[4].split(/;\s*/),
-        data: cleanData(federalData.concat(dataSet))
+        types: stateInfo[3].split(/;\s*/),
+        topics: stateInfo[4].split(/;\s*/),
+        data: cleanData(federalData.concat(stateData))
     };
 }
 
