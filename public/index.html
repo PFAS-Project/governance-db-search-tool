@@ -610,13 +610,16 @@
         const fields = ['Title', 'AgencyOrState','Date','ActionType']
         const selected = dataList.matchingItems;
         let fileContent = '';
-        console.log("Exported:");
         for (i=0; i < selected.length; i++) {
           const record = selected[i].values();
           const row = fields.map(field => `"${record[field]}"`).join(',');
           fileContent += row + '\n';
         }
-        console.log(fileContent);
+        const bb = new Blob([fileContent], { type: 'text/csv' });
+        const a = document.createElement('a');
+        a.download = 'pfas-policy.csv';
+        a.href = window.URL.createObjectURL(bb);
+        a.click();
       }
 
       async function getInfo() {
