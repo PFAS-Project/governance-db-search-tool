@@ -475,16 +475,6 @@
       var actionTypeVal = [];
       var actionTopicVal = [];
 
-      $("#fedSelect").empty();
-
-      federal.map((item) =>{
-          $("#fedSelect").append(
-              "<option>" + item + "</option>"
-          )
-      });
-
-
-
       /*
       start of event listeners
       */
@@ -600,6 +590,7 @@
             });
           }
           makeOptions(info.states, 'stateSelect');
+          makeOptions(info.agencies, 'fedSelect');
           makeOptions(info.types, 'typeSelect');
           makeOptions(info.topics, 'topicSelect');
 

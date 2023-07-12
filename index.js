@@ -46,17 +46,19 @@ async function getSheetData(client,sheet) {
 }
 
 async function gsrun(client){ // function which grabs data from sheet, within a particular range
-    const data = await getSheetData(client, "STATE");
+    const federalSheetData = await getSheetData(client, 'FEDERAL');
+    const federalList = federalSheetData.data.values;
+    federalInfo = federalList[1];
+    
+    const data = await getSheetData(client, 'STATE');
     const dataArray = data.data.values;
     dataHeader = dataArray[0];
     dataInfo = dataArray[1];
     dataSet = dataArray.slice(2);
-    
-    console.log(dataInfo);
-
 
     responseObject = {
         states: dataInfo[0].split(/;\s*/),
+        agencies: federalInfo[0].split(/;\s*/),
         types: dataInfo[3].split(/;\s*/),
         topics: dataInfo[4].split(/;\s*/),
         data: cleanData(dataSet)
