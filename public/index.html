@@ -84,7 +84,7 @@
                 <button class="btn btn-secondary" style="color: rgb(255, 255, 255)" type="submit" id="submitBtn">Search</button>
               </form> 
               
-              <!--Export All Button-->
+              <!--Export Selected Button-->
               <div class="container"> 
                 <div class="row">
                     <div class="col-11 mt-3 text-right">
@@ -254,9 +254,9 @@
           "ActionTopic", 
           "AgenciesAndPlayers", 
           "Summary", 
-          "Legislative", 
+          "LegislativeOutcome", 
           "CompanionBills", 
-          "PFASDef", 
+          "PFASDefinition", 
           "Sources",
           "ID"
       ],
@@ -311,7 +311,7 @@
                               </a> 
                               <div id='collapseTwo${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
                                 <div class='card-body'>   
-                                  ${values.Legislative}
+                                  ${values.LegislativeOutcome}
                               </div> 
                             </div> 
                             <!--Companion Bills--> 
@@ -331,7 +331,7 @@
                               </a> 
                               <div id='collapseFour${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
                                 <div class='card-body'>
-                                  ${values.PFASDef}
+                                  ${values.PFASDefinition}
                                   <!--***PFAS definition goes here***--> 
                                 </div> 
                               </div> 
@@ -609,7 +609,7 @@
       function exportSelected() {
         // List fields
         // TODO: Use column headers from the Google Sheet
-        const fields = ['Title', 'AgencyOrState','Date','ActionType','ActionTopic','AgenciesAndPlayers','Summary','Legislative','CompanionBills','PFASDef','Sources','ID']
+        const fields = ['Title', 'AgencyOrState','Date','ActionType','ActionTopic','AgenciesAndPlayers','Summary','LegislativeOutcome','CompanionBills','PFASDefinition','Sources','ID']
         const selected = dataList.matchingItems;
         let fileContent = '';
 
@@ -652,9 +652,9 @@
                   ActionTopic: item[4], 
                   AgenciesAndPlayers: item[10], 
                   Summary: item[9], 
-                  Legislative: item[7], 
+                  LegislativeOutcome: item[7], 
                   CompanionBills: item[8], 
-                  PFASDef: item[11], 
+                  PFASDefinition: item[11], 
                   primarySources: item[12],
                   secondarySources: item[13],
                   ID: accordionID++
