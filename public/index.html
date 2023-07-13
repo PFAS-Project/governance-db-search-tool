@@ -106,10 +106,15 @@
                 <div class="row justify-content-around align-items-center sticky-top-filter">
                     <div class="col">
                         <div class="row mx-1 mb-1">
+                          <input type="checkbox" class="btn-check" id="btn-check-exactSearch" autocomplete="off">
+                          <label class="btn btn-secondary" for="btn-check-exactSearch">Exact search</label>
+                        </div>
+                        <div class="row mx-1 mb-1">
                             <button id="filterReset" class="btn btn-secondary" type="button">
                               Reset Filters
                             </button>
                         </div>
+                        
                         <div class="accordion" id="advanced-search">
                            <!--start of accordion item-->
                            <!--State or federal agency-->
@@ -259,9 +264,10 @@
           "Sources",
           "ID"
       ],
-      fuzzySearch: {
-        threshold: 0.4,
-      },
+      // fuzzySearch: {
+      //   threshold: 0.4,
+      //   // distance: 0,
+      // },
           item:
               function (values){
                   return `<div class='card'>  
@@ -409,9 +415,25 @@
       $('#filterReset').on('click', function(){
         resetFilters();
       });
+
+
+
       $('#basicSearch').on("submit", function(e) { 
         e.preventDefault();
-        dataList.fuzzySearch($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers','AgencyOrState']);     
+
+          if (($('#btn-check-exactSearch').prop('checked')))
+          {
+            // console.log("searching with exact filter")
+            dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers','AgencyOrState']);
+          } else {
+            // console.log("searching with fuzzy filter")
+            dataList.fuzzySearch($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers','AgencyOrState']);
+          }
+
+          
+          // dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers','AgencyOrState']);
+
+
         megaFilter();
       });
       $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
