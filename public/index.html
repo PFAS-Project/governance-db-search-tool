@@ -60,6 +60,23 @@
 
                           </div>
                         </div>
+                      </div>
+
+                      <div class="modal fade" id="compBillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                
+                              </button>
+                            </div>
+                            <div class="modal-body" id="companionBill">
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
               <!-- PFAS Project Lab -->
               <li class="navbar">
                 <a class="nav-link" style="color: rgb(84, 84, 84)" href="https://pfasproject.com" target="_blank">PFAS Project Lab</a> 
@@ -320,8 +337,8 @@
                               </a> 
                               <div id='collapseThree${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
                                 <div class='card-body'>
-                                  ${values.CompanionBills}
-                              </div> 
+                                  ${values.CompanionBills == 'N/A' ? 'N/A':`<p><a class='compBill' href='#compBillModal' data-bs-toggle='modal'>${values.CompanionBills}</a></p>`}
+                              </div>
                             </div> 
                             <!--PFAS Definition--> 
                             <div class='card'> 
@@ -408,13 +425,29 @@
       });
       $('#basicSearch').on("submit", function(e) { 
         e.preventDefault();
-        dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
+        dataList.fuzzySearch($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
       $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
         e.preventDefault();
         megaFilter();
       });
+
+      $(document).ready(function(){
+        $(document).on('click', '.compBill', function(){
+          var compBill = $(this).text();
+          // console.log(compBill);
+          compBillData = dataList.get('Title',compBill)
+          console.log(compBillData.values().Title);
+          $('#companionBill').empty();
+          $('#companionBill').html(
+          `
+          <p>html injected</p>
+          <h5 class='card-title ml-3'>${compBillData.values().AgencyOrState}</h5>
+          `
+          );
+          });
+        });
 
       function megaFilter(){
 
@@ -499,7 +532,7 @@
           info.data.map((item)=>{
               item = item.map(str => str.trim());
               dataList.add({
-                  Title: item[1], 
+                  Title: item[2], 
                   AgencyOrState: item[0], 
                   Date: item[5], 
                   ActionType: item[3], 
