@@ -360,10 +360,9 @@
                               <div id='collapseFive${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
                                 <div class='card-body'> 
                                   <h6><p>Primary Sources:</p></h6> 
-                                  <p><a ${(values.primarySources == 'N/A') ? '':`href=${values.primarySources} class='link-underline-primary' target='_blank'`}>${values.primarySources}<!--***primary sources links goes here and in href***--></a></p> 
+                                  <p>${(values.primarySources == 'N/A' || values.primarySources == undefined) ? 'N/A':`<a href=${values.primarySources} class='link-underline-primary' target='_blank'>${values.primarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
                                   <h6><p>Other Impotant Sources:</p></h6> 
-                                  <p><a ${(values.secondarySources == 'N/A') ? '':`href=${values.secondarySources} class='link-underline-primary' target='_blank'`}>${values.secondarySources}<!--***other important sources links goes here and in href***--></a></p> 
-                                </div> 
+                                  <p>${(values.secondarySources == 'N/A' || values.secondarySources == undefined) ? 'N/A':`<a href=${values.secondarySources} class='link-underline-primary' target='_blank'>${values.secondarySources}<!--***primary sources links goes here and in href***--></a>`}</p>                                 </div> 
                               </div> 
                           </div> 
                       </div> 
@@ -436,14 +435,14 @@
       $(document).ready(function(){
         $(document).on('click', '.compBill', function(){
           var compBill = $(this).text();
-          // console.log(compBill);
-          compBillData = dataList.get('Title',compBill)
+          console.log(compBill);
+          compBillData = dataList.get('Title',compBill);
           console.log(compBillData.values().Title);
           $('#companionBill').empty();
           $('#companionBill').html(
           `
           <p>html injected</p>
-          <h5 class='card-title ml-3'>${compBillData.values().AgencyOrState}</h5>
+          <h5 class='card-title ml-3'>Title: ${compBillData.values().Title}</h5>
           `
           );
           });
