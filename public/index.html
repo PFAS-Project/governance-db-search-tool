@@ -617,19 +617,19 @@
         fileContent += headerRow + '\n';
         // Add selected records to fileContent
         for (i=0; i < selected.length; i++) {
-          const record = selected[i].values();
-          const row = fields.map(field => `"${record[field]}"`).join(',');
-          fileContent += row + '\n';
+          let record = selected[i].values();
+          let row = fields.map(field => `"${String(record[field]).replaceAll('"',"'")}"`);
+          fileContent += row.join(',').replaceAll('\n',' ') + '\n';
         }
 
         // Save fileContent as a new CSV file
         const bb = new Blob([fileContent], { type: 'text/csv' });
         const a = document.createElement('a');
         // Add date and time to filename
-        const now = new Date();
-        const date = now.toLocalDateString().replaceAll('/', '');
-        const time = now.toLocalTimeString().replace(/:/g, '');
-        const exportDateTime = `${date}-${time}`;
+        // const now = new Date();
+        // const date = now.toLocalDateString().replaceAll('/', '');
+        // const time = now.toLocalTimeString().replace(/:/g, '');
+        // const exportDateTime = `${date}-${time}`;
         a.download = 'pfas-policy-export-DATETIME.csv';
         
         a.href = window.URL.createObjectURL(bb);
