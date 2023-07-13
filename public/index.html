@@ -607,7 +607,8 @@
       }
 
       function exportSelected() {
-        // Add remaining fields
+        // List fields
+        // TODO: Use column headers from the Google Sheet
         const fields = ['Title', 'AgencyOrState','Date','ActionType','ActionTopic','AgenciesAndPlayers','Summary','Legislative','CompanionBills','PFASDef','Sources','ID']
         const selected = dataList.matchingItems;
         let fileContent = '';
@@ -615,6 +616,7 @@
         // Add header row to fileContent
         const headerRow = fields.map(field => `"${field}"`).join(',');
         fileContent += headerRow + '\n';
+
         // Add selected records to fileContent
         for (i=0; i < selected.length; i++) {
           let record = selected[i].values();
@@ -626,6 +628,7 @@
         const bb = new Blob([fileContent], { type: 'text/csv' });
         const a = document.createElement('a');
         // Add date and time to filename
+        // TODO: Reseach alternatives to Date.toLocalDateString()
         // const now = new Date();
         // const date = now.toLocalDateString().replaceAll('/', '');
         // const time = now.toLocalTimeString().replace(/:/g, '');
