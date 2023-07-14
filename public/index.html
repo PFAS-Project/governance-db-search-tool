@@ -271,7 +271,7 @@
           "AgenciesAndPlayers", 
           "Summary", 
           "Legislative", 
-          "CompanionBills", 
+          "CompanionBill", 
           "PFASDef", 
           "Sources",
           "ID"
@@ -330,14 +330,14 @@
                                   ${values.Legislative}
                               </div> 
                             </div> 
-                            <!--Companion Bills--> 
+                            <!--Companion Bill--> 
                             <div class='card'> 
                               <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${values.ID}' > 
-                                Companion Bills 
+                                Companion Bill 
                               </a> 
                               <div id='collapseThree${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
                                 <div class='card-body'>
-                                  ${values.CompanionBills == 'N/A' ? 'N/A':`<p><a class='compBill' href='#compBillModal' data-bs-toggle='modal'>${values.CompanionBills}</a></p>`}
+                                  ${(values.CompanionBill == 'N/A') || (values.CompanionBill == 'No companion legislation') ? 'N/A':`<p><a class='compBill' href='#compBillModal' data-bs-toggle='modal'>${values.CompanionBill}</a></p>`}
                               </div>
                             </div> 
                             <!--PFAS Definition--> 
@@ -432,17 +432,113 @@
         megaFilter();
       });
 
-      $(document).ready(function(){
+      $(document).ready(function(){ // companion bill event listener
         $(document).on('click', '.compBill', function(){
           var compBill = $(this).text();
-          console.log(compBill);
-          compBillData = dataList.get('Title',compBill);
-          console.log(compBillData.values().Title);
+          // console.log(compBill);
+          compBillVals = dataList.get('Title',compBill)[0].values();
+          // console.log(compBillData.values().Title);
+          // compBillVals = compBillData.values();
           $('#companionBill').empty();
           $('#companionBill').html(
           `
-          <p>html injected</p>
-          <h5 class='card-title ml-3'>Title: ${compBillData.values().Title}</h5>
+          <div class='card border-0'>  
+                  <div class='card-body'> 
+                      <h2 class='card-title ml-3'>  
+                      ${compBillVals.Title}
+              <!--***Name of Governance Action/title goes here***--> 
+                          <!--download button--> 
+                          <button type='button' class='btn btn-secondary'> 
+                              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'> 
+                          <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'></path> 
+                          <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'></path> 
+                            </svg> 
+                            </button> 
+                      </h2> 
+                      <!--Actor, Date, Legislation, Topics of Action, and Key Agencies/Players--> 
+                      <h5 class='card-actor ml-3'>Federal Agency or State:  
+              ${compBillVals.AgencyOrState} 
+              <!--***Name of Federal Agency/State goes here***--></h5> 
+                      <h5 class='card-date ml-3'>Date:  
+              ${compBillVals.Date}
+              <!--***Date of governance goes here***--></h5> 
+                      <h5 class='card-type ml-3'>Type of Governance Action:  
+              ${compBillVals.ActionType} 
+              <!--***Type of governance action goes here***--></h5> 
+                      <h5 class='card-topicsOfAction ml-3'>Topics of Governance Action:  
+              ${compBillVals.ActionTopic}
+              <!--***Topics of action goes here***--></h5> 
+                      <h5 class='card-keyAgencyPlayers ml-3'>Key Agencies and Players:  
+              ${compBillVals.AgenciesAndPlayers} 
+              <!--***Key agencies/players goes here***--></h5> 
+                        <!--Accordion${(compBillVals.ID).toString() + "modal"}Info Start--> 
+                        <div class='container mt-4'> 
+                          <div id='accordion${(compBillVals.ID).toString() + "modal"}'> 
+                          <!--Summary of Action--> 
+                            <div class='card'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseOne${(compBillVals.ID).toString() + "modal"}' > 
+                                Summary of Action 
+                              </a> 
+                              <div id='collapseOne${(compBillVals.ID).toString() + "modal"}' class='collapse' data-parent='#accordion${(compBillVals.ID).toString() + "modal"}'> 
+                                <div class='card-body'> 
+                                  ${compBillVals.Summary}
+                              </div> 
+                            </div> 
+                            <!--Legislative outcome--> 
+                            <div class='card'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseTwo${(compBillVals.ID).toString() + "modal"}' > 
+                                Legislative Outcome 
+                              </a> 
+                              <div id='collapseTwo${(compBillVals.ID).toString() + "modal"}' class='collapse' data-parent='#accordion${(compBillVals.ID).toString() + "modal"}'> 
+                                <div class='card-body'>   
+                                  ${compBillVals.Legislative}
+                              </div> 
+                            </div> 
+                            <!--Companion Bill--> 
+                            <div class='card'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${(compBillVals.ID).toString() + "modal"}' > 
+                                Companion Bill 
+                              </a> 
+                              <div id='collapseThree${(compBillVals.ID).toString() + "modal"}' class='collapse' data-parent='#accordion${(compBillVals.ID).toString() + "modal"}'> 
+                                <div class='card-body'>
+                                  ${(compBillVals.CompanionBill == 'N/A') || (compBillVals.CompanionBill == 'No companion legislation') ? 'N/A':`<p><a class='compBill' href='#compBillModal' data-bs-toggle='modal'>${compBillVals.CompanionBill}</a></p>`}
+                              </div>
+                            </div> 
+                            <!--PFAS Definition--> 
+                            <div class='card'> 
+                              <a class='collapsed card-link card-header' data-toggle='collapse' href='#collapseFour${(compBillVals.ID).toString() + "modal"}'> 
+                                PFAS Definition 
+                              </a> 
+                              <div id='collapseFour${(compBillVals.ID).toString() + "modal"}' class='collapse' data-parent='#accordion${(compBillVals.ID).toString() + "modal"}'> 
+                                <div class='card-body'>
+                                  ${compBillVals.PFASDef}
+                                  <!--***PFAS definition goes here***--> 
+                                </div> 
+                              </div> 
+                            </div> 
+                            <!--Sources--> 
+                            <div class='card'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseFive${(compBillVals.ID).toString() + "modal"}'> 
+                                Sources 
+                              </a> 
+                              <div id='collapseFive${(compBillVals.ID).toString() + "modal"}' class='collapse' data-parent='#accordion${(compBillVals.ID).toString() + "modal"}'> 
+                                <div class='card-body'> 
+                                  <h6><p>Primary Sources:</p></h6> 
+                                  <p>${(compBillVals.primarySources == 'N/A' || compBillVals.primarySources == undefined) ? 'N/A':`<a href=${compBillVals.primarySources} class='link-underline-primary' target='_blank'>${compBillVals.primarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
+                                  <h6><p>Other Impotant Sources:</p></h6> 
+                                  <p>${(compBillVals.secondarySources == 'N/A' || compBillVals.secondarySources == undefined) ? 'N/A':`<a href=${compBillVals.secondarySources} class='link-underline-primary' target='_blank'>${compBillVals.secondarySources}<!--***primary sources links goes here and in href***--></a>`}</p>                                 </div> 
+                              </div> 
+                          </div> 
+                      </div> 
+                  </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> 
+              </div> 
           `
           );
           });
@@ -539,7 +635,7 @@
                   AgenciesAndPlayers: item[10], 
                   Summary: item[9], 
                   Legislative: item[7], 
-                  CompanionBills: item[8], 
+                  CompanionBill: item[8], 
                   PFASDef: item[11], 
                   primarySources: item[12],
                   secondarySources: item[13],
