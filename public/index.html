@@ -616,9 +616,9 @@
         }
 
         // Make a string where each line looks like "Header: Content" with a blank line after each record
-        //let recordString = '';
-        //for (const key in record) {
-          //recordString += '${key}: ${record[key]}\n';
+        let recordString = '';
+        for (const key in record) {
+          recordString += '${key}: ${record[key]}\n';
         }
         // Save this string in a .txt file named AgencyOrState-DATE-ID.txt
         //const now = new Date();
