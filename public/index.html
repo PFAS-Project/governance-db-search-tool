@@ -454,7 +454,7 @@
           }
 
           if ((dateStart != earliestDate) || (dateEnd != latestDate)){
-            console.log("searching with "+ dateStart + " and " + dateEnd);
+            console.log("searching with "+ (dateStart || earliestDate) + " and " + (dateEnd || latestDate));
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
 
