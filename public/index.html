@@ -173,9 +173,9 @@
                                     <div id="advOption2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="advanced-search">
                                         <div class="accordion-body justify-content-center">
                                             <form>
-                                                <input type="number" min="1900" max="2099" step="1" value="1905" id="dateStart"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="" id="dateStart"/>
                                                 -
-                                                <input type="number" min="1900" max="2099" step="1" value="2023" id="dateEnd"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="" id="dateEnd"/>
                                             </form>
                                         </div>
                                     </div>
@@ -263,10 +263,14 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" crossorigin="anonymous" type="text/javascript"></script>
       <script>
+        
       var accordionID = 0;
+      var earliestDate = 2023;
+      var latestDate = 2023;
+
       function template(values, modal = false){
-      return `
-      <div class='card ${(modal ? "border-0":"")}'>  
+          return `
+                <div class='card ${(modal ? "border-0":"")}'>  
                   <div class='card-body'> 
                       <h2 class='card-title ml-3'>  
                       ${values.Title}
@@ -390,7 +394,8 @@
       const name = document.getElementById("name");
       const email = document.getElementById("email");
       const ID = document.getElementById("id");
-      const submitBtn = document.getElementById("submitBtn");      const stateSel = document.getElementById("state");
+      const submitBtn = document.getElementById("submitBtn");      
+      const stateSel = document.getElementById("state");
       const fedSel = document.getElementById("federal");
       var stateSelVal = $('#stateSelect').val(); // default vaules for search
       var fedSelVal = $('#fedSelect').val();
@@ -492,8 +497,8 @@
             filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
           }
 
-          if ((dateStart != 1905) || (dateEnd != 2023)){
-            console.log("searching with "+ dateStart + " and " + dateEnd);
+          if ((dateStart != earliestDate) || (dateEnd != latestDate)){
+            console.log("searching with " + (dateStart || earliestDate) + " and " + (dateEnd || latestDate));
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
 
@@ -508,15 +513,15 @@
       
       function resetFilters(){
         dataList.filter();
-        $('#dateStart').val(1905);
-        $('#dateEnd').val(2023);
+        $('#dateStart').val(earliestDate);
+        $('#dateEnd').val(latestDate);
         $('select').selectpicker('deselectAll');
         stateSelVal = "";
         fedSelVal = "";
         actionTypeVal = "";
         actionTopicVal = "";
-        dateStart = 1905;
-        dateEnd = 2023;
+        dateStart = earliestDate;
+        dateEnd = latestDate;
       }
 
       async function getInfo() {
@@ -537,8 +542,14 @@
           makeOptions(info.topics, 'topicSelect');
 
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
-
+          
           info.data.map((item)=>{
+
+              var date = (item[5]);
+
+              if (date < earliestDate)  earliestDate = date;
+              if (date > latestDate)    latestDate = date;
+
               item = item.map(str => str.trim());
               dataList.add({
                   Title: item[2], 
@@ -556,7 +567,8 @@
                   ID: accordionID++
               });
           });
-
+          $('#dateStart').val(earliestDate);
+          $('#dateEnd').val(latestDate);
         }
       getInfo();
       </script>
