@@ -7,6 +7,7 @@
     <title>PFAS prototype</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel='stylesheet' id='style-css' href='https://pfasproject.com/wp-content/themes/rowling/style.css?ver=1.1.1-wpcom' type='text/css' media='all'/>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -21,9 +22,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
    
-   
-    <link rel='stylesheet' id='fonts-css' href='https://fonts-api.wp.com/css?family=Lato%3A400%2C700%2C900%2C400italic%2C700italic%7CMerriweather%3A700%2C900%2C400italic&#038;subset=latin%2Clatin-ext' type='text/css' media='all'/>
-    <link rel='stylesheet' id='style-css' href='https://pfasproject.com/wp-content/themes/rowling/style.css?ver=1.1.1-wpcom' type='text/css' media='all'/>
     <style id='style-inline-css' type='text/css'>
     .post-meta-author {
         clip: rect(1px, 1px, 1px, 1px);
@@ -38,7 +36,8 @@
     <style type="text/css" id="custom-colors-css">
 
     .header-wrapper {
-        background:#474747
+        background:#474747;
+        padding-top: 30px;
     }
 
     .site-title a:hover {
@@ -65,20 +64,21 @@
     .navigation {
       width:25%;
       position:relative;
-      left: 70%;
-      top: -150px;
+      left: 72%;
+      bottom: 0px;
+    }
+    .outer {
+    border-bottom: solid 8px;
+    color:#bde146
     }
 
-    img {
-      left:30%;
-    }
+
   </style>  
 </head>
 
 
 <body class="home blog wp-custom-logo custom-colors has-site-logo author-hidden">
   <header class="header-wrapper">
-    <div class="header">
       <div class="section-inner">
 
         <!--PFAS logo and Title-->
@@ -99,9 +99,11 @@
           </div>
         </div>
       </div>
-    </div>
+
+    
 
     <!--Nav bar-->
+    <div class="outer">
     <nav class="navigation">
       <div class="section-inner clear-fix">
         <ul class="header-bottom-menu">
@@ -125,6 +127,7 @@
 
       </div>
     </nav>
+  </div>
 
     <!--Modal About The Databawse-->
     <div class="modal fade" id="datamodalref" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -155,6 +158,7 @@
         </div>
       </div>
     </div>
+    </header>
 
     
         <!--start of container-->
