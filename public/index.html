@@ -49,11 +49,11 @@
     }
 
 
-    .header-bottom-menu ul a, .header-bottom-menu > li > a, .header-bottom-menu > li:hover > a, .header-bottom-menu ul li:hover > a, .header-bottom-menu > li.current_menu_item > a, .header-bottom-menu > li.current_page_item > a, .navigation .section-inner, .sticky.post .sticky-tag, .single-post .post .sticky-tag, .post-content .page-links a:hover, .post-content fieldset legend, .post-content fieldset legend, .post-content input[type="submit"], .post-content input[type="reset"], .post-content input[type="button"], .post-content input[type="submit"]:hover, .post-content input[type="reset"]:hover, .post-content input[type="button"]:hover, .post-tags a:hover, .tagcloud .widget-content a:hover, .widget_tag_cloud .widget-content a:hover, .comment-respond input[type="submit"], .to-the-top .fa {
+    .header-bottom-menu ul a, .header-bottom-menu > li > a, .header-bottom-menu > li:hover > a, .header-bottom-menu ul li:hover > a, .header-bottom-menu > li.current_menu_item > a, .header-bottom-menu > li.current_page_item > a, .navigation .section-inner, .section-inner-nav .sticky.post .sticky-tag, .single-post .post .sticky-tag, .post-content .page-links a:hover, .post-content fieldset legend, .post-content fieldset legend, .post-content input[type="submit"], .post-content input[type="reset"], .post-content input[type="button"], .post-content input[type="submit"]:hover, .post-content input[type="reset"]:hover, .post-content input[type="button"]:hover, .post-tags a:hover, .tagcloud .widget-content a:hover, .widget_tag_cloud .widget-content a:hover, .comment-respond input[type="submit"], .to-the-top .fa {
         color:#545454
     }
 
-    .header-bottom-menu ul, .navigation .section-inner, .header-bottom-menu, .nav-toggle, .sticky.post .sticky-tag, .single-post .post .sticky-tag, .post-content .page-links a:hover, .post-tags a:hover, .tagcloud .widget-content a:hover, .widget_tag_cloud .widget-content a:hover, .post-content fieldset legend, .post-content input[type="submit"], .post-content input[type="reset"], .post-content input[type="button"], .post-content input[type="submit"]:hover, .post-content input[type="reset"]:hover, .post-content input[type="button"]:hover, .comment-respond input[type="submit"], #infinite-handle span button, .to-the-top {
+    .header-bottom-menu ul, .navigation .section-inner, .section-inner-nav, .header-bottom-menu, .nav-toggle, .sticky.post .sticky-tag, .single-post .post .sticky-tag, .post-content .page-links a:hover, .post-tags a:hover, .tagcloud .widget-content a:hover, .widget_tag_cloud .widget-content a:hover, .post-content fieldset legend, .post-content input[type="submit"], .post-content input[type="reset"], .post-content input[type="button"], .post-content input[type="submit"]:hover, .post-content input[type="reset"]:hover, .post-content input[type="button"]:hover, .comment-respond input[type="submit"], #infinite-handle span button, .to-the-top {
         background:#bde146
     }
 
@@ -62,14 +62,23 @@
     }
 
     .navigation {
-      width:25%;
       position:relative;
-      left: 72%;
       bottom: 0px;
     }
+
     .outer {
     border-bottom: solid 8px;
     color:#bde146
+    }
+
+    .section-inner-nav {
+      position:relative;
+      left: 75%;
+    }
+
+    .nav-toggle {
+      top: 50px;
+      right: 10px;
     }
 
 
@@ -105,7 +114,7 @@
     <!--Nav bar-->
     <div class="outer">
     <nav class="navigation">
-      <div class="section-inner clear-fix">
+      <div class="section-inner-nav clear-fix">
         <ul class="header-bottom-menu">
           <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-8">
             <a href="https://pfasproject.com" aria-current="page">Pfas Project Lab</a>
