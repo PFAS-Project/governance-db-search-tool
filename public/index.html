@@ -621,15 +621,15 @@
           recordString += '${key}: ${record[key]}\n';
         }
         // Save this string in a .txt file named AgencyOrState-DATE-ID.txt
-        //const now = new Date();
-        //const date = now.toLocaleDateString().replaceAll('/','');
-        //const filename = 'AgencyOrState-${date}-${ID}.txt';
+        const now = new Date();
+        const date = now.toLocaleDateString().replaceAll('/','');
+        const filename = 'AgencyOrState-${date}-${ID}.txt';
 
-        //const bb = new Blob([recordString], { type: 'text/plain' });
-        //const a = document.createElement('a');
-        //a.href = window.URL.createObjectURL(bb);
-        //a.download = filename;
-        //a.click();
+        const bb = new Blob([recordString], { type: 'text/plain' });
+        const a = document.createElement('a');
+        a.href = window.URL.createObjectURL(bb);
+        a.download = filename;
+        a.click();
 
         //console.log("Export record: " + ID);
       } 
