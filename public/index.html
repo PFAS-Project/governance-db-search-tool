@@ -623,8 +623,8 @@
           recordString += `${key}: ${record.values()[key]}\n\n`;
         }
         // Save this string in a .txt file named after the first two words of the title
-        const shortTitle = record.values().Title.split(' ').slice(0,2).join('-');
-        const filename = `${shortTitle}.txt`;
+        const shortTitle = record.values().Title.split(' ').slice(0,15);
+        const filename = `${shortTitle.join(' ').replace(/[/\\?%*:|"<>]/g, '-')}.txt`;
 
         const bb = new Blob([recordString], { type: 'text/plain' });
         const a = document.createElement('a');
@@ -696,8 +696,10 @@
                   ID: accordionID++
               });
           });
-        }
+      }
       getInfo();
+
+
       </script>
   </body>
 </html>
