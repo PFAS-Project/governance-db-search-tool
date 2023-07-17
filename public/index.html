@@ -607,16 +607,32 @@
       }
 
       function exportThisRecord(ID) {
-        // TODO:
         // Get item from dataList that has the given ID
-        // Make a string where each line looks like
-        //     Header: Content
-        // with a blank line after 
-        // Save this string in a .txt file named 
-        //     AgencyOrState-DATE-ID.txt
-        // (It would be better to use the short title if we had it.)
-        console.log("Export record: " + ID);
-      }
+        const record = dataList.find(item => item.ID === ID);
+
+        if (!record) {
+          console.log("No record found with ID: " + ID);
+          return;
+        }
+
+        // Make a string where each line looks like "Header: Content" with a blank line after each record
+        //let recordString = '';
+        //for (const key in record) {
+          //recordString += '${key}: ${record[key]}\n';
+        }
+        // Save this string in a .txt file named AgencyOrState-DATE-ID.txt
+        //const now = new Date();
+        //const date = now.toLocaleDateString().replaceAll('/','');
+        //const filename = 'AgencyOrState-${date}-${ID}.txt';
+
+        //const bb = new Blob([recordString], { type: 'text/plain' });
+        //const a = document.createElement('a');
+        //a.href = window.URL.createObjectURL(bb);
+        //a.download = filename;
+        //a.click();
+
+        //console.log("Export record: " + ID);
+      } 
 
       function exportSelected() {
         // List fields
@@ -638,14 +654,22 @@
         // Save fileContent as a new CSV file
         const bb = new Blob([fileContent], { type: 'text/csv' });
         const a = document.createElement('a');
+
         // Add date and time to filename
-        // TODO: Reseach alternatives to Date.toLocalDateString()
-        // const now = new Date();
-        // const date = now.toLocalDateString().replaceAll('/', '');
-        // const time = now.toLocalTimeString().replace(/:/g, '');
-        // const exportDateTime = `${date}-${time}`;
-        a.download = 'pfas-policy-export-DATETIME.csv';
+        const now = new Date();
+        const formatter = new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+          hour12: false,
+        });
+        const formattedDateTime = formatter.format(now).replaceAll('/', '').replaceAll(':', '');
+      
         
+        a.download = 'pfas-policy-export-${formattedDateTime}.csv';
         a.href = window.URL.createObjectURL(bb);
         a.click();
       }
