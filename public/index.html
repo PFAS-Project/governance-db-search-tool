@@ -666,7 +666,7 @@
           second: 'numeric',
           hour12: false,
         });
-        const formattedDateTime = formatter.format(now).replaceAll('/', '-').replaceAll(':', '-').replaceAll(', ','-');
+        const formattedDateTime = formatter.format(now).replaceAll('/', '').replaceAll(':', '').replaceAll(', ','-');
         
         a.download = `pfas-policy-export-${formattedDateTime}.csv`;
         a.href = window.URL.createObjectURL(bb);
