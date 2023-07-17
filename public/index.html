@@ -599,7 +599,7 @@
       async function getAboutText() {
             const res = await fetch('/about.txt', { method: "GET" });
             const data = await res.text();
-            $('#aboutModal').text(data);
+            $('#aboutModal').html(data);
         }
 
         getAboutText();
