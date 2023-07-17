@@ -453,7 +453,7 @@
             filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
           }
 
-          if ((dateStart != 1905) || (dateEnd != 2023)){
+          if ((dateStart != earliestDate) || (dateEnd != latestDate)){
             console.log("searching with "+ dateStart + " and " + dateEnd);
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
