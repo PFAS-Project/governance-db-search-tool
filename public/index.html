@@ -454,7 +454,7 @@
           }
 
           if ((dateStart != earliestDate) || (dateEnd != latestDate)){
-            console.log("searching with "+ (dateStart || earliestDate) + " and " + (dateEnd || latestDate));
+            console.log("searching with " + (dateStart || earliestDate) + " and " + (dateEnd || latestDate));
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
 
@@ -503,15 +503,8 @@
 
               var date = (item[5]);
 
-              if (date < earliestDate){
-                earliestDate = date;
-                console.log(`earliest data = ${earliestDate}`)
-              } 
-
-              if (date > latestDate){
-                latestDate = date;
-                console.log(`latest data = ${latestDate}`)
-              }
+              if (date < earliestDate)  earliestDate = date;
+              if (date > latestDate)    latestDate = date;
 
               item = item.map(str => str.trim());
               dataList.add({
