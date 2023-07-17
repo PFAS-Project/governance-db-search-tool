@@ -257,7 +257,8 @@
           "LegislativeOutcome", 
           "CompanionBills", 
           "PFASDefinition", 
-          "Sources",
+          "PrimarySources",
+          "SecondarySources",
           "ID"
       ],
           item:
@@ -344,9 +345,9 @@
                               <div id='collapseFive${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
                                 <div class='card-body'> 
                                   <h6><p>Primary Sources:</p></h6> 
-                                  <p><a ${(values.primarySources == 'N/A') ? '':`href=${values.primarySources} class='link-underline-primary' target='_blank'`}>${values.primarySources}<!--***primary sources links goes here and in href***--></a></p> 
+                                  <p><a ${(values.PrimarySources == 'N/A') ? '':`href=${values.PrimarySources} class='link-underline-Primary' target='_blank'`}>${values.PrimarySources}<!--***Primary sources links goes here and in href***--></a></p> 
                                   <h6><p>Other Impotant Sources:</p></h6> 
-                                  <p><a ${(values.secondarySources == 'N/A') ? '':`href=${values.secondarySources} class='link-underline-primary' target='_blank'`}>${values.secondarySources}<!--***other important sources links goes here and in href***--></a></p> 
+                                  <p><a ${(values.SecondarySources == 'N/A') ? '':`href=${values.SecondarySources} class='link-underline-Primary' target='_blank'`}>${values.SecondarySources}<!--***other important sources links goes here and in href***--></a></p> 
                                 </div> 
                               </div> 
                           </div> 
@@ -635,7 +636,7 @@
       } 
 
       function exportSelected() {
-        // List fields
+        // TODO: remove ID from list of fields
         const fields = options.valueNames;
         const selected = dataList.matchingItems;
         let fileContent = '';
@@ -689,8 +690,8 @@
                   LegislativeOutcome: item[7], 
                   CompanionBills: item[8], 
                   PFASDefinition: item[11], 
-                  primarySources: item[12],
-                  secondarySources: item[13],
+                  PrimarySources: item[12],
+                  SecondarySources: item[13],
                   ID: accordionID++
               });
           });
