@@ -244,6 +244,8 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" crossorigin="anonymous" type="text/javascript"></script>
       <script>
       var accordionID = 0;
+      var earliestDate = 2023;
+
       var options = { // list.js options, fill with html template and column names
           valueNames: [
           "Title", 
@@ -478,7 +480,6 @@
       }
 
       async function getInfo() {
-          var earliestDate = 2023;
           const res = await fetch('/info', { method: "GET" });
           const info = await res.json();
           console.log(info);
@@ -518,9 +519,9 @@
                   ID: accordionID++
               });
           });
-          $('#dateStart').val(earliestDate);
         }
       getInfo();
+      $('#dateStart').val(earliestDate);
       </script>
   </body>
 </html>
