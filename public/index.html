@@ -609,7 +609,7 @@
 
       function exportThisRecord(ID) {
         // Get item from dataList that has the given ID
-        const record = dataList.find(item => item.ID === ID);
+        const record = dataList.get("ID", ID)[0];
 
         if (!record) {
           console.log("No record found with ID: " + ID);
