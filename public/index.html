@@ -60,6 +60,23 @@
 
                           </div>
                         </div>
+                      </div>
+
+                      <div class="modal fade" id="compBillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                
+                              </button>
+                            </div>
+                            <div class="modal-body" id="companionBill">
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
               <!-- PFAS Project Lab -->
               <li class="navbar">
                 <a class="nav-link" style="color: rgb(84, 84, 84)" href="https://pfasproject.com" target="_blank">PFAS Project Lab</a> 
@@ -247,24 +264,9 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" crossorigin="anonymous" type="text/javascript"></script>
       <script>
       var accordionID = 0;
-      var options = { // list.js options, fill with html template and column names
-          valueNames: [
-          "Title", 
-          "AgencyOrState", 
-          "Date", 
-          "ActionType", 
-          "ActionTopic", 
-          "AgenciesAndPlayers", 
-          "Summary", 
-          "Legislative", 
-          "CompanionBills", 
-          "PFASDef", 
-          "Sources",
-          "ID"
-      ],
-          item:
-              function (values){
-                  return `<div class='card'>  
+      function template(values, modal = false){
+      return `
+      <div class='card ${(modal ? "border-0":"")}'>  
                   <div class='card-body'> 
                       <h2 class='card-title ml-3'>  
                       ${values.Title}
@@ -293,45 +295,45 @@
                       <h5 class='card-keyAgencyPlayers ml-3'>Key Agencies and Players:  
               ${values.AgenciesAndPlayers} 
               <!--***Key agencies/players goes here***--></h5> 
-                        <!--Accordion${values.ID}Info Start--> 
+                        <!--Accordion${(values.ID.toString()) + (modal ? "modal":"")}Info Start--> 
                         <div class='container mt-4'> 
-                          <div id='accordion${values.ID}'> 
+                          <div id='accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                           <!--Summary of Action--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseOne${values.ID}' > 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseOne${(values.ID.toString()) + (modal ? "modal":"")}' > 
                                 Summary of Action 
                               </a> 
-                              <div id='collapseOne${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseOne${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
                                   ${values.Summary}
                               </div> 
                             </div> 
                             <!--Legislative outcome--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseTwo${values.ID}' > 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseTwo${(values.ID.toString()) + (modal ? "modal":"")}' > 
                                 Legislative Outcome 
                               </a> 
-                              <div id='collapseTwo${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseTwo${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>   
                                   ${values.Legislative}
                               </div> 
                             </div> 
-                            <!--Companion Bills--> 
+                            <!--Companion Bill--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${values.ID}' > 
-                                Companion Bills 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${(values.ID.toString()) + (modal ? "modal":"")}' > 
+                                Companion Bill 
                               </a> 
-                              <div id='collapseThree${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseThree${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>
-                                  ${values.CompanionBills}
-                              </div> 
+                                  ${(values.CompanionBill == 'N/A') || (values.CompanionBill == 'No companion legislation') ? 'N/A':`<p><a class='compBill' href='#compBillModal' data-bs-toggle='modal'>${values.CompanionBill}</a></p>`}
+                              </div>
                             </div> 
                             <!--PFAS Definition--> 
                             <div class='card'> 
-                              <a class='collapsed card-link card-header' data-toggle='collapse' href='#collapseFour${values.ID}'> 
+                              <a class='collapsed card-link card-header' data-toggle='collapse' href='#collapseFour${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 PFAS Definition 
                               </a> 
-                              <div id='collapseFour${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseFour${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>
                                   ${values.PFASDef}
                                   <!--***PFAS definition goes here***--> 
@@ -340,16 +342,15 @@
                             </div> 
                             <!--Sources--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseFive${values.ID}'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseFive${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 Sources 
                               </a> 
-                              <div id='collapseFive${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseFive${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
                                   <h6><p>Primary Sources:</p></h6> 
-                                  <p><a ${(values.primarySources == 'N/A') ? '':`href=${values.primarySources} class='link-underline-primary' target='_blank'`}>${values.primarySources}<!--***primary sources links goes here and in href***--></a></p> 
+                                  <p>${(values.primarySources == 'N/A' || values.primarySources == undefined) ? 'N/A':`<a href=${values.primarySources} class='link-underline-primary' target='_blank'>${values.primarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
                                   <h6><p>Other Impotant Sources:</p></h6> 
-                                  <p><a ${(values.secondarySources == 'N/A') ? '':`href=${values.secondarySources} class='link-underline-primary' target='_blank'`}>${values.secondarySources}<!--***other important sources links goes here and in href***--></a></p> 
-                                </div> 
+                                  <p>${(values.secondarySources == 'N/A' || values.secondarySources == undefined) ? 'N/A':`<a href=${values.secondarySources} class='link-underline-primary' target='_blank'>${values.secondarySources}<!--***primary sources links goes here and in href***--></a>`}</p>                                 </div> 
                               </div> 
                           </div> 
                       </div> 
@@ -361,7 +362,27 @@
               </div> 
               </div> 
               </div> 
-              </div> ` ;
+              </div> 
+      `;
+      };
+      var options = { // list.js options, fill with html template and column names
+          valueNames: [
+          "Title", 
+          "AgencyOrState", 
+          "Date", 
+          "ActionType", 
+          "ActionTopic", 
+          "AgenciesAndPlayers", 
+          "Summary", 
+          "Legislative", 
+          "CompanionBill", 
+          "PFASDef", 
+          "Sources",
+          "ID"
+      ],
+          item:
+              function (values){
+                return template(values);
               }
       };
       var values = []; // list.js values (should stay empty)
@@ -411,7 +432,7 @@
       });
       $('#basicSearch').on("submit", function(e) { 
         e.preventDefault();
-        dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
+        dataList.fuzzySearch($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
       $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
@@ -422,6 +443,20 @@
         $('#sortDate').attr('class', 'sort btn btn-secondary');
         dataList.sort('ID', { order: "asc" });
       });
+
+      $(document).ready(function(){ // companion bill event listener
+        $(document).on('click', '.compBill', function(){
+          var compBill = $(this).text();
+          // console.log(compBill);
+          compBillVals = dataList.get('Title',compBill)[0].values();
+          // console.log(compBillData.values().Title);
+          // compBillVals = compBillData.values();
+          $('#companionBill').empty();
+          $('#companionBill').html(
+          template(compBillVals, true)
+          );
+          });
+        });
 
       function megaFilter(){
 
@@ -506,7 +541,7 @@
           info.data.map((item)=>{
               item = item.map(str => str.trim());
               dataList.add({
-                  Title: item[1], 
+                  Title: item[2], 
                   AgencyOrState: item[0], 
                   Date: item[5], 
                   ActionType: item[3], 
@@ -514,7 +549,7 @@
                   AgenciesAndPlayers: item[10], 
                   Summary: item[9], 
                   Legislative: item[7], 
-                  CompanionBills: item[8], 
+                  CompanionBill: item[8], 
                   PFASDef: item[11], 
                   primarySources: item[12],
                   secondarySources: item[13],
