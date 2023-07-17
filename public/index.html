@@ -399,6 +399,7 @@
       const fedSel = document.getElementById("federal");
       var stateSelVal = $('#stateSelect').val(); // default vaules for search
       var fedSelVal = $('#fedSelect').val();
+      // console.log("value gotten")
       var dateStart = $('#dateStart').val();
       var dateEnd = $('#dateEnd').val();
       var actionTypeVal = [];
@@ -407,15 +408,6 @@
       /*
       start of event listeners
       */
-      
-      $('#stateSelect').on('change',function() {
-          stateSelVal = $(this).val();
-          console.log(stateSelVal);
-      });
-      $('#fedSelect').on('change',function() {
-          fedSelVal = $(this).val();
-          console.log(fedSelVal);
-      });
       $('#dateStart').on('change',function() {
           dateStart = $(this).val();
           console.log(dateStart);
@@ -423,6 +415,14 @@
       $('#dateEnd').on('change',function() {
           dateEnd = $(this).val();
           console.log(dateEnd);
+      });
+      $('#stateSelect').on('change',function() {
+          stateSelVal = $(this).val();
+          console.log(stateSelVal);
+      });
+      $('#fedSelect').on('change',function() {
+          fedSelVal = $(this).val();
+          console.log(fedSelVal);
       });
       $('#typeSelect').on('change',function() {
           actionTypeVal = $(this).val();
@@ -497,7 +497,7 @@
             filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
           }
 
-          if ((dateStart != earliestDate) || (dateEnd != latestDate)){
+          if ((dateStart != "") || (dateEnd != "")){
             console.log("searching with " + (dateStart || earliestDate) + " and " + (dateEnd || latestDate));
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
