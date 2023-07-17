@@ -156,7 +156,7 @@
                                     <div id="advOption2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="advanced-search">
                                         <div class="accordion-body justify-content-center">
                                             <form>
-                                                <input type="number" min="1900" max="2099" step="1" value="1905" id="dateStart"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="" id="dateStart"/>
                                                 -
                                                 <input type="number" min="1900" max="2099" step="1" value="2023" id="dateEnd"/>
                                             </form>
@@ -466,18 +466,19 @@
       
       function resetFilters(){
         dataList.filter();
-        $('#dateStart').val(1905);
+        $('#dateStart').val(earliestDate);
         $('#dateEnd').val(2023);
         $('select').selectpicker('deselectAll');
         stateSelVal = "";
         fedSelVal = "";
         actionTypeVal = "";
         actionTopicVal = "";
-        dateStart = 1905;
+        dateStart = earliestDate;
         dateEnd = 2023;
       }
 
       async function getInfo() {
+          var earliestDate = 2023;
           const res = await fetch('/info', { method: "GET" });
           const info = await res.json();
           console.log(info);
@@ -495,8 +496,11 @@
           makeOptions(info.topics, 'topicSelect');
 
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
-
+          
           info.data.map((item)=>{
+            if (item[5] < earliestDate){
+              earliestDate = item[5];
+            };
               item = item.map(str => str.trim());
               dataList.add({
                   Title: item[1], 
@@ -514,7 +518,7 @@
                   ID: accordionID++
               });
           });
-
+          $('#dateStart').val(earliestDate);
         }
       getInfo();
       </script>
