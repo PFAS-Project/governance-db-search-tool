@@ -622,10 +622,9 @@
         for (const key in record.values()) {
           recordString += `${key}: ${record.values()[key]}\n\n`;
         }
-        // Save this string in a .txt file named AgencyOrState-DATE-ID.txt
-        const now = new Date();
-        const date = now.toLocaleDateString().replaceAll('/','');
-        const filename = `${record['AgencyOrState']}-${record['Date']}-${ID}.txt`;
+        // Save this string in a .txt file named after the first two words of the title
+        const shortTitle = record.values().Title.split(' ').slice(0,2).join('-');
+        const filename = `${shortTitle}.txt`;
 
         const bb = new Blob([recordString], { type: 'text/plain' });
         const a = document.createElement('a');
