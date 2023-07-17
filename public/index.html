@@ -617,14 +617,15 @@
         }
 
         // Make a string where each line looks like "Header: Content" with a blank line after each record
+        // TODO: Skip ID field
         let recordString = '';
-        for (const key in record) {
-          recordString += '${key}: ${record[key]}\n';
+        for (const key in record.values()) {
+          recordString += `${key}: ${record.values()[key]}\n\n`;
         }
         // Save this string in a .txt file named AgencyOrState-DATE-ID.txt
         const now = new Date();
         const date = now.toLocaleDateString().replaceAll('/','');
-        const filename = 'AgencyOrState-${date}-${ID}.txt';
+        const filename = `${record['AgencyOrState']}-${record['Date']}-${ID}.txt`;
 
         const bb = new Blob([recordString], { type: 'text/plain' });
         const a = document.createElement('a');
