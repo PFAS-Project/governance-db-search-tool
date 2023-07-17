@@ -648,6 +648,7 @@
         // Add selected records to fileContent
         for (i=0; i < selected.length; i++) {
           let record = selected[i].values();
+          // TODO: Replace "smart quotes" with regular quotes
           let row = fields.map(field => `"${String(record[field]).replaceAll('"',"'")}"`);
           fileContent += row.join(',').replaceAll('\n',' ') + '\n';
         }
