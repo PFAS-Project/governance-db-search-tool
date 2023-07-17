@@ -158,7 +158,7 @@
                                             <form>
                                                 <input type="number" min="1900" max="2099" step="1" value="" id="dateStart"/>
                                                 -
-                                                <input type="number" min="1900" max="2099" step="1" value="2023" id="dateEnd"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="" id="dateEnd"/>
                                             </form>
                                         </div>
                                     </div>
@@ -245,7 +245,7 @@
       <script>
       var accordionID = 0;
       var earliestDate = 2023;
-
+      var latestDate = 2023;
       var options = { // list.js options, fill with html template and column names
           valueNames: [
           "Title", 
@@ -368,7 +368,8 @@
       const name = document.getElementById("name");
       const email = document.getElementById("email");
       const ID = document.getElementById("id");
-      const submitBtn = document.getElementById("submitBtn");      const stateSel = document.getElementById("state");
+      const submitBtn = document.getElementById("submitBtn");      
+      const stateSel = document.getElementById("state");
       const fedSel = document.getElementById("federal");
       var stateSelVal = $('#stateSelect').val(); // default vaules for search
       var fedSelVal = $('#fedSelect').val();
@@ -469,14 +470,14 @@
       function resetFilters(){
         dataList.filter();
         $('#dateStart').val(earliestDate);
-        $('#dateEnd').val(2023);
+        $('#dateEnd').val(latestDate);
         $('select').selectpicker('deselectAll');
         stateSelVal = "";
         fedSelVal = "";
         actionTypeVal = "";
         actionTopicVal = "";
         dateStart = earliestDate;
-        dateEnd = 2023;
+        dateEnd = latestDate;
       }
 
       async function getInfo() {
@@ -499,9 +500,19 @@
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
           
           info.data.map((item)=>{
-            if (item[5] < earliestDate){
-              earliestDate = item[5];
-            };
+
+              var date = (item[5]);
+
+              if (date < earliestDate){
+                earliestDate = date;
+                console.log(`earliest data = ${earliestDate}`)
+              } 
+
+              if (date > latestDate){
+                latestDate = date;
+                console.log(`latest data = ${latestDate}`)
+              }
+
               item = item.map(str => str.trim());
               dataList.add({
                   Title: item[1], 
@@ -519,9 +530,10 @@
                   ID: accordionID++
               });
           });
+          $('#dateStart').val(earliestDate);
+          $('#dateEnd').val(latestDate);
         }
       getInfo();
-      $('#dateStart').val(earliestDate);
       </script>
   </body>
 </html>
