@@ -4,24 +4,13 @@ const express = require('express');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
-const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
-    keys.client_email, // service acc
-    null,
-    keys.private_key, // private key
-    ['https://www.googleapis.com/auth/spreadsheets'] // api address
-);
-// var dataSet;
 
-client.authorize(function(err,tokens){ // call the authorize method, which will reach out to the api address and attempt a connection
-    if(err){
-        console.log(err);
-        return;
-    } else {
-        console.log("connected to google cloud API")
-    }
-});
-
-function cleanData(dataSet){ // this function is used to clean out rows containing empty and undefined rows. 
+/**
+ * Returns a copy of dataSet after removing any rows 
+ * containing empty and undefined values.
+ * @param {*} dataSet A 2D array of data
+ */
+function cleanData(dataSet){ 
     found = [];
     cleaned = [];
     for(i in dataSet){
@@ -31,33 +20,76 @@ function cleanData(dataSet){ // this function is used to clean out rows containi
             found.push(dataSet[i])
         }
     }
-    console.log('%d rows have missing data:', cleaned.length, cleaned)
+    console.log('Removed %d rows with missing data', cleaned.length);
+    console.log('Found %d valid rows', found.length);
     return found;
 };
 
-async function gsrun(client){ // function which grabs data from sheet, within a particular range
+/**
+ * Gets all data from a given Google Sheet.
+ * @param {*} client Authorized connection to Google Sheets API
+ * @param {*} sheet Which sheet to access, 'STATE' or 'FEDERAL'
+ * @returns A 2D array of data
+ */
+async function getSheetData(client,sheet) { 
     const gsAPI = google.sheets({version:"v4", auth:client});
     const opt = {
         spreadsheetId: keys.sheet_id, 
-        range: "STATE" // get all rows/columms from the sheet
-        // TODO: Get data from both FEDERAL and STATE sheets
+        range: sheet 
     };
-    let data = await gsAPI.spreadsheets.values.get(opt);
-    let dataArray = data.data.values;
-    dataHeader = dataArray[0];
-    dataInfo = dataArray[1];
-    let dataSet = dataArray.slice(2);
-    // cleanData();
-    return dataSet;
+    const data = await gsAPI.spreadsheets.values.get(opt);    
+    return data;
 }
 
-app.listen(port, () => {console.log("localhost:" + port)});
+/**
+ * Gets data and metadata from both 'FEDERAL' and 'STATE' sheets.
+ * Defines responseObject.
+ * @param {*} client Authorized connection to Google Sheets API
+ */
+async function getData(client) { // get data from both federal and state sheets
+    const federalSheetData = await getSheetData(client, 'FEDERAL');
+    const federalArray = federalSheetData.data.values;
+    const federalInfo = federalArray[1];
+    const federalData = federalArray.slice(2);
+    
+    const stateSheetData = await getSheetData(client, 'STATE');
+    const stateArray = stateSheetData.data.values;
+    const stateInfo = stateArray[1];
+    const stateData = stateArray.slice(2);
 
-app.use(express.static('public'));
+    responseObject = {
+        states: stateInfo[0].split(/\s*;\s*/),
+        agencies: federalInfo[0].split(/\s*;\s*/),
+        types: stateInfo[3].split(/\s*;\s*/),
+        topics: stateInfo[4].split(/\s*;\s*/),
+        data: cleanData(federalData.concat(stateData))
+    };
+}
 
-// gsrun(client);
+async function startup() {
+    const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
+        keys.client_email, // service acc
+        null,
+        keys.private_key, // private key
+        ['https://www.googleapis.com/auth/spreadsheets'] // api address
+    );
 
-app.get('/info', async (req,res) => {
-    const dataSet = await gsrun(client);
-    res.status(200).json({data: cleanData(dataSet)}) // this object can be specified to make data presentation easier
-});
+    // call the authorize method, which will reach out to the api address and attempt a connection
+    client.authorize(function(err,tokens){ 
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            console.log("connected to google cloud API")
+        }
+    });
+
+    await getData(client);
+    app.use(express.static('public'));
+    app.get('/info', async (req,res) => {
+        res.status(200).json(responseObject);
+    });
+    app.listen(port, () => {console.log("localhost:" + port)});
+}
+
+startup();
