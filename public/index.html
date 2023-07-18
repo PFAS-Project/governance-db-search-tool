@@ -75,6 +75,24 @@
     </nav>
   </div>
 </div>
+</header>
+
+    <!-- Modals -->
+    <div class="modal fade" id="compBillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              
+            </button>
+          </div>
+          <div class="modal-body" id="companionBill">
+          </div>
+
+        </div>
+      </div>
+    </div>
 
     <!--Modal About The Databawse-->
     <div class="modal fade" id="datamodalref" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -105,7 +123,7 @@
         </div>
       </div>
     </div>
-    </header>
+
 
     
         <!--start of container-->
@@ -380,7 +398,7 @@
                               <div id='collapseFive${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
                                   <h6><p>Primary Sources:</p></h6> 
-                                  <p>${(values.PrimarySources == 'N/A' || values.PrimarySources == undefined) ? 'N/A':`<a href=${values.PrimarySources} class='link-underline-Primary' target='_blank'>${values.primarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
+                                  <p>${(values.PrimarySources == 'N/A' || values.PrimarySources == undefined) ? 'N/A':`<a href=${values.PrimarySources} class='link-underline-Primary' target='_blank'>${values.PrimarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
                                   <h6><p>Other Important Sources:</p></h6> 
                                   <p>${(values.SecondarySources == 'N/A' || values.SecondarySources == undefined) ? 'N/A':`<a href=${values.SecondarySources} class='link-underline-primary' target='_blank'>${values.SecondarySources}<!--***primary sources links goes here and in href***--></a>`}</p>                                 </div> 
                               </div> 
@@ -406,10 +424,11 @@
           "ActionTopic", 
           "AgenciesAndPlayers", 
           "Summary", 
-          "Legislative", 
+          "LegislativeOutcome", 
           "CompanionBill", 
-          "PFASDef", 
-          "Sources",
+          "PFASDefinition", 
+          "PrimarySources",
+          "SecondarySources",
           "ID"
       ],
           item:
@@ -427,7 +446,6 @@
       const fedSel = document.getElementById("federal");
       var stateSelVal = $('#stateSelect').val(); // default vaules for search
       var fedSelVal = $('#fedSelect').val();
-      // console.log("value gotten")
       var dateStart = $('#dateStart').val();
       var dateEnd = $('#dateEnd').val();
       var actionTypeVal = [];
@@ -654,9 +672,9 @@
                   ActionTopic: item[4], 
                   AgenciesAndPlayers: item[10], 
                   Summary: item[9], 
-                  Legislative: item[7], 
+                  LegislativeOutcome: item[7], 
                   CompanionBill: item[8], 
-                  PFASDef: item[11], 
+                  PFASDefinition: item[11], 
                   PrimarySources: item[12],
                   SecondarySources: item[13],
                   ID: accordionID++
