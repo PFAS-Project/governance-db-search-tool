@@ -408,14 +408,12 @@
       /*
       start of event listeners
       */
-      $('#dateStart').on('change',function() {
-          dateStart = $(this).val();
-          console.log(dateStart);
-      });
-      $('#dateEnd').on('change',function() {
-          dateEnd = $(this).val();
-          console.log(dateEnd);
-      });
+      $('#dateStart, #dateEnd').on('change', function(){
+        dateEnd = $('#dateEnd').val();
+        console.log(dateEnd);
+        dateStart = $('#dateStart').val();
+        console.log(dateStart);
+      })
       $('#stateSelect').on('change',function() {
           stateSelVal = $(this).val();
           console.log(stateSelVal);
@@ -498,7 +496,7 @@
           }
 
           if ((dateStart != "") || (dateEnd != "")){
-            console.log("searching with " + (dateStart || earliestDate) + " and " + (dateEnd || latestDate));
+            console.log("searching with " + (dateStart) + " and " + (dateEnd));
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
 
