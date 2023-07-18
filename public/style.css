@@ -58,3 +58,63 @@ html, body {
          z-index: 1019;
          }
      } 
+
+     .post-meta-author {
+         clip: rect(1px, 1px, 1px, 1px);
+         height: 1px;
+         position: absolute;
+         overflow: hidden;
+         width: 1px;
+    }
+  
+    .header-wrapper {
+      background:#474747;
+      padding-top: 30px;
+  }
+
+  .site-title a:hover {
+      color: #bde146
+  }
+
+  .nav-toggle .bar, .nav-toggle.active .bar {
+      background:#545454
+  }
+
+
+  .header-bottom-menu ul a, .header-bottom-menu > li > a, .header-bottom-menu > li:hover > a, .header-bottom-menu ul li:hover > a, .header-bottom-menu > li.current_menu_item > a, .header-bottom-menu > li.current_page_item > a, .navigation .section-inner, .sticky.post .sticky-tag, .single-post .post .sticky-tag, .post-content .page-links a:hover, .post-content fieldset legend, .post-content fieldset legend, .post-content input[type="submit"], .post-content input[type="reset"], .post-content input[type="button"], .post-content input[type="submit"]:hover, .post-content input[type="reset"]:hover, .post-content input[type="button"]:hover, .post-tags a:hover, .tagcloud .widget-content a:hover, .widget_tag_cloud .widget-content a:hover, .comment-respond input[type="submit"], .to-the-top .fa {
+      color:#545454
+  }
+
+  .header-bottom-menu ul, .navigation .section-inner, .header-bottom-menu, .nav-toggle, .sticky.post .sticky-tag, .single-post .post .sticky-tag, .post-content .page-links a:hover, .post-tags a:hover, .tagcloud .widget-content a:hover, .widget_tag_cloud .widget-content a:hover, .post-content fieldset legend, .post-content input[type="submit"], .post-content input[type="reset"], .post-content input[type="button"], .post-content input[type="submit"]:hover, .post-content input[type="reset"]:hover, .post-content input[type="button"]:hover, .comment-respond input[type="submit"], #infinite-handle span button, .to-the-top {
+      background:#bde146
+  }
+
+  .nav-link {
+    white-space:nowrap;
+  }
+
+  .navigation {
+    position:relative;
+    bottom: 0px;
+  }
+
+  .outer {
+  border-bottom: solid 8px;
+  color:#bde146
+  }
+
+  .nav-toggle {
+    top: 50px;
+    right: 10px;
+  }
+
+  .containerNav {
+    position: relative;
+    width: 400px;
+    left: 65%;
+    margin-right: 5;
+
+  }
+    
+    
+    
