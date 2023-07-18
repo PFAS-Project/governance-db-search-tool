@@ -60,12 +60,10 @@ html, body {
      } 
 
      .spinner-border {
-      position: fixed;
-      top: 40%;
-      left: 60%;
       width: 3rem;
       height: 3rem;
       color: rgb(94, 119, 13);
+      margin-top: 90px;
     }
      .post-meta-author {
          clip: rect(1px, 1px, 1px, 1px);
