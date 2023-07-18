@@ -262,16 +262,21 @@
             <!--dropdown end-->
             
             <!--cards start-->
-            
             <div class="col-9" style="background-color: rgb(191, 191, 191) ;"> 
-                <div class="row">
-                    <div class="col-lg-12 gy-2 overflow-auto" id="search_results">
-                        <div class="list row gy-3 align-items-center">
-                            <!--cards injected here-->
-                        </div>
-                    </div>
+              <!--Spinner start-->
+              <div class="d-flex justify-content-center">
+                <div class="spinner-border" id="spinner" role="status">
+                  <span class="sr-only"></span>
                 </div>
-            <!--sear bar and cards end-->
+              </div>
+              <div class="row">
+                  <div class="col-lg-12 gy-2 overflow-auto" id="search_results">
+                      <div class="list row gy-3 align-items-center">
+                          <!--cards injected here-->
+                      </div>
+                  </div>
+              </div>
+            <!--search bar and cards end-->
             </div> 
         <!--end of container--> 
 
@@ -539,6 +544,7 @@
       }
 
       async function getInfo() {
+          let spinner = document.getElementById("spinner");
           const res = await fetch('/info', { method: "GET" });
           const info = await res.json();
           console.log(info);
@@ -583,6 +589,7 @@
           });
           $('#dateStart').val(earliestDate);
           $('#dateEnd').val(latestDate);
+          $("#spinner").attr('hidden', true);
         }
       getInfo();
       </script>
