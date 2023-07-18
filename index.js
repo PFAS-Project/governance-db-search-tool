@@ -1,65 +1,95 @@
 const {google} = require('googleapis'); // include google api
 const keys = require('./keys.json'); // import API keys
 const express = require('express');
-//const listjs = require('list.js');
 const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
-const defaultcells = ['A3','W222']; // default cell range is just header row
-const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
-    keys.client_email, // service acc
-    null,
-    keys.private_key, // private key
-    ['https://www.googleapis.com/auth/spreadsheets'] // api address
-);
-var dataSet;
 
-
-
-client.authorize(function(err,tokens){ // call the authorize method, which will reach out to the api address and attempt a connection
-    if(err){
-        console.log(err);
-        return;
-    } else {
-        console.log("connected to google cloud API")
-    }
-});
-
-async function gsrun(client, sheet, cellRange = defaultcells){ // function which grabs data from sheet, within a particular range
-    const gsAPI = google.sheets({version:"v4", auth:client});
-    const opt = {
-        spreadsheetId: keys.sheet_id, 
-        range: sheet + cellRange[0] + ':' + cellRange[1]
-    };
-    let data = await gsAPI.spreadsheets.values.get(opt);
-    let dataArray = data.data.values;
-    dataSet = dataArray;
-    //console.log(dataSet)
-    return dataArray;
-}
-
-function searchData(target){
+/**
+ * Returns a copy of dataSet after removing any rows 
+ * containing empty and undefined values.
+ * @param {*} dataSet A 2D array of data
+ */
+function cleanData(dataSet){ 
     found = [];
+    cleaned = [];
     for(i in dataSet){
-        if(dataSet[i][3] == undefined)  // added this to skip the empty and label rows, may be problematic later
-            console.log(dataSet[i][0])
-        else if((normalizeForSearch(dataSet[i][1]).includes(normalizeForSearch(target)))){ // second index can be changed depending on which column is being searched
+        if(dataSet[i][3] == undefined) 
+            cleaned.push(dataSet[i])
+        else{ 
             found.push(dataSet[i])
         }
     }
+    console.log('Removed %d rows with missing data', cleaned.length);
+    console.log('Found %d valid rows', found.length);
     return found;
+};
+
+/**
+ * Gets all data from a given Google Sheet.
+ * @param {*} client Authorized connection to Google Sheets API
+ * @param {*} sheet Which sheet to access, 'STATE' or 'FEDERAL'
+ * @returns A 2D array of data
+ */
+async function getSheetData(client,sheet) { 
+    const gsAPI = google.sheets({version:"v4", auth:client});
+    const opt = {
+        spreadsheetId: keys.sheet_id, 
+        range: sheet 
+    };
+    const data = await gsAPI.spreadsheets.values.get(opt);    
+    return data;
 }
 
-app.listen(port, () => {console.log("localhost:" + port)});
+/**
+ * Gets data and metadata from both 'FEDERAL' and 'STATE' sheets.
+ * Defines responseObject.
+ * @param {*} client Authorized connection to Google Sheets API
+ */
+async function getData(client) { // get data from both federal and state sheets
+    const federalSheetData = await getSheetData(client, 'FEDERAL');
+    const federalArray = federalSheetData.data.values;
+    const federalInfo = federalArray[1];
+    const federalData = federalArray.slice(2);
+    
+    const stateSheetData = await getSheetData(client, 'STATE');
+    const stateArray = stateSheetData.data.values;
+    const stateInfo = stateArray[1];
+    const stateData = stateArray.slice(2);
 
-app.use(express.static('public'));
+    responseObject = {
+        states: stateInfo[0].split(/\s*;\s*/),
+        agencies: federalInfo[0].split(/\s*;\s*/),
+        types: stateInfo[3].split(/\s*;\s*/),
+        topics: stateInfo[4].split(/\s*;\s*/),
+        data: cleanData(federalData.concat(stateData))
+    };
+}
 
-gsrun(client, keys.sheet_names[0]); // second parameter index can be changed to specify the sheet accessed, 0 = federal, 1 = state
+async function startup() {
+    const client = new google.auth.JWT( // create client object, which holds the private key and service acc address
+        keys.client_email, // service acc
+        null,
+        keys.private_key, // private key
+        ['https://www.googleapis.com/auth/spreadsheets'] // api address
+    );
 
-app.get('/info', async (req,res) => {
-    const target = req.query.param1.toString();
-    //console.log(target);
-    const data = searchData(target);
-    //const data = dataSet;
-    res.status(200).json({data: data}) // this object can be specified to make data presentation easier
-})
+    // call the authorize method, which will reach out to the api address and attempt a connection
+    client.authorize(function(err,tokens){ 
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            console.log("connected to google cloud API")
+        }
+    });
+
+    await getData(client);
+    app.use(express.static('public'));
+    app.get('/info', async (req,res) => {
+        res.status(200).json(responseObject);
+    });
+    app.listen(port, () => {console.log("localhost:" + port)});
+}
+
+startup();
