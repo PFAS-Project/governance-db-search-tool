@@ -510,8 +510,8 @@
       } 
 
       function exportSelected() {
-        // TODO: remove ID from list of fields
-        const fields = options.valueNames;
+        // Remove ID from list of fields
+        const fields = options.valueNames.filter(field => field !== 'ID');
         const selected = dataList.matchingItems;
         let fileContent = '';
 
