@@ -4,9 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>PFAS prototype</title>
+    <title>The PFAS Governance Tracker</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel='stylesheet' id='style-css' href='https://pfasproject.com/wp-content/themes/rowling/style.css?ver=1.1.1-wpcom' type='text/css' media='all'/>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -20,58 +21,94 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 </head>
-  <body>
 
-    <!-- Start of navbar -->
-    <nav class="navbar navbar-expand-md" style="background-color: rgb(189, 225, 70);"> <!--navbar-dark bg-dark-->
-        <div class="container-fluid">
-          <a href="#" class="navbar-brand" style="color: rgb(84, 84, 84);">PFAS Governance Database</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_supported_content">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-  
-          <div class="collapse navbar-collapse" id="navbar_supported_content">
-            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-              
-              <!-- About This Database Dropdown -->
-              <li class="navbar">
-                <a class="nav-link " data-bs-toggle="modal" style="color: rgb(84, 84, 84)" href="#modalref">About This Database</a> 
-                    <div class="modal fade" id="modalref" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
-                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
-                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
-                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
-                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
-                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
-                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
-                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
-                                The Department of Environmental Conservation shall periodically test the drinking water for PFAS contamination, monitor and offer testing for those expose to the contamination, 
-                                and inform the public that firefighting gear that contains PFAS is no longer required ADEC has identified PFOS and PFOA and several other PFAS found in AFFF as hazardous substances. Any discharge of PFAS-based AFFF must be reported immediately to the State under 18 AAC 75.
-                            </div>
+<body class="home blog wp-custom-logo custom-colors has-site-logo author-hidden">
+  <header class="header-wrapper">
+      <div class="section-inner">
 
-                          </div>
-                        </div>
-              <!-- PFAS Project Lab -->
-              <li class="navbar">
-                <a class="nav-link" style="color: rgb(84, 84, 84)" href="https://pfasproject.com" target="_blank">PFAS Project Lab</a> 
-              </li>
-            </ul>
-  
-            <!-- Search Form -->
+        <!--PFAS logo and Title-->
+        <a href="https://pfasproject.com/" class="site-logo-link" rel="home" itemprop="url">
+          <img width="471" height="80" src="https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?fit=471%2C80&amp;ssl=1" class="site-logo attachment-rowling_site_logo" alt="" decoding="async" loading="lazy" data-size="rowling_site_logo" itemprop="logo" srcset="https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?w=1312&amp;ssl=1 1312w, https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?resize=300%2C51&amp;ssl=1 300w, https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?resize=1024%2C174&amp;ssl=1 1024w, https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?resize=768%2C131&amp;ssl=1 768w, https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?resize=816%2C139&amp;ssl=1 816w, https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?resize=471%2C80&amp;ssl=1 471w, https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?w=1232&amp;ssl=1 1232w" sizes="(max-width: 471px) 100vw, 471px" data-attachment-id="17471" data-permalink="https://pfasproject.com/cropped-ssehri-pfas-logo-1280-jpg/" data-orig-file="https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?fit=1312%2C223&amp;ssl=1" data-orig-size="1312,223" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="cropped-SSEHRI-PFAS-Logo-1280.jpg" data-image-description="&lt;p&gt;https://pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg&lt;/p&gt;
+            " data-image-caption="" data-medium-file="https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?fit=300%2C51&amp;ssl=1" data-large-file="https://i0.wp.com/pfasproject.com/wp-content/uploads/2022/02/cropped-SSEHRI-PFAS-Logo-1280.jpg?fit=616%2C105&amp;ssl=1"/>
+        </a>
+        <h2 class="site-title">
+          <a href="https://pfasproject.com/" title="PFAS Governance Tracker" rel="home">The PFAS Governance Tracker</a>
+        </h2>
+
+        <!--Nav toggle-->
+        <div class="nav-toggle">
+          <div class="bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
           </div>
         </div>
+      </div>
+
+    
+
+    <!--Nav bar-->
+    <div class="outer">
+    <div class="containerNav">
+    <nav class="navigation">
+      <div class="section-inner clear-fix">
+        <ul class="header-bottom-menu">
+
+          <!--Dropdown starts-->               
+          <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-has-children menu-item-98">                 
+            <a href="#">About</a>
+            <ul class="sub-menu">
+              <li>
+                <a class="nav-link menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-13204" id="menu-item-13204" data-bs-toggle="modal" style="color: rgb(84, 84, 84)" href="#datamodalref"><strong>Our Work</strong></a> 
+              </li>
+              <li>
+                <a class=" nav-link menu-item menu-item-type-post_type menu-item-object-page menu-item-192" id="menu-item-192" data-bs-toggle="modal" href="#teamModalref">The Team</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-8">
+            <a href="https://pfasproject.com" aria-current="page">Pfas Project Lab</a>
+          </li>
+        </ul>
+
+      </div>
     </nav>
-      <!-- End of navbar -->
-        
+  </div>
+</div>
+
+    <!--Modal About The Databawse-->
+    <div class="modal fade" id="datamodalref" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            About the database text goes here.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal About Our Team-->
+    <div class="modal fade" id="teamModalref" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            About our team text goes here.
+          </div>
+        </div>
+      </div>
+    </div>
+    </header>
+
+    
         <!--start of container-->
         <div class="container-fluid border" id="content">
         <row class="row">
@@ -90,11 +127,7 @@
                     <div class="col-11 mt-3 text-right">
                         <button type='button' class='btn btn-secondary'>Export All
 
-                            <!--
-                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'>
-                                <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'></path>
-                                <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'></path>
-                            </svg> -->
+                       
                         </button>
                     </div>
                 </div>
@@ -107,7 +140,7 @@
                     <div class="col">
                         <div class="row mx-1 mb-1">
                             <button id="filterReset" class="btn btn-secondary" type="button">
-                              Reset Filters
+                              Reset All Filters
                             </button>
                         </div>
                         <div class="accordion" id="advanced-search">
@@ -156,9 +189,9 @@
                                     <div id="advOption2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="advanced-search">
                                         <div class="accordion-body justify-content-center">
                                             <form>
-                                                <input type="number" min="1900" max="2099" step="1" value="1905" id="dateStart"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="" id="dateStart"/>
                                                 -
-                                                <input type="number" min="1900" max="2099" step="1" value="2023" id="dateEnd"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="" id="dateEnd"/>
                                             </form>
                                         </div>
                                     </div>
@@ -213,7 +246,10 @@
                                     <div id="option5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="sort-by">
                                             <div class="row">
-                                                <span class="sort btn btn-secondary" data-sort="Date">Sort by: Date</span>
+                                                <span id="clearSort" class="btn btn-secondary">Clear Sort</span>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <span id="sortDate" class="sort btn btn-secondary" data-sort="Date">Sort by: Date</span>
                                             </div>
                                         </div>
                                     </div>
@@ -233,14 +269,14 @@
                   <span class="sr-only"></span>
                 </div>
               </div>
-                <div class="row">
-                    <div class="col-lg-12 gy-2 overflow-auto" id="search_results">
-                        <div class="list row gy-3 align-items-center">
-                            <!--cards injected here-->
-                        </div>
-                    </div>
-                </div>
-            <!--sear bar and cards end-->
+              <div class="row">
+                  <div class="col-lg-12 gy-2 overflow-auto" id="search_results">
+                      <div class="list row gy-3 align-items-center">
+                          <!--cards injected here-->
+                      </div>
+                  </div>
+              </div>
+            <!--search bar and cards end-->
             </div> 
         <!--end of container--> 
 
@@ -248,25 +284,14 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" crossorigin="anonymous" type="text/javascript"></script>
       <script>
+        
       var accordionID = 0;
-      var options = { // list.js options, fill with html template and column names
-          valueNames: [
-          "Title", 
-          "AgencyOrState", 
-          "Date", 
-          "ActionType", 
-          "ActionTopic", 
-          "AgenciesAndPlayers", 
-          "Summary", 
-          "Legislative", 
-          "CompanionBills", 
-          "PFASDef", 
-          "Sources",
-          "ID"
-      ],
-          item:
-              function (values){
-                  return `<div class='card'>  
+      var earliestDate = 2023;
+      var latestDate = 2023;
+
+      function template(values, modal = false){
+          return `
+                <div class='card ${(modal ? "border-0":"")}'>  
                   <div class='card-body'> 
                       <h2 class='card-title ml-3'>  
                       ${values.Title}
@@ -295,45 +320,45 @@
                       <h5 class='card-keyAgencyPlayers ml-3'>Key Agencies and Players:  
               ${values.AgenciesAndPlayers} 
               <!--***Key agencies/players goes here***--></h5> 
-                        <!--Accordion${values.ID}Info Start--> 
+                        <!--Accordion${(values.ID.toString()) + (modal ? "modal":"")}Info Start--> 
                         <div class='container mt-4'> 
-                          <div id='accordion${values.ID}'> 
+                          <div id='accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                           <!--Summary of Action--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseOne${values.ID}' > 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseOne${(values.ID.toString()) + (modal ? "modal":"")}' > 
                                 Summary of Action 
                               </a> 
-                              <div id='collapseOne${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseOne${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
                                   ${values.Summary}
                               </div> 
                             </div> 
                             <!--Legislative outcome--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseTwo${values.ID}' > 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseTwo${(values.ID.toString()) + (modal ? "modal":"")}' > 
                                 Legislative Outcome 
                               </a> 
-                              <div id='collapseTwo${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseTwo${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>   
                                   ${values.Legislative}
                               </div> 
                             </div> 
-                            <!--Companion Bills--> 
+                            <!--Companion Bill--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${values.ID}' > 
-                                Companion Bills 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${(values.ID.toString()) + (modal ? "modal":"")}' > 
+                                Companion Bill 
                               </a> 
-                              <div id='collapseThree${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseThree${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>
-                                  ${values.CompanionBills}
-                              </div> 
+                                  ${(values.CompanionBill == 'N/A') || (values.CompanionBill == 'No companion legislation') ? 'N/A':`<p><a class='compBill' href='#compBillModal' data-bs-toggle='modal'>${values.CompanionBill}</a></p>`}
+                              </div>
                             </div> 
                             <!--PFAS Definition--> 
                             <div class='card'> 
-                              <a class='collapsed card-link card-header' data-toggle='collapse' href='#collapseFour${values.ID}'> 
+                              <a class='collapsed card-link card-header' data-toggle='collapse' href='#collapseFour${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 PFAS Definition 
                               </a> 
-                              <div id='collapseFour${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseFour${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>
                                   ${values.PFASDef}
                                   <!--***PFAS definition goes here***--> 
@@ -342,16 +367,15 @@
                             </div> 
                             <!--Sources--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseFive${values.ID}'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseFive${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 Sources 
                               </a> 
-                              <div id='collapseFive${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseFive${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
                                   <h6><p>Primary Sources:</p></h6> 
-                                  <p><a ${(values.primarySources == 'N/A') ? '':`href=${values.primarySources} class='link-underline-primary' target='_blank'`}>${values.primarySources}<!--***primary sources links goes here and in href***--></a></p> 
+                                  <p>${(values.primarySources == 'N/A' || values.primarySources == undefined) ? 'N/A':`<a href=${values.primarySources} class='link-underline-primary' target='_blank'>${values.primarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
                                   <h6><p>Other Impotant Sources:</p></h6> 
-                                  <p><a ${(values.secondarySources == 'N/A') ? '':`href=${values.secondarySources} class='link-underline-primary' target='_blank'`}>${values.secondarySources}<!--***other important sources links goes here and in href***--></a></p> 
-                                </div> 
+                                  <p>${(values.secondarySources == 'N/A' || values.secondarySources == undefined) ? 'N/A':`<a href=${values.secondarySources} class='link-underline-primary' target='_blank'>${values.secondarySources}<!--***primary sources links goes here and in href***--></a>`}</p>                                 </div> 
                               </div> 
                           </div> 
                       </div> 
@@ -363,7 +387,27 @@
               </div> 
               </div> 
               </div> 
-              </div> ` ;
+              </div> 
+      `;
+      };
+      var options = { // list.js options, fill with html template and column names
+          valueNames: [
+          "Title", 
+          "AgencyOrState", 
+          "Date", 
+          "ActionType", 
+          "ActionTopic", 
+          "AgenciesAndPlayers", 
+          "Summary", 
+          "Legislative", 
+          "CompanionBill", 
+          "PFASDef", 
+          "Sources",
+          "ID"
+      ],
+          item:
+              function (values){
+                return template(values);
               }
       };
       var values = []; // list.js values (should stay empty)
@@ -371,10 +415,12 @@
       const name = document.getElementById("name");
       const email = document.getElementById("email");
       const ID = document.getElementById("id");
-      const submitBtn = document.getElementById("submitBtn");      const stateSel = document.getElementById("state");
+      const submitBtn = document.getElementById("submitBtn");      
+      const stateSel = document.getElementById("state");
       const fedSel = document.getElementById("federal");
       var stateSelVal = $('#stateSelect').val(); // default vaules for search
       var fedSelVal = $('#fedSelect').val();
+      // console.log("value gotten")
       var dateStart = $('#dateStart').val();
       var dateEnd = $('#dateEnd').val();
       var actionTypeVal = [];
@@ -383,7 +429,12 @@
       /*
       start of event listeners
       */
-      
+      $('#dateStart, #dateEnd').on('change', function(){
+        dateEnd = $('#dateEnd').val();
+        console.log(dateEnd);
+        dateStart = $('#dateStart').val();
+        console.log(dateStart);
+      })
       $('#stateSelect').on('change',function() {
           stateSelVal = $(this).val();
           console.log(stateSelVal);
@@ -391,14 +442,6 @@
       $('#fedSelect').on('change',function() {
           fedSelVal = $(this).val();
           console.log(fedSelVal);
-      });
-      $('#dateStart').on('change',function() {
-          dateStart = $(this).val();
-          console.log(dateStart);
-      });
-      $('#dateEnd').on('change',function() {
-          dateEnd = $(this).val();
-          console.log(dateEnd);
       });
       $('#typeSelect').on('change',function() {
           actionTypeVal = $(this).val();
@@ -413,13 +456,31 @@
       });
       $('#basicSearch').on("submit", function(e) { 
         e.preventDefault();
-        dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
+        dataList.fuzzySearch($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
       $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
         e.preventDefault();
         megaFilter();
       });
+      $('#clearSort').on('click', function(){
+        $('#sortDate').attr('class', 'sort btn btn-secondary');
+        dataList.sort('ID', { order: "asc" });
+      });
+
+      $(document).ready(function(){ // companion bill event listener
+        $(document).on('click', '.compBill', function(){
+          var compBill = $(this).text();
+          // console.log(compBill);
+          compBillVals = dataList.get('Title',compBill)[0].values();
+          // console.log(compBillData.values().Title);
+          // compBillVals = compBillData.values();
+          $('#companionBill').empty();
+          $('#companionBill').html(
+          template(compBillVals, true)
+          );
+          });
+        });
 
       function megaFilter(){
 
@@ -455,8 +516,8 @@
             filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
           }
 
-          if ((dateStart != 1905) || (dateEnd != 2023)){
-            console.log("searching with "+ dateStart + " and " + dateEnd);
+          if ((dateStart != "") || (dateEnd != "")){
+            console.log("searching with " + (dateStart) + " and " + (dateEnd));
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
 
@@ -471,15 +532,15 @@
       
       function resetFilters(){
         dataList.filter();
-        $('#dateStart').val(1905);
-        $('#dateEnd').val(2023);
+        $('#dateStart').val(earliestDate);
+        $('#dateEnd').val(latestDate);
         $('select').selectpicker('deselectAll');
         stateSelVal = "";
         fedSelVal = "";
         actionTypeVal = "";
         actionTopicVal = "";
-        dateStart = 1905;
-        dateEnd = 2023;
+        dateStart = earliestDate;
+        dateEnd = latestDate;
       }
 
       async function getInfo() {
@@ -501,11 +562,17 @@
           makeOptions(info.topics, 'topicSelect');
 
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
-
+          
           info.data.map((item)=>{
+
+              var date = (item[5]);
+
+              if (date < earliestDate)  earliestDate = date;
+              if (date > latestDate)    latestDate = date;
+
               item = item.map(str => str.trim());
               dataList.add({
-                  Title: item[1], 
+                  Title: item[2], 
                   AgencyOrState: item[0], 
                   Date: item[5], 
                   ActionType: item[3], 
@@ -513,13 +580,15 @@
                   AgenciesAndPlayers: item[10], 
                   Summary: item[9], 
                   Legislative: item[7], 
-                  CompanionBills: item[8], 
+                  CompanionBill: item[8], 
                   PFASDef: item[11], 
                   primarySources: item[12],
                   secondarySources: item[13],
                   ID: accordionID++
               });
           });
+          $('#dateStart').val(earliestDate);
+          $('#dateEnd').val(latestDate);
           $("#spinner").attr('hidden', true);
         }
       getInfo();
