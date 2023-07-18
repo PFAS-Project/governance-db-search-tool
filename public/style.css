@@ -59,6 +59,12 @@ html, body {
          }
      } 
 
+     .spinner-border {
+      width: 3rem;
+      height: 3rem;
+      color: rgb(94, 119, 13);
+      margin-top: 90px;
+    }
      .post-meta-author {
          clip: rect(1px, 1px, 1px, 1px);
          height: 1px;
