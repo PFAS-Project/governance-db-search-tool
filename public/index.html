@@ -121,13 +121,18 @@
                 <button class="btn btn-secondary" style="color: rgb(255, 255, 255)" type="submit" id="submitBtn">Search</button>
               </form> 
               
-              <!--Export All Button-->
+              <!--Export Selected Button-->
               <div class="container"> 
                 <div class="row">
                     <div class="col-11 mt-3 text-right">
-                        <button type='button' class='btn btn-secondary'>Export All
-
-                       
+                        <button title="Download displayed records as CSV" 
+                                type='button' class='btn btn-secondary' 
+                                data-toggle='tooltip' 
+                                onclick="exportSelected()">
+                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'>
+                                <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'></path>
+                                <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'></path>
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -297,12 +302,15 @@
                       ${values.Title}
               <!--***Name of Governance Action/title goes here***--> 
                           <!--download button--> 
-                          <button type='button' class='btn btn-secondary'> 
-                              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'> 
-                          <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'></path> 
-                          <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'></path> 
+                          <button title="Download record as TXT" 
+                                  type='button' class='btn btn-secondary' 
+                                  data-toggle='tooltip' 
+                                  onclick='exportThisRecord(${values.ID})'>
+                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'> 
+                              <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'></path> 
+                             <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'></path> 
                             </svg> 
-                            </button> 
+                          </button> 
                       </h2> 
                       <!--Actor, Date, Legislation, Topics of Action, and Key Agencies/Players--> 
                       <h5 class='card-actor ml-3'>Federal Agency or State:  
@@ -340,7 +348,7 @@
                               </a> 
                               <div id='collapseTwo${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>   
-                                  ${values.Legislative}
+                                  ${values.LegislativeOutcome}
                               </div> 
                             </div> 
                             <!--Companion Bill--> 
@@ -360,7 +368,7 @@
                               </a> 
                               <div id='collapseFour${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>
-                                  ${values.PFASDef}
+                                  ${values.PFASDefinition}
                                   <!--***PFAS definition goes here***--> 
                                 </div> 
                               </div> 
@@ -373,9 +381,9 @@
                               <div id='collapseFive${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
                                   <h6><p>Primary Sources:</p></h6> 
-                                  <p>${(values.primarySources == 'N/A' || values.primarySources == undefined) ? 'N/A':`<a href=${values.primarySources} class='link-underline-primary' target='_blank'>${values.primarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
-                                  <h6><p>Other Impotant Sources:</p></h6> 
-                                  <p>${(values.secondarySources == 'N/A' || values.secondarySources == undefined) ? 'N/A':`<a href=${values.secondarySources} class='link-underline-primary' target='_blank'>${values.secondarySources}<!--***primary sources links goes here and in href***--></a>`}</p>                                 </div> 
+                                  <p>${(values.PrimarySources == 'N/A' || values.PrimarySources == undefined) ? 'N/A':`<a href=${values.PrimarySources} class='link-underline-Primary' target='_blank'>${values.primarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
+                                  <h6><p>Other Important Sources:</p></h6> 
+                                  <p>${(values.SecondarySources == 'N/A' || values.SecondarySources == undefined) ? 'N/A':`<a href=${values.SecondarySources} class='link-underline-primary' target='_blank'>${values.SecondarySources}<!--***primary sources links goes here and in href***--></a>`}</p>                                 </div> 
                               </div> 
                           </div> 
                       </div> 
@@ -543,6 +551,76 @@
         dateEnd = latestDate;
       }
 
+      function exportThisRecord(ID) {
+        // Get item from dataList that has the given ID
+        const record = dataList.get("ID", ID)[0];
+
+        if (!record) {
+          console.log("No record found with ID: " + ID);
+          return;
+        }
+
+        // Make a string where each line looks like "Header: Content" with a blank line after each record
+        let recordString = '';
+        for (const key in record.values()) {
+          // Skip ID field
+          if (key !== 'ID') {
+            recordString += `${key}: ${record.values()[key]}\n\n`;
+          }
+        }
+        // Save this string in a .txt file named after the first two words of the title
+        const shortTitle = record.values().Title.split(' ').slice(0,15);
+        const filename = `${shortTitle.join(' ').replace(/[/\\?%*:|"<>]/g, '-')}.txt`;
+
+        const bb = new Blob([recordString], { type: 'text/plain' });
+        const a = document.createElement('a');
+        a.href = window.URL.createObjectURL(bb);
+        a.download = filename;
+        a.click();
+
+        console.log("Export record: " + ID);
+      } 
+
+      function exportSelected() {
+        // Remove ID from list of fields
+        const fields = options.valueNames.filter(field => field !== 'ID');
+        const selected = dataList.matchingItems;
+        let fileContent = '';
+
+        // Add header row to fileContent
+        const headerRow = fields.map(field => `"${field}"`).join(',');
+        fileContent += headerRow + '\n';
+
+        // Add selected records to fileContent
+        for (i=0; i < selected.length; i++) {
+          let record = selected[i].values();
+          // Replace "smart quotes" with regular quotes
+          let row = fields.map(field => `"${String(record[field]).replaceAll('“','"').replaceAll('”','"').replaceAll('"',"'")}"`);
+          fileContent += row.join(',').replaceAll('\n',' ') + '\n';
+        }
+
+        // Save fileContent as a new CSV file
+        const bb = new Blob([fileContent], { type: 'text/csv' });
+        const a = document.createElement('a');
+
+        // Add date and time to the filename
+        const now = new Date();
+        const formatter = new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+          hour12: false,
+        });
+        const formattedDateTime = formatter.format(now).replaceAll('/', '').replaceAll(':', '').replaceAll(', ','-');
+        
+        a.download = `pfas-policy-export-${formattedDateTime}.csv`;
+        a.href = window.URL.createObjectURL(bb);
+        a.click();
+      }
+
       async function getInfo() {
           let spinner = document.getElementById("spinner");
           const res = await fetch('/info', { method: "GET" });
@@ -561,8 +639,6 @@
           makeOptions(info.types, 'typeSelect');
           makeOptions(info.topics, 'topicSelect');
 
-          $('select').selectpicker(); // Apply bootstrap-select to all select tags
-          
           info.data.map((item)=>{
 
               var date = (item[5]);
@@ -582,13 +658,15 @@
                   Legislative: item[7], 
                   CompanionBill: item[8], 
                   PFASDef: item[11], 
-                  primarySources: item[12],
-                  secondarySources: item[13],
+                  PrimarySources: item[12],
+                  SecondarySources: item[13],
                   ID: accordionID++
               });
           });
           $('#dateStart').val(earliestDate);
           $('#dateEnd').val(latestDate);
+          $('select').selectpicker(); // Apply bootstrap-select to all select tags
+          $('[data-toggle="tooltip"]').tooltip() // Activate tooltips
           $("#spinner").attr('hidden', true);
         }
       getInfo();
