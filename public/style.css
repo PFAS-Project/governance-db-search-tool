@@ -54,7 +54,7 @@ html, body {
       .sticky-top-filter {
          position: -webkit-sticky;
          position: sticky;
-         top: 70px;
+         top: 93px;
          z-index: 1019;
          }
      } 
@@ -115,6 +115,8 @@ html, body {
     margin-right: 5;
 
   }
+
+
     
     
     
