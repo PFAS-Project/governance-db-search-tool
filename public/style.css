@@ -58,3 +58,12 @@ html, body {
          z-index: 1019;
          }
      } 
+
+     .spinner-border {
+      position: fixed;
+      top: 40%;
+      left: 60%;
+      width: 3rem;
+      height: 3rem;
+      color: rgb(94, 119, 13);
+    }
