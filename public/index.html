@@ -88,7 +88,6 @@
   </style>  
 </head>
 
-
 <body class="home blog wp-custom-logo custom-colors has-site-logo author-hidden">
   <header class="header-wrapper">
       <div class="section-inner">
@@ -207,7 +206,7 @@
                     <div class="col">
                         <div class="row mx-1 mb-1">
                             <button id="filterReset" class="btn btn-secondary" type="button">
-                              Reset Filters
+                              Reset All Filters
                             </button>
                         </div>
                         <div class="accordion" id="advanced-search">
@@ -226,7 +225,7 @@
                                                     State
                                                 </label>
                                                 <!-- <input class="form-check-input" type="checkbox" value="" id="state"> -->
-                                                <select class="selectpicker" data-width="fit" multiple id="stateSelect" data-selected-text-format="count" data-actions-box="true">
+                                                <select data-width="fit" multiple id="stateSelect" data-selected-text-format="count" data-actions-box="true">
                                                     <!--state options-->
                                                 </select>
                                             </form>
@@ -235,7 +234,7 @@
                                                     Federal
                                                 </label>
                                                 <!-- <input class="form-check-input" type="checkbox" value="" id="federal"> -->
-                                                <select class="selectpicker" data-width="fit" multiple id="fedSelect" data-selected-text-format="count" data-actions-box="true">
+                                                <select data-width="fit" multiple id="fedSelect" data-selected-text-format="count" data-actions-box="true">
                                                     <!--federal options-->
                                                 </select>
                                             </form>
@@ -256,9 +255,9 @@
                                     <div id="advOption2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="advanced-search">
                                         <div class="accordion-body justify-content-center">
                                             <form>
-                                                <input type="number" min="1900" max="2099" step="1" value="1905" id="dateStart"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="" id="dateStart"/>
                                                 -
-                                                <input type="number" min="1900" max="2099" step="1" value="2023" id="dateEnd"/>
+                                                <input type="number" min="1900" max="2099" step="1" value="" id="dateEnd"/>
                                             </form>
                                         </div>
                                     </div>
@@ -276,7 +275,7 @@
                                     <div id="advOption3" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="actionTypeBody">
                                             <!--action types injected here-->
-                                            <select class="selectpicker" data-width="fit" multiple id="typeSelect" data-selected-text-format="count" data-actions-box="true">
+                                            <select data-width="fit" multiple id="typeSelect" data-selected-text-format="count" data-actions-box="true">
                                               <!--type options-->
                                           </select>
                                         </div>
@@ -290,12 +289,12 @@
                                 <h2 class="accordion-header" id="headingFour">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#option4" aria-expanded="false" aria-controls="option4">
-                                    Topic of action
+                                    Topic of Action
                                     </button>
                                     <div id="option4" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="actionTopicBody">
                                             <!--action topics injected here-->
-                                            <select class="selectpicker" data-width="fit" multiple id="topicSelect" data-selected-text-format="count" data-actions-box="true">
+                                            <select data-width="fit" multiple id="topicSelect" data-selected-text-format="count" data-actions-box="true">
                                               <!--topic options-->
                                           </select>
                                         </div>
@@ -313,7 +312,10 @@
                                     <div id="option5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="sort-by">
                                             <div class="row">
-                                                <span class="sort btn btn-secondary" data-sort="Date">Sort by: Date</span>
+                                                <span id="clearSort" class="btn btn-secondary">Clear Sort</span>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <span id="sortDate" class="sort btn btn-secondary" data-sort="Date">Sort by: Date</span>
                                             </div>
                                         </div>
                                     </div>
@@ -343,25 +345,14 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js" crossorigin="anonymous" type="text/javascript"></script>
       <script>
+        
       var accordionID = 0;
-      var options = { // list.js options, fill with html template and column names
-          valueNames: [
-          "Title", 
-          "AgencyOrState", 
-          "Date", 
-          "ActionType", 
-          "ActionTopic", 
-          "AgenciesAndPlayers", 
-          "Summary", 
-          "Legislative", 
-          "CompanionBills", 
-          "PFASDef", 
-          "Sources",
-          "ID"
-      ],
-          item:
-              function (values){
-                  return `<div class='card'>  
+      var earliestDate = 2023;
+      var latestDate = 2023;
+
+      function template(values, modal = false){
+          return `
+                <div class='card ${(modal ? "border-0":"")}'>  
                   <div class='card-body'> 
                       <h2 class='card-title ml-3'>  
                       ${values.Title}
@@ -390,45 +381,45 @@
                       <h5 class='card-keyAgencyPlayers ml-3'>Key Agencies and Players:  
               ${values.AgenciesAndPlayers} 
               <!--***Key agencies/players goes here***--></h5> 
-                        <!--Accordion${values.ID}Info Start--> 
+                        <!--Accordion${(values.ID.toString()) + (modal ? "modal":"")}Info Start--> 
                         <div class='container mt-4'> 
-                          <div id='accordion${values.ID}'> 
+                          <div id='accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                           <!--Summary of Action--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseOne${values.ID}' > 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseOne${(values.ID.toString()) + (modal ? "modal":"")}' > 
                                 Summary of Action 
                               </a> 
-                              <div id='collapseOne${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseOne${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
                                   ${values.Summary}
                               </div> 
                             </div> 
                             <!--Legislative outcome--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseTwo${values.ID}' > 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseTwo${(values.ID.toString()) + (modal ? "modal":"")}' > 
                                 Legislative Outcome 
                               </a> 
-                              <div id='collapseTwo${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseTwo${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>   
                                   ${values.Legislative}
                               </div> 
                             </div> 
-                            <!--Companion Bills--> 
+                            <!--Companion Bill--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${values.ID}' > 
-                                Companion Bills 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseThree${(values.ID.toString()) + (modal ? "modal":"")}' > 
+                                Companion Bill 
                               </a> 
-                              <div id='collapseThree${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseThree${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>
-                                  ${values.CompanionBills}
-                              </div> 
+                                  ${(values.CompanionBill == 'N/A') || (values.CompanionBill == 'No companion legislation') ? 'N/A':`<p><a class='compBill' href='#compBillModal' data-bs-toggle='modal'>${values.CompanionBill}</a></p>`}
+                              </div>
                             </div> 
                             <!--PFAS Definition--> 
                             <div class='card'> 
-                              <a class='collapsed card-link card-header' data-toggle='collapse' href='#collapseFour${values.ID}'> 
+                              <a class='collapsed card-link card-header' data-toggle='collapse' href='#collapseFour${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 PFAS Definition 
                               </a> 
-                              <div id='collapseFour${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseFour${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'>
                                   ${values.PFASDef}
                                   <!--***PFAS definition goes here***--> 
@@ -437,16 +428,15 @@
                             </div> 
                             <!--Sources--> 
                             <div class='card'> 
-                              <a class='card-link card-header' data-toggle='collapse' href='#collapseFive${values.ID}'> 
+                              <a class='card-link card-header' data-toggle='collapse' href='#collapseFive${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 Sources 
                               </a> 
-                              <div id='collapseFive${values.ID}' class='collapse' data-parent='#accordion${values.ID}'> 
+                              <div id='collapseFive${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
                                   <h6><p>Primary Sources:</p></h6> 
-                                  <p><a ${(values.primarySources == 'N/A') ? '':`href=${values.primarySources} class='link-underline-primary' target='_blank'`}>${values.primarySources}<!--***primary sources links goes here and in href***--></a></p> 
+                                  <p>${(values.primarySources == 'N/A' || values.primarySources == undefined) ? 'N/A':`<a href=${values.primarySources} class='link-underline-primary' target='_blank'>${values.primarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
                                   <h6><p>Other Impotant Sources:</p></h6> 
-                                  <p><a ${(values.secondarySources == 'N/A') ? '':`href=${values.secondarySources} class='link-underline-primary' target='_blank'`}>${values.secondarySources}<!--***other important sources links goes here and in href***--></a></p> 
-                                </div> 
+                                  <p>${(values.secondarySources == 'N/A' || values.secondarySources == undefined) ? 'N/A':`<a href=${values.secondarySources} class='link-underline-primary' target='_blank'>${values.secondarySources}<!--***primary sources links goes here and in href***--></a>`}</p>                                 </div> 
                               </div> 
                           </div> 
                       </div> 
@@ -458,7 +448,27 @@
               </div> 
               </div> 
               </div> 
-              </div> ` ;
+              </div> 
+      `;
+      };
+      var options = { // list.js options, fill with html template and column names
+          valueNames: [
+          "Title", 
+          "AgencyOrState", 
+          "Date", 
+          "ActionType", 
+          "ActionTopic", 
+          "AgenciesAndPlayers", 
+          "Summary", 
+          "Legislative", 
+          "CompanionBill", 
+          "PFASDef", 
+          "Sources",
+          "ID"
+      ],
+          item:
+              function (values){
+                return template(values);
               }
       };
       var values = []; // list.js values (should stay empty)
@@ -466,106 +476,7 @@
       const name = document.getElementById("name");
       const email = document.getElementById("email");
       const ID = document.getElementById("id");
-      const submitBtn = document.getElementById("submitBtn");
-      const actionTopics = [
-      "Drinking water",
-      "Groundwater",
-      "Soil/leachate",
-      "Air",
-      "Alternatives Assessment",
-      "Permitting process",
-      "Chemical ban/substitution",
-      "Food packaging",
-      "Data/research requirement",
-      "Local/state testing",
-      "AFFF",
-      "Litigation",
-      "Standards-setting",
-      "PFAS Task force",
-      "Funding mechanism",
-      "Clean-up and disposal",
-      "Hazardous Designation",
-      "Reporting requirement",
-      "Medical",
-      "Product ban/restriction",
-      "Investigative orders",
-      "Sludge",
-      "Agriculture",
-      "Definition",
-      "PFAS-omnibus",
-      "Multi-Toxics-omnibus",
-      "Appropriations-omnibus"
-      ];
-      const actionType = [
-      "legislation",
-      "regulation",
-      "non-regulatory",
-      "peri-governmental"
-      ];
-      const states = [
-      "AL",
-      "AK",
-      "AZ",
-      "AR",
-      "CA",
-      "CO",
-      "CT",
-      "DE",
-      "DC",
-      "FL",
-      "GA",
-      "HI",
-      "ID",
-      "IL",
-      "IN",
-      "IA",
-      "KS",
-      "KY",
-      "LA",
-      "ME",
-      "MD",
-      "MA",
-      "MI",
-      "MN",
-      "MS",
-      "MO",
-      "MT",
-      "NE",
-      "NV",
-      "NH",
-      "NJ",
-      "NM",
-      "NY",
-      "NC",
-      "ND",
-      "OH",
-      "OK",
-      "OR",
-      "PA",
-      "PR",
-      "RI",
-      "SC",
-      "SD",
-      "TN",
-      "TX",
-      "UT",
-      "VT",
-      "VA",
-      "VI",
-      "WA",
-      "WV",
-      "WI",
-      "WY"
-      ]
-      const federal = [ 
-      "United States Congress",
-      "United States Department of Defense (DOD)",
-      "United States Environmental Protection Agency (EPA)",
-      "United States Department of Energy (DOE)",
-      "United States Food and Drug Administration (FDA)",
-      "United States Geological Survey (USGS)",
-      "White House"
-      ]
+      const submitBtn = document.getElementById("submitBtn");      
       const stateSel = document.getElementById("state");
       const fedSel = document.getElementById("federal");
       var stateSelVal = $('#stateSelect').val(); // default vaules for search
@@ -574,34 +485,6 @@
       var dateEnd = $('#dateEnd').val();
       var actionTypeVal = [];
       var actionTopicVal = [];
-
-      $("#stateSelect").empty();
-
-      $("#fedSelect").empty();
-
-      states.map((item) =>{
-          $("#stateSelect").append(
-              "<option>" + item + "</option>"
-          )
-      });
-
-      federal.map((item) =>{
-          $("#fedSelect").append(
-              "<option>" + item + "</option>"
-          )
-      });
-
-      actionType.map((item) =>{
-          $("#typeSelect").append(
-              "<option>" + item + "</option>"
-          )
-      });
-
-      actionTopics.map((item) =>{
-          $("#topicSelect").append(
-              "<option>" + item + "</option>"
-          )
-      });
 
       /*
       start of event listeners
@@ -636,13 +519,31 @@
       });
       $('#basicSearch').on("submit", function(e) { 
         e.preventDefault();
-        dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
+        dataList.fuzzySearch($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
       $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
         e.preventDefault();
         megaFilter();
       });
+      $('#clearSort').on('click', function(){
+        $('#sortDate').attr('class', 'sort btn btn-secondary');
+        dataList.sort('ID', { order: "asc" });
+      });
+
+      $(document).ready(function(){ // companion bill event listener
+        $(document).on('click', '.compBill', function(){
+          var compBill = $(this).text();
+          // console.log(compBill);
+          compBillVals = dataList.get('Title',compBill)[0].values();
+          // console.log(compBillData.values().Title);
+          // compBillVals = compBillData.values();
+          $('#companionBill').empty();
+          $('#companionBill').html(
+          template(compBillVals, true)
+          );
+          });
+        });
 
       function megaFilter(){
 
@@ -678,8 +579,8 @@
             filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
           }
 
-          if ((dateStart != 1905) || (dateEnd != 2023)){
-            console.log("searching with "+ dateStart + " and " + dateEnd);
+          if ((dateStart != earliestDate) || (dateEnd != latestDate)){
+            console.log("searching with " + (dateStart || earliestDate) + " and " + (dateEnd || latestDate));
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
 
@@ -694,24 +595,46 @@
       
       function resetFilters(){
         dataList.filter();
-        $('#dateStart').val(1905);
-        $('#dateEnd').val(2023);
-        $('.selectpicker').selectpicker('deselectAll');
+        $('#dateStart').val(earliestDate);
+        $('#dateEnd').val(latestDate);
+        $('select').selectpicker('deselectAll');
         stateSelVal = "";
         fedSelVal = "";
         actionTypeVal = "";
         actionTopicVal = "";
-        dateStart = 1905;
-        dateEnd = 2023;
+        dateStart = earliestDate;
+        dateEnd = latestDate;
       }
 
       async function getInfo() {
           const res = await fetch('/info', { method: "GET" });
-          const data = await res.json();
-          console.log(data.data);
-          data.data.map((item)=>{
+          const info = await res.json();
+          console.log(info);
+
+          function makeOptions(items, selectID) {
+            items.map((item) =>{
+              $(`#${selectID}`).append(
+                  "<option>" + item + "</option>"
+              )
+            });
+          }
+          makeOptions(info.states, 'stateSelect');
+          makeOptions(info.agencies, 'fedSelect');
+          makeOptions(info.types, 'typeSelect');
+          makeOptions(info.topics, 'topicSelect');
+
+          $('select').selectpicker(); // Apply bootstrap-select to all select tags
+          
+          info.data.map((item)=>{
+
+              var date = (item[5]);
+
+              if (date < earliestDate)  earliestDate = date;
+              if (date > latestDate)    latestDate = date;
+
+              item = item.map(str => str.trim());
               dataList.add({
-                  Title: item[1], 
+                  Title: item[2], 
                   AgencyOrState: item[0], 
                   Date: item[5], 
                   ActionType: item[3], 
@@ -719,13 +642,15 @@
                   AgenciesAndPlayers: item[10], 
                   Summary: item[9], 
                   Legislative: item[7], 
-                  CompanionBills: item[8], 
+                  CompanionBill: item[8], 
                   PFASDef: item[11], 
                   primarySources: item[12],
                   secondarySources: item[13],
                   ID: accordionID++
               });
           });
+          $('#dateStart').val(earliestDate);
+          $('#dateEnd').val(latestDate);
         }
       getInfo();
       </script>
