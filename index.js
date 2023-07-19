@@ -1,7 +1,8 @@
 const {google} = require('googleapis'); // include google api
 const keys = require('./keys.json'); // import API keys
 const express = require('express');
-const normalizeForSearch = require('normalize-for-search');
+const fs = require('fs');
+// const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = 9001; // if you get a port already in use error, changed this and try again
 
@@ -57,12 +58,16 @@ async function getData(client) { // get data from both federal and state sheets
     const stateInfo = stateArray[1];
     const stateData = stateArray.slice(2);
 
+    const files = fs.readdirSync('public/static');
+    console.log(files)
+
     responseObject = {
         states: stateInfo[0].split(/\s*;\s*/),
         agencies: federalInfo[0].split(/\s*;\s*/),
         types: stateInfo[3].split(/\s*;\s*/),
         topics: stateInfo[4].split(/\s*;\s*/),
-        data: cleanData(federalData.concat(stateData))
+        data: cleanData(federalData.concat(stateData)),
+        helpFiles: files
     };
 }
 

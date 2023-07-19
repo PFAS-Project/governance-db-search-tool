@@ -77,129 +77,8 @@
 </div>
 </header>
 
-    <!-- Modals -->
-    <div class="modal fade" id="compBillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-              
-            </button>
-          </div>
-          <div class="modal-body" id="companionBill">
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!--Modal About The Databawse-->
-    <div class="modal fade" id="datamodalref" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            About the database text goes here.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Modal About Our Team-->
-    <div class="modal fade" id="teamModalref" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            About our team text goes here.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Topic of Action -->
-    <div class="modal fade" id="helpTopicAction" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Topic of Action Definitions</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" id="actionTopicBody">
-            ...
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Modal Type of Action-->
-    <div class="modal fade" id="helpTypeAction" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Type of Action Definitions</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" id="actionTypeBody">
-            ...
-          </div>
-        </div>
-      </div>
-    </div>
-
-        <!-- Modal Date -->
-    <div class="modal fade" id="helpDate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">How to Use Date Range</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" id="dateBody">
-            ...
-          </div>
-        </div>
-      </div>
-    </div>
-
-      <!--Modal State/Fed-->
-    <div class="modal fade" id="helpStateFed" tabindex="-1" aria-labelledby="stateFedTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="stateFedTitle">Federal Agency or State:</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" id="stateFedBody">
-            Help text goes here
-          </div>
-        </div>
-      </div>
-    </div>       
-
-      <!--Modal Sort By-->
-    <div class="modal fade" id="helpSortBy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">How to Use Sort By</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" id="sortBody">
-          
-          </div>
-        </div>
-      </div>
-    </div>
-
-
+<div id="modals">
+</div>
     
         <!--start of container-->
         <div class="container-fluid border" id="content">
@@ -247,7 +126,7 @@
                                 <div class="row">
                                 <div class="col-1">
                                   <!--Help button State/Fed -->
-                                  <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#helpStateFed" id="stateFedHelp">
+                                  <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#stateFedHelpModal" id="stateFedHelp">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                                       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                       <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
@@ -296,7 +175,7 @@
                                 <div class="row">
                                 <div class="col-1">
                                    <!--Help button Date-->
-                                  <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#helpDate">
+                                  <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#dateHelpModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                                       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                       <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
@@ -330,7 +209,7 @@
                               <div class="row">
                               <div class="col-1">
                               <!--Help button Type of Action-->
-                              <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#helpTypeAction">
+                              <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#actionTypeHelpModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                   <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
@@ -363,7 +242,7 @@
                               <div class="row">
                               <div class="col-1">
                                 <!--Help button Topic of Action-->
-                              <button type="button" class="btn btn-link grey-color align-items-center" data-bs-toggle="modal" data-bs-target="#helpTopicAction">
+                              <button type="button" class="btn btn-link grey-color align-items-center" data-bs-toggle="modal" data-bs-target="#actionTopicHelpModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                   <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
@@ -396,7 +275,7 @@
                             <div class="row">
                               <div class="col-1">
                                   <!--Help button Sort By-->
-                                  <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#helpSortBy">
+                                  <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#sortHelpModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                                       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                       <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
@@ -458,8 +337,28 @@
       var accordionID = 0;
       var earliestDate = 2023;
       var latestDate = 2023;
-      const modalNames = ['aboutBody','dateBody','sortBody','stateFedBody','actionTypeBody','actionTopicBody'];
-      function template(values, modal = false){
+      const modalNames = ['about', 'actionTopicHelp', ];
+      function modalTemplate(fileName,title,body){
+        return `
+        <div class="modal fade" id="${fileName}Modal" tabindex="-1" role="dialog" aria-labelledby="${fileName}Title" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="${fileName}Title">
+                  ${title}
+                </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  </button>
+              </div>
+              <div class="modal-body" id="${fileName}Body">
+                ${body}
+              </div>
+          </div>
+        </div>
+      </div>
+        `
+      };
+      function cardTemplate(values, modal = false){
           return `
                 <div class='card ${(modal ? "border-0":"")}'>  
                   <div class='card-body'> 
@@ -563,7 +462,7 @@
               </div> 
       `;
       };
-      var options = { // list.js options, fill with html template and column names
+      var options = { // list.js options, fill with html cardTemplate and column names
           valueNames: [
           "Title", 
           "AgencyOrState", 
@@ -581,7 +480,7 @@
       ],
           item:
               function (values){
-                return template(values);
+                return cardTemplate(values);
               }
       };
       var values = []; // list.js values (should stay empty)
@@ -650,7 +549,7 @@
           // compBillVals = compBillData.values();
           $('#companionBill').empty();
           $('#companionBill').html(
-          template(compBillVals, true)
+          cardTemplate(compBillVals, true)
           );
           });
         });
@@ -715,8 +614,6 @@
         dateStart = earliestDate;
         dateEnd = latestDate;
       }
-
-
 
       function exportThisRecord(ID) {
         // Get item from dataList that has the given ID
@@ -788,11 +685,17 @@
         a.click();
       }
 
-      async function getModal(name){
-        const res = await fetch(`/static/${name}.html`, { method: "GET" });
-        const modalHTML = await res.text();
-        console.log(modalHTML);
-        $(`#${name}`).html(modalHTML);
+      async function createModals(files){
+        for (i in files){
+          var name = (files[i].split('.')[0]);
+          const res = await fetch(`/static/${files[i]}`, { method: "GET" });
+          const text = await res.text();
+          title = text.split('<title>')[1].split('</title>')[0];
+          console.log(title);
+          body = text.split('</title>')[1];
+          console.log(body);
+          $('#modals').append(modalTemplate(name,title,body));
+        }
       };
 
       async function getInfo() {
@@ -812,11 +715,7 @@
           makeOptions(info.agencies, 'fedSelect');
           makeOptions(info.types, 'typeSelect');
           makeOptions(info.topics, 'topicSelect');
-
-          for (i in modalNames){
-            getModal(modalNames[i]);
-          }
-
+          createModals(info.helpFiles);
           info.data.map((item)=>{
 
               var date = (item[5]);
