@@ -1,9 +1,11 @@
 const {google} = require('googleapis'); // include google api
 const keys = require('./keys.json'); // import API keys
-const express = require('express');
 const normalizeForSearch = require('normalize-for-search');
+
+const express = require('express');
 const app = express();
-const port = 9001; // if you get a port already in use error, changed this and try again
+const port = process.env.PORT || 9001; 
+const host = process.env.HOST || "localhost";
 
 /**
  * Returns a copy of dataSet after removing any rows 
@@ -89,7 +91,7 @@ async function startup() {
     app.get('/info', async (req,res) => {
         res.status(200).json(responseObject);
     });
-    app.listen(port, () => {console.log("localhost:" + port)});
+    app.listen(port, () => {console.log(host + ":" + port)});
 }
 
 startup();
