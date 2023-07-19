@@ -134,3 +134,6 @@ dist
 
 #vscode
 .vscode
+
+# Source bundles
+*.zip
