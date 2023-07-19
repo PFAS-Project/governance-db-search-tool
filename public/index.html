@@ -692,7 +692,7 @@
           const text = await res.text();
           title = text.split('<title>')[1].split('</title>')[0];
           console.log(title);
-          body = text.split('</title>')[1];
+          body = text.split('<body>')[1].split('</body>')[0];
           console.log(body);
           $('#modals').append(modalTemplate(name,title,body));
         }
