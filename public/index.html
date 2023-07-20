@@ -187,6 +187,8 @@
                 state-level governance action (alphabetized by state).
               </li>
             </ul>
+            <br>
+            <b>You can access this information again in About -> About this tool</b>
           </p>
         </div>
     </div>
@@ -201,7 +203,7 @@
             <div class="d-flex flex-row sticky-top pb-3" style="background-color: rgb(191, 191, 191); z-index: 2;"> 
                         
                 <!--search bar -->
-              <form class="d-flex col-11 mt-3" role="search" id="basicSearch">
+              <form class="d-flex col-10 mt-3" role="search" id="basicSearch">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchTerm">
                 <button class="btn btn-secondary" style="color: rgb(255, 255, 255)" type="submit" id="submitBtn">Search</button>
               </form> 
@@ -209,7 +211,7 @@
               <!--Export Selected Button-->
               <div class="container"> 
                 <div class="row">
-                    <div class="col-11 mt-3 text-right">
+                    <div class="col-10 mt-3 text-right">
                         <button title="Download displayed records as CSV" 
                                 type='button' class='btn btn-secondary' 
                                 data-toggle='tooltip' 
@@ -237,17 +239,17 @@
                            <!--start of accordion item-->
                            <!--State or federal agency-->
                             <div class="accordion-item">
-                                <div class="row">
-                                <div class="col-1">
+                                <div class="row gx-0 justify-content-center align-items-center">
+                                <div class="col-2 d-flex">
                                   <!--Help button State/Fed -->
-                                  <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#stateFedHelpModal" id="stateFedHelp">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                                  <button type="button" class="btn btn-link grey-color d-flex" data-bs-toggle="modal" data-bs-target="#stateFedHelpModal" id="stateFedHelp">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle d-flex" viewBox="0 0 16 16">
                                       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                       <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
                                     </svg>
                                   </button>
                                   </div>
-                                  <div class="col-11">
+                                  <div class="col-10">
                                 <h2 class="accordion-header" id="headingOne">
                                     <!--Accordion buttons start-->
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -286,17 +288,17 @@
                             <!--start of accordion item-->
                             <!--Date-->
                             <div class="accordion-item">
-                                <div class="row">
-                                <div class="col-1">
+                                <div class="row gx-0 justify-content-center align-items-center">
+                                <div class="col-2 d-flex">
                                    <!--Help button Date-->
-                                  <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#dateHelpModal">
+                                  <button type="button" class="btn btn-link grey-color d-flex" data-bs-toggle="modal" data-bs-target="#dateHelpModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                                       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                       <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
                                     </svg>
                                   </button>
                                 </div>
-                                <div class="col-11">
+                                <div class="col-10">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#advOption2" aria-expanded="false" aria-controls="advOption2">
@@ -320,8 +322,8 @@
                             <!--start of accordion item-->
                             <!--Type of action-->
                             <div class="accordion-item">
-                              <div class="row">
-                              <div class="col-1">
+                              <div class="row gx-0 justify-content-center align-items-center">
+                              <div class="col-2 d-flex">
                               <!--Help button Type of Action-->
                               <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#actionTypeHelpModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
@@ -330,7 +332,7 @@
                                 </svg>
                               </button>
                               </div>
-                              <div class="col-11">
+                              <div class="col-10">
                                 <h2 class="accordion-header" id="headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#advOption3" aria-expanded="false" aria-controls="advOption3">
@@ -353,8 +355,8 @@
                             <!--start of accordion item-->
                             <!--Topic of action-->
                             <div class="accordion-item">
-                              <div class="row">
-                              <div class="col-1">
+                              <div class="row gx-0 justify-content-center align-items-center">
+                              <div class="col-2 d-flex">
                                 <!--Help button Topic of Action-->
                               <button type="button" class="btn btn-link grey-color align-items-center" data-bs-toggle="modal" data-bs-target="#actionTopicHelpModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
@@ -363,7 +365,7 @@
                                 </svg>
                               </button>
                               </div>
-                              <div class="col-11">
+                              <div class="col-10">
                                 <h2 class="accordion-header" id="headingFour">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#advOption4" aria-expanded="false" aria-controls="advOption4">
@@ -386,8 +388,8 @@
                             <!--start of accordion item-->
                             <!--sort by options-->
                             <div class="accordion-item">
-                            <div class="row">
-                              <div class="col-1">
+                            <div class="row gx-0 justify-content-center align-items-center">
+                              <div class="col-2 d-flex">
                                   <!--Help button Sort By-->
                                   <button type="button" class="btn btn-link grey-color" data-bs-toggle="modal" data-bs-target="#sortHelpModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
@@ -396,7 +398,7 @@
                                     </svg>
                                   </button>
                               </div>
-                                <div class="col-11">
+                                <div class="col-10">
                                 <h2 class="accordion-header" id="headingFive">
                                     
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
