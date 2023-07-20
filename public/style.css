@@ -107,17 +107,27 @@ html, body {
   color:#bde146
   }
 
-  .nav-toggle {
-    top: 50px;
-    right: 10px;
+  .navbar {
+    width: 80%;
+    position: flex;
+    left: 10%;
+    font-family: 'Lato', sans-serif;
   }
 
-  .containerNav {
-    position: relative;
-    width: 400px;
-    left: 65%;
-    margin-right: 5;
+  .navbar-brand {
+    margin-left: 20px;
+  }
 
+  .navbar-toggler {
+    margin-right: 20px;
+  }
+
+  .dropdown-menu .dropdown-item {
+    background-color:#fffffe;
+  }
+
+  .navbar-brand {
+    margin-top: 10px;
   }
     
     
