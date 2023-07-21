@@ -569,10 +569,7 @@
       $(document).ready(function(){ // companion bill event listener
         $(document).on('click', '.compBill', function(){
           var compBill = $(this).text();
-          // console.log(compBill);
           compBillVals = dataList.get('Title',compBill)[0].values();
-          // console.log(compBillData.values().Title);
-          // compBillVals = compBillData.values();
           $('#companionBill').empty();
           $('#companionBill').html(
           cardTemplate(compBillVals, true)
@@ -717,9 +714,7 @@
           const res = await fetch(`/static/${files[i]}`, { method: "GET" });
           const text = await res.text();
           title = text.split('<title>')[1].split('</title>')[0];
-          // console.log(title);
           body = text.split('<body>')[1].split('</body>')[0];
-          // console.log(body);
           $('#modals').append(modalTemplate(name,title,body));
         }
       };
