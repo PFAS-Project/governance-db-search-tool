@@ -415,10 +415,10 @@
                               </a> 
                               <div id='collapseFive${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
-                                  <h6><p>Primary Sources:</p></h6> 
-                                  <p>${(values.PrimarySources == 'N/A' || values.PrimarySources == undefined) ? 'N/A': values.PrimarySources.split(', ').map((link)=>{return`<a href=${link} class='link-underline-Primary' target='_blank'>${link}</a> <br />`})}</p> 
+                                  <h6><p>Primary Source:</p></h6> 
+                                  <p><ul>${(values.PrimarySources == 'N/A' || values.PrimarySources == undefined) ? 'N/A': values.PrimarySources.split(', ').map((link)=>{return`<li><a href=${link} class='link-underline-Primary' target='_blank'>${link}</a></li> <br />`})}</ul></p> 
                                   <h6><p>Other Important Sources:</p></h6> 
-                                  <p>${(values.SecondarySources == 'N/A' || values.SecondarySources == undefined) ? 'N/A': values.SecondarySources.split(', ').map((link)=>{return`<a href=${link} class='link-underline-Primary' target='_blank'>${link}</a> <br />`})}</p> 
+                                  <p><ul>${(values.SecondarySources == 'N/A' || values.SecondarySources == undefined) ? 'N/A': values.SecondarySources.split(', ').map((link)=>{return`<li> <a href=${link} class='link-underline-Primary' target='_blank'>${link}</a></li> <br />`}).join('\n')}</ul></p> 
                               </div> 
                           </div> 
                       </div> 
