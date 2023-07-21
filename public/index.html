@@ -99,8 +99,8 @@
 
       </div>
     </nav>
-    </div>
-    </div>
+  </div>
+</div>
 </header>
 
 <div id="modals">
@@ -403,19 +403,19 @@
                           </button> 
                       </h2> 
                       <!--Actor, Date, Legislation, Topics of Action, and Key Agencies/Players--> 
-                      <h5 class='card-actor ml-3'>Federal Agency or State:  
+                      <h5 class='card-actor ml-3'><strong>Federal Agency or State</strong>:  
               ${values.AgencyOrState} 
               <!--***Name of Federal Agency/State goes here***--></h5> 
-                      <h5 class='card-date ml-3'>Date:  
+                      <h5 class='card-date ml-3'><strong>Date</strong>:  
               ${values.Date}
               <!--***Date of governance goes here***--></h5> 
-                      <h5 class='card-type ml-3'>Type of Governance Action:  
+                      <h5 class='card-type ml-3'><strong>Type of Governance Action</strong>:  
               ${values.ActionType} 
               <!--***Type of governance action goes here***--></h5> 
-                      <h5 class='card-topicsOfAction ml-3'>Topics of Governance Action:  
+                      <h5 class='card-topicsOfAction ml-3'><strong>Topics of Governance Action</strong>:  
               ${values.ActionTopic}
               <!--***Topics of action goes here***--></h5> 
-                      <h5 class='card-keyAgencyPlayers ml-3'>Key Agencies and Players:  
+                      <h5 class='card-keyAgencyPlayers ml-3'><strong>Key Agencies and Players</strong>:  
               ${values.AgenciesAndPlayers} 
               <!--***Key agencies/players goes here***--></h5> 
                         <!--Accordion${(values.ID.toString()) + (modal ? "modal":"")}Info Start--> 
@@ -470,10 +470,10 @@
                               </a> 
                               <div id='collapseFive${(values.ID.toString()) + (modal ? "modal":"")}' class='collapse' data-parent='#accordion${(values.ID.toString()) + (modal ? "modal":"")}'> 
                                 <div class='card-body'> 
-                                  <h6><p>Primary Sources:</p></h6> 
-                                  <p>${(values.PrimarySources == 'N/A' || values.PrimarySources == undefined) ? 'N/A':`<a href=${values.PrimarySources} class='link-underline-Primary' target='_blank'>${values.PrimarySources}<!--***primary sources links goes here and in href***--></a>`}</p> 
+                                  <h6><p>Primary Source:</p></h6> 
+                                  <p><ul>${(values.PrimarySources == 'N/A' || values.PrimarySources == undefined) ? 'N/A': values.PrimarySources.split(', ').map((link)=>{return`<li><a href=${link} class='link-underline-Primary' target='_blank'>${link}</a></li> <br />`})}</ul></p> 
                                   <h6><p>Other Important Sources:</p></h6> 
-                                  <p>${(values.SecondarySources == 'N/A' || values.SecondarySources == undefined) ? 'N/A':`<a href=${values.SecondarySources} class='link-underline-primary' target='_blank'>${values.SecondarySources}<!--***primary sources links goes here and in href***--></a>`}</p>                                 </div> 
+                                  <p><ul>${(values.SecondarySources == 'N/A' || values.SecondarySources == undefined) ? 'N/A': values.SecondarySources.split(', ').map((link)=>{return`<li> <a href=${link} class='link-underline-Primary' target='_blank'>${link}</a></li> <br />`}).join('\n')}</ul></p> 
                               </div> 
                           </div> 
                       </div> 
@@ -554,7 +554,7 @@
       });
       $('#basicSearch').on("submit", function(e) { 
         e.preventDefault();
-        dataList.fuzzySearch($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
+        dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
       $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
@@ -701,9 +701,8 @@
           second: 'numeric',
           hour12: false,
         });
-        const formattedDateTime = formatter.format(now).replaceAll('/', '').replaceAll(':', '').replaceAll(', ','-');
-        
-        a.download = `pfas-policy-export-${formattedDateTime}.csv`;
+        const date = formatter.format(now).replaceAll('/', '').replaceAll(':', '').replaceAll(', ','-').split('-')[0];
+        a.download = `pfas-governance-export-${date}.csv`;
         a.href = window.URL.createObjectURL(bb);
         a.click();
       }
@@ -750,6 +749,10 @@
               if (date > latestDate)    latestDate = date;
 
               item = item.map(str => str.trim());
+              if (item[13] != undefined){
+              if (item[13].split(',').length > 1) {
+                console.log(item[13].split(', '));
+              }}
               dataList.add({
                   Title: item[2], 
                   AgencyOrState: item[0], 
