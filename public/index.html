@@ -104,22 +104,6 @@
 </header>
 
 <div id="modals">
-  <div class="modal fade" id="splashScreenModal" tabindex="-1" role="dialog" aria-labelledby="splashScreenTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="splashScreenTitle">
-            About this tool
-          </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-            </button>
-        </div>
-        <div class="modal-body" id="splashScreenBody">
-          
-        </div>
-    </div>
-  </div>
-  </div>
 </div>
     
         <!--start of container-->
@@ -740,15 +724,6 @@
         }
       };
 
-      async function getSplashScreenBody(file){
-        const res = await fetch(`/static/${file}`, { method: "GET" });
-        const text = await res.text();
-        title = text.split('<title>')[1].split('</title>')[0];
-        body = text.split('<body>')[1].split('</body>')[0];
-        $('#splashScreenBody').append(body);
-        // console.log('splashScreen input')
-      }
-
       async function getInfo() {
           let spinner = document.getElementById("spinner");
           const res = await fetch('/info', { method: "GET" });
@@ -766,8 +741,11 @@
           makeOptions(info.agencies, 'fedSelect');
           makeOptions(info.types, 'typeSelect');
           makeOptions(info.topics, 'topicSelect');
-          createModals(info.helpFiles);
-          getSplashScreenBody(info.helpFiles[0]);
+
+          createModals(info.helpFiles).then(() => {
+            const splashScreen = new bootstrap.Modal('#aboutToolModal');
+            splashScreen.show()
+          });
           
           info.data.map((item)=>{
 
@@ -799,8 +777,7 @@
           $('[data-toggle="tooltip"]').tooltip() // Activate tooltips
           $("#spinner").attr('hidden', true);
         }
-      // createModals(['aboutTool.html']);
-      $('#splashScreenModal').modal('show');
+        
       getInfo();
       </script>
   </body>
