@@ -1,3 +1,5 @@
+Test deployment: https://pfas-gov-tracker-test.onrender.com/
+
 To install and run this web tool in a development environment:
 - Install [node.js](https://nodejs.org/en/download)
 - Install [Visual Studio Code](https://code.visualstudio.com/download)
@@ -10,10 +12,14 @@ To install and run this web tool in a development environment:
 - In the web browser, navigate to [localhost:9001](http://localhost:9001)
 - Use CTRL-C to quit
 
+Deployment notes:
+- Create new service accounts on the [Google Cloud console](https://console.cloud.google.com).
+- Deploy at [Render.com](https://dashboard.render.com) (login required). Be sure to add `keys.json` as a "secret file."
+
 References:
+- [How to Deploy Your Node.js Application for Free with Render](https://www.freecodecamp.org/news/how-to-deploy-nodejs-application-with-render/)
 - [Node.js tutorial in Visual Studio Code](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial)
 - [Video: Google Sheets API - JavaScript NodeJS Tutorial](https:/youtu.be/MiPpQzW_ya0)
 - [Video: Passing Data Between Frontend and Backend | Node.js](https://www.youtube.com/watch?v=5TxF9PQaq4U&ab_channel=Smoljames)
 - For editing this file: [Markdown cheat sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
-The Google Cloud console used for creating the service account can be accessed at https://console.cloud.google.com.
