@@ -115,10 +115,19 @@ html, body {
   .containerNav {
     position: relative;
     width: 400px;
-    left: 65%;
+    margin-left: auto;
     margin-right: 5;
-
   }
+
+  .site-title {
+    font-size:30px;
+  }
+
+  .site-description {
+    font-size: 18px;
+    padding-bottom: 12px;
+  }
+
     
     
     
