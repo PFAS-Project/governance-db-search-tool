@@ -362,10 +362,12 @@
                   <div class="fa fw fa-arrow-up"></div>
               </a>
               <p class="copyright">
-                  &copy; 2023 
+                  &copy; 2023 <span id="additional-copyright"></span>
                   <a href="https://pfasproject.com/" title="The PFAS Project Lab &mdash; Studying Social, Scientific, and Political Factors of Per- and Polyfluoroalkyl Substances" rel="home">The PFAS Project Lab</a>
               </p>
-              <p class="attribution"></p>
+              <p class="attribution">Citation: 
+                <span id="citation"></span>
+              </p>
           </div>
   
       </footer>
@@ -792,6 +794,14 @@
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
           $('[data-toggle="tooltip"]').tooltip() // Activate tooltips
           $("#spinner").attr('hidden', true);
+          
+          $("#citation").text(info.metadata.Citation); 
+          
+          const mdy = info.metadata["Release date"].split('/');
+          const year = mdy[2];
+          if (year > 2023) {
+            $("#additional-copyright").text(`- ${year}`);
+          }
         }
         
       getInfo();
