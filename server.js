@@ -1,8 +1,8 @@
 const {google} = require('googleapis'); // include google api
 const keys = require('./keys.json'); // import API keys
-const normalizeForSearch = require('normalize-for-search');
-
 const express = require('express');
+const fs = require('fs');
+// const normalizeForSearch = require('normalize-for-search');
 const app = express();
 const port = process.env.PORT || 9001; 
 const host = process.env.HOST || "localhost";
@@ -59,12 +59,15 @@ async function getData(client) { // get data from both federal and state sheets
     const stateInfo = stateArray[1];
     const stateData = stateArray.slice(2);
 
+    const files = fs.readdirSync('public/static');
+
     responseObject = {
         states: stateInfo[0].split(/\s*;\s*/),
         agencies: federalInfo[0].split(/\s*;\s*/),
         types: stateInfo[3].split(/\s*;\s*/),
         topics: stateInfo[4].split(/\s*;\s*/),
-        data: cleanData(federalData.concat(stateData))
+        data: cleanData(federalData.concat(stateData)),
+        helpFiles: files
     };
 }
 
