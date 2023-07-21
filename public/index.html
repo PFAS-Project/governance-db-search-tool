@@ -671,9 +671,8 @@
           second: 'numeric',
           hour12: false,
         });
-        const formattedDateTime = formatter.format(now).replaceAll('/', '').replaceAll(':', '').replaceAll(', ','-');
-        
-        a.download = `pfas-policy-export-${formattedDateTime}.csv`;
+        const date = formatter.format(now).replaceAll('/', '').replaceAll(':', '').replaceAll(', ','-').split('-')[0];
+        a.download = `pfas-governance-export-${date}.csv`;
         a.href = window.URL.createObjectURL(bb);
         a.click();
       }
