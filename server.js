@@ -60,7 +60,6 @@ async function getData(client) { // get data from both federal and state sheets
     const stateData = stateArray.slice(2);
 
     const files = fs.readdirSync('public/static');
-    console.log(files)
 
     responseObject = {
         states: stateInfo[0].split(/\s*;\s*/),
