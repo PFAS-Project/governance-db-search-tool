@@ -366,7 +366,7 @@
                   <div class="fa fw fa-arrow-up"></div>
               </a>
 
-              <p class="attribution" style="color: white">&copy; 
+              <p class="attribution" style="color: white; font-size: 16px">&copy; 
                 <span id="citation"></span>
               </p>
           </div>
@@ -795,14 +795,15 @@
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
           $('[data-toggle="tooltip"]').tooltip() // Activate tooltips
           $("#spinner").attr('hidden', true);
-          
-          $("#citation").text(info.metadata.Citation); 
-          
+
+          $("#citation").text(info.metadata["Citation"]);
+
           const mdy = info.metadata["Release date"].split('/');
           const year = mdy[2];
           if (year > 2023) {
             $("#additional-copyright").text(`- ${year}`);
           }
+          
         }
         
       getInfo();
