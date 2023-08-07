@@ -137,7 +137,7 @@
               <!--Export Selected Button-->
               <div class="col d-flex mt-3 pl-3">
                 <div class="col d-flex align-items-stretch">
-                    <div class="row text-right mx-2 d-flex flex-fill">
+                    <div class="row text-right mx-2 d-flex flex-fill ">
                         <button title="Download displayed records as CSV" 
                                 type='button' class='btn btn-secondary' 
                                 data-toggle='tooltip' 
@@ -150,8 +150,8 @@
                     </div>
                 </div>
                 <div class="col">
-                  <div class="row mt-3 m-1 align-items-center bg-white">
-                    <p class="m-0">num results</p>
+                  <div class="row mt-3 m-1 align-items-center bg-white" id="numResults">
+                    
                   </div>
                 </div>
               </div>
@@ -638,7 +638,9 @@
           }
 
           return filterTopic && filterType && filterState && filterFederal && filterDate;
-        })
+        });
+        updateResultCount();
+        // console.log("filtered");
       };
 
       async function onSubmit(e) {
@@ -657,6 +659,10 @@
         actionTopicVal = "";
         dateStart = earliestDate;
         dateEnd = latestDate;
+        updateResultCount();
+      }
+      function updateResultCount() {
+        $('#numResults').text(`${(dataList.filtered || dataList.searched ? dataList.matchingItems.length:dataList.items.length)} results found`);
       }
 
       function exportThisRecord(ID) {
@@ -795,6 +801,7 @@
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
           $('[data-toggle="tooltip"]').tooltip() // Activate tooltips
           $("#spinner").attr('hidden', true);
+          updateResultCount();
         }
         
       getInfo();
