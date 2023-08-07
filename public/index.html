@@ -135,7 +135,7 @@
               </form> 
               
               <!--Export Selected Button-->
-              <div class="col d-flex mt-3 pl-3">
+              <div class="col d-flex mt-3  mx-1">
                 <div class="col d-flex align-items-stretch">
                     <div class="row text-right mx-2 d-flex flex-fill ">
                         <button title="Download displayed records as CSV" 
@@ -149,9 +149,9 @@
                         </button>
                     </div>
                 </div>
-                <div class="col">
-                  <div class="row mt-3 m-1 align-items-center bg-white" id="numResults">
-                    
+                <div class="col d-flex align-items-stretch">
+                  <div class="row mx-1 d-flex flex-fill bg-white border rounded" >
+                    <p class="text-center m-0 font-weight-bold text-nowrap mt-2" id="numResults"></p>
                   </div>
                 </div>
               </div>
@@ -662,7 +662,7 @@
         updateResultCount();
       }
       function updateResultCount() {
-        $('#numResults').text(`${(dataList.filtered || dataList.searched ? dataList.matchingItems.length:dataList.items.length)} results found`);
+        $('#numResults').text(`${(dataList.filtered || dataList.searched ? dataList.matchingItems.length:dataList.items.length)} results`);
       }
 
       function exportThisRecord(ID) {
