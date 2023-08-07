@@ -150,7 +150,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-stretch">
-                  <div class="row mx-1 d-flex flex-fill bg-white border rounded" >
+                  <div class="row mx-1 d-flex flex-fill bg-white  rounded" >
                     <p class="text-center m-0 font-weight-bold text-nowrap mt-2" id="numResults"></p>
                   </div>
                 </div>
@@ -662,7 +662,7 @@
         updateResultCount();
       }
       function updateResultCount() {
-        $('#numResults').text(`${(dataList.filtered || dataList.searched ? dataList.matchingItems.length:dataList.items.length)} results`);
+        $('#numResults').text(`${(dataList.filtered || dataList.searched ? dataList.matchingItems.length:dataList.items.length)} Results`);
       }
 
       function exportThisRecord(ID) {
