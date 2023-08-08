@@ -359,7 +359,7 @@
         <!--end of container--> 
 
         <!--Site footer-->
-        <footer class="site-footer">
+        <footer class="site-footer d-none" id="siteFooter">
 
           <div class="section-inner">
               <a href="#" class="to-the-top" title="To the top">
@@ -795,7 +795,7 @@
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
           $('[data-toggle="tooltip"]').tooltip() // Activate tooltips
           $("#spinner").attr('hidden', true);
-
+          $("#siteFooter").removeClass('d-none');
           $("#citation").text(info.metadata["Citation"]);
 
           const mdy = info.metadata["Release date"].split('/');
