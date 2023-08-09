@@ -135,19 +135,24 @@
               </form> 
               
               <!--Export Selected Button-->
-              <div class="container"> 
-                <div class="row">
-                    <div class="col-10 mt-3 text-right">
+              <div class="col d-flex mt-3  mx-1">
+                <div class="col d-flex align-items-stretch">
+                    <div class="row text-right mx-2 d-flex flex-fill ">
                         <button title="Download displayed records as CSV" 
                                 type='button' class='btn btn-secondary' 
                                 data-toggle='tooltip' 
                                 onclick="exportSelected()">
-                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'>
+                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'>
                                 <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'></path>
                                 <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'></path>
                             </svg>
                         </button>
                     </div>
+                </div>
+                <div class="col d-flex align-items-stretch">
+                  <div class="row mx-1 d-flex flex-fill bg-white  rounded" >
+                    <p class="text-center m-0 font-weight-bold text-nowrap mt-2" id="numResults"></p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -348,7 +353,7 @@
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
             <!--dropdown end-->
             
             <!--cards start-->
@@ -633,7 +638,9 @@
           }
 
           return filterTopic && filterType && filterState && filterFederal && filterDate;
-        })
+        });
+        updateResultCount();
+        // console.log("filtered");
       };
 
       async function onSubmit(e) {
@@ -652,6 +659,10 @@
         actionTopicVal = "";
         dateStart = earliestDate;
         dateEnd = latestDate;
+        updateResultCount();
+      }
+      function updateResultCount() {
+        $('#numResults').text(`${(dataList.filtered || dataList.searched ? dataList.matchingItems.length:dataList.items.length)} Results`);
       }
 
       function exportThisRecord(ID) {
@@ -790,6 +801,7 @@
           $('select').selectpicker(); // Apply bootstrap-select to all select tags
           $('[data-toggle="tooltip"]').tooltip() // Activate tooltips
           $("#spinner").attr('hidden', true);
+          updateResultCount();
         }
         
       getInfo();
