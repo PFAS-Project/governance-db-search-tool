@@ -338,10 +338,9 @@
                               </div>
                               </div>
                                     <div id="advOption5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="advanced-search">
-                                          <div class="accordion-body" id="actionTopicBody">
-                                              <!--action topics injected here-->
+                                          <div class="accordion-body" id="outcomeBody">
+                                              <!--outcomes injected here-->
                                               <select data-width="fit" multiple id="outcomeSelect" data-selected-text-format="count" data-actions-box="true">
-                                                <!--topic options-->
                                             </select>
                                           </div>
                                   </div>
@@ -795,6 +794,7 @@
           makeOptions(info.agencies, 'fedSelect');
           makeOptions(info.types, 'typeSelect');
           makeOptions(info.topics, 'topicSelect');
+          makeOptions(info.outcomes, 'outcomeSelect');
 
           createModals(info.helpFiles).then(() => {
             const splashScreen = new bootstrap.Modal('#aboutToolModal');
