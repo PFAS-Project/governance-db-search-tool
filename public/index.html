@@ -698,6 +698,7 @@
         fedSelVal = "";
         actionTypeVal = "";
         actionTopicVal = "";
+        actionOutcomeVal = "";
         dateStart = earliestDate;
         dateEnd = latestDate;
         updateResultCount();
@@ -804,7 +805,7 @@
           makeOptions(info.types, 'typeSelect');
           makeOptions(info.topics, 'topicSelect');
           makeOptions(info.outcomes, 'outcomeSelect');
-          console.log(info.helpFiles);
+          // console.log(info.helpFiles);
           createModals(info.helpFiles).then(() => {
             const splashScreen = new bootstrap.Modal('#aboutToolModal');
             splashScreen.show()
