@@ -576,7 +576,7 @@
       var dateEnd = $('#dateEnd').val();
       var actionTypeVal = [];
       var actionTopicVal = [];
-
+      var actionOutcomeVal = [];
       /*
       start of event listeners
       */
@@ -602,6 +602,10 @@
           actionTopicVal = $(this).val();
           console.log(actionTopicVal);
       });
+      $('#outcomeSelect').on('change',function() {
+          actionOutcomeVal = $(this).val();
+          console.log(actionOutcomeVal);
+      });
       $('#filterReset').on('click', function(){
         resetFilters();
       });
@@ -610,7 +614,7 @@
         dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
-      $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
+      $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect, #outcomeSelect').on('change', function(e){
         e.preventDefault();
         megaFilter();
       });
@@ -664,12 +668,17 @@
             filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
           }
 
+          if (actionOutcomeVal != ""){
+            console.log("searching with outcome filter");
+            filterOutcome = actionOutcomeVal.some((outcome) => { return ((item.values().LegislativeOutcome).includes((outcome)))  });
+          }
+
           if ((dateStart != "") || (dateEnd != "")){
             console.log("searching with " + (dateStart) + " and " + (dateEnd));
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
 
-          return filterTopic && filterType && filterState && filterFederal && filterDate;
+          return filterTopic && filterType && filterState && filterFederal && filterDate && filterOutcome;
         });
         updateResultCount();
         // console.log("filtered");
