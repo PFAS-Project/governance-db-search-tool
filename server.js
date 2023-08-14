@@ -75,6 +75,7 @@ async function getData(client) { // get data from both federal and state sheets
         agencies: federalInfo[0].split(/\s*;\s*/),
         types: stateInfo[3].split(/\s*;\s*/),
         topics: stateInfo[4].split(/\s*;\s*/),
+        outcomes: stateInfo[7].split(/\s*;\s*/),
         data: cleanData(federalData.concat(stateData)),
         helpFiles: staticFiles
     };
