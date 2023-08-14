@@ -316,37 +316,6 @@
                             </div>
                             <!--end of accordion item-->
                             <!--start of accordion item-->
-                            <!--Topic of action-->
-                            <div class="accordion-item">
-                              <div class="row gx-0 justify-content-center align-items-center">
-                              <div class="col-2 d-flex">
-                                <!--Help button Topic of Action-->
-                              <button type="button" class="btn btn-link grey-color align-items-center" data-bs-toggle="modal" data-bs-target="#outcomeHelpModal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-                                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                  <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
-                                </svg>
-                              </button>
-                              </div>
-                              <div class="col-10">
-                                <h2 class="accordion-header" id="headingFive">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#advOption5" aria-expanded="false" aria-controls="advOption5">
-                                    Legistlative Outcome
-                                    </button>
-                                </h2>
-                              </div>
-                              </div>
-                                    <div id="advOption5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="advanced-search">
-                                          <div class="accordion-body" id="outcomeBody">
-                                              <!--outcomes injected here-->
-                                              <select data-width="fit" multiple id="outcomeSelect" data-selected-text-format="count" data-actions-box="true">
-                                            </select>
-                                          </div>
-                                  </div>
-                            </div>
-                            <!--end of accordion item-->
-                            <!--start of accordion item-->
                             <!--sort by options-->
                             <div class="accordion-item">
                             <div class="row gx-0 justify-content-center align-items-center">
@@ -360,16 +329,16 @@
                                   </button>
                               </div>
                                 <div class="col-10">
-                                <h2 class="accordion-header" id="headingSix">
+                                <h2 class="accordion-header" id="headingFive">
                                     
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#option6" aria-expanded="false" aria-controls="option6">
+                                    data-bs-target="#option5" aria-expanded="false" aria-controls="option5">
                                     Sort
                                     </button>
                                     
                                 </h2>
                                 </div>
-                                    <div id="option6" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="advanced-search">
+                                    <div id="option5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="sort-by">
                                             <div class="row">
                                                 <span id="clearSort" class="btn btn-secondary">Clear Sort</span>
@@ -381,7 +350,6 @@
                                     </div>
                             </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -576,7 +544,7 @@
       var dateEnd = $('#dateEnd').val();
       var actionTypeVal = [];
       var actionTopicVal = [];
-      var actionOutcomeVal = [];
+
       /*
       start of event listeners
       */
@@ -602,10 +570,6 @@
           actionTopicVal = $(this).val();
           console.log(actionTopicVal);
       });
-      $('#outcomeSelect').on('change',function() {
-          actionOutcomeVal = $(this).val();
-          console.log(actionOutcomeVal);
-      });
       $('#filterReset').on('click', function(){
         resetFilters();
       });
@@ -614,7 +578,7 @@
         dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
-      $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect, #outcomeSelect').on('change', function(e){
+      $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect').on('change', function(e){
         e.preventDefault();
         megaFilter();
       });
@@ -668,17 +632,12 @@
             filterTopic = actionTopicVal.some((topic) => { return ((item.values().ActionTopic).includes((topic)))  });
           }
 
-          if (actionOutcomeVal != ""){
-            console.log("searching with outcome filter");
-            filterOutcome = actionOutcomeVal.some((outcome) => { return ((item.values().LegislativeOutcome).includes((outcome)))  });
-          }
-
           if ((dateStart != "") || (dateEnd != "")){
             console.log("searching with " + (dateStart) + " and " + (dateEnd));
             filterDate = ((item.values().Date <= dateEnd) && (item.values().Date >= dateStart));
           }
 
-          return filterTopic && filterType && filterState && filterFederal && filterDate && filterOutcome;
+          return filterTopic && filterType && filterState && filterFederal && filterDate;
         });
         updateResultCount();
         // console.log("filtered");
@@ -698,7 +657,6 @@
         fedSelVal = "";
         actionTypeVal = "";
         actionTopicVal = "";
-        actionOutcomeVal = "";
         dateStart = earliestDate;
         dateEnd = latestDate;
         updateResultCount();
@@ -804,8 +762,7 @@
           makeOptions(info.agencies, 'fedSelect');
           makeOptions(info.types, 'typeSelect');
           makeOptions(info.topics, 'topicSelect');
-          makeOptions(info.outcomes, 'outcomeSelect');
-          // console.log(info.helpFiles);
+
           createModals(info.helpFiles).then(() => {
             const splashScreen = new bootstrap.Modal('#aboutToolModal');
             splashScreen.show()
