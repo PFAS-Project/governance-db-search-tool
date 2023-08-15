@@ -59,16 +59,25 @@ async function getData(client) { // get data from both federal and state sheets
     const stateInfo = stateArray[1];
     const stateData = stateArray.slice(2);
 
-    const files = fs.readdirSync('public/static');
+    const metadataSheetData = await getSheetData(client, 'METADATA');
+    const metadataArray = metadataSheetData.data.values;
+    const metadataObject = {};
+    for (r in metadataArray) {
+        const row = metadataArray[r];
+        metadataObject[row[0]] = row[1];
+    }
+
+    const staticFiles = fs.readdirSync('public/static');
 
     responseObject = {
+        metadata: metadataObject,
         states: stateInfo[0].split(/\s*;\s*/),
         agencies: federalInfo[0].split(/\s*;\s*/),
         types: stateInfo[3].split(/\s*;\s*/),
         topics: stateInfo[4].split(/\s*;\s*/),
         outcomes: stateInfo[7].split(/\s*;\s*/),
         data: cleanData(federalData.concat(stateData)),
-        helpFiles: files
+        helpFiles: staticFiles
     };
 }
 
