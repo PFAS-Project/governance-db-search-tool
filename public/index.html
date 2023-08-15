@@ -585,9 +585,7 @@
       };
       var values = []; // list.js values (should stay empty)
       var dataList = new List("content", options, values); // list.js object
-      const name = document.getElementById("name");
-      const email = document.getElementById("email");
-      const ID = document.getElementById("id");
+      var metadata = {};
       const submitBtn = document.getElementById("submitBtn");      
       const stateSel = document.getElementById("state");
       const fedSel = document.getElementById("federal");
@@ -598,6 +596,7 @@
       var actionTypeVal = [];
       var actionTopicVal = [];
       var actionOutcomeVal = [];
+
       /*
       start of event listeners
       */
@@ -744,8 +743,8 @@
 
         // Make a string where each line looks like "Header: Content" with a blank line after each record
         let recordString = '';
-        recordString += 'Search results from: ' 
-        recordString += $("#citation").text() + '\n\n'
+        recordString += 'Search results from: ';
+        recordString += metadata.Citation + '\n\n';
         for (const key in record.values()) {
           // Skip ID field and undefined values
           if (key !== 'ID' && record.values()[key]) {
@@ -770,6 +769,9 @@
         const fields = options.valueNames.filter(field => field !== 'ID');
         const selected = dataList.matchingItems;
         let fileContent = '';
+
+        // Add metadata to fileContent
+
 
         // Add header row to fileContent
         const headerRow = fields.map(field => `"${field}"`).join(',');
@@ -820,6 +822,7 @@
           const res = await fetch('/info', { method: "GET" });
           const info = await res.json();
           console.log(info);
+          metadata = info.metadata;
 
           function makeOptions(items, selectID) {
             items.map((item) =>{
