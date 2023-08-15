@@ -606,18 +606,22 @@
           actionOutcomeVal = $(this).val();
           console.log(actionOutcomeVal);
       });
+      
       $('#filterReset').on('click', function(){
         resetFilters();
       });
+
       $('#basicSearch').on("submit", function(e) { 
         e.preventDefault();
         dataList.search($('#searchTerm').val(),['Title','Summary','AgenciesAndPlayers']);     
         megaFilter();
       });
+
       $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect, #outcomeSelect').on('change', function(e){
         e.preventDefault();
         megaFilter();
       });
+
       $('#clearSort').on('click', function(){
         $('#sortDate').attr('class', 'sort btn btn-secondary');
         dataList.sort('ID', { order: "asc" });
@@ -641,6 +645,7 @@
         var filterState = true;
         var filterFederal = true;
         var filterDate = true;
+        var filterOutcome = true;
 
         dataList.filter((item)=>{
 
