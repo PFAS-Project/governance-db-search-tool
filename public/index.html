@@ -771,7 +771,12 @@
         let fileContent = '';
 
         // Add metadata to fileContent
-
+        for (const key in metadata) {
+          fileContent += key + ",";
+          fileContent += metadata[key].replaceAll(',',';');
+          fileContent += '\n';
+        }
+        fileContent += '\n\n';
 
         // Add header row to fileContent
         const headerRow = fields.map(field => `"${field}"`).join(',');
