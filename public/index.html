@@ -744,9 +744,11 @@
 
         // Make a string where each line looks like "Header: Content" with a blank line after each record
         let recordString = '';
+        recordString += 'Search results from: ' 
+        recordString += $("#citation").text() + '\n\n'
         for (const key in record.values()) {
-          // Skip ID field
-          if (key !== 'ID') {
+          // Skip ID field and undefined values
+          if (key !== 'ID' && record.values()[key]) {
             recordString += `${key}: ${record.values()[key]}\n\n`;
           }
         }
@@ -831,7 +833,6 @@
           makeOptions(info.types, 'typeSelect');
           makeOptions(info.topics, 'topicSelect');
           makeOptions(info.outcomes, 'outcomeSelect');
-          // console.log(info.helpFiles);
           createModals(info.helpFiles).then(() => {
             const splashScreen = new bootstrap.Modal('#aboutToolModal');
             splashScreen.show()
@@ -845,10 +846,6 @@
               if (date > latestDate)    latestDate = date;
 
               item = item.map(str => str.trim());
-              if (item[13] != undefined){
-              if (item[13].split(',').length > 1) {
-                console.log(item[13].split(', '));
-              }}
               dataList.add({
                   Title: item[2], 
                   AgencyOrState: item[0], 
