@@ -1,3 +1,4 @@
+Public deployment: https://governance.pfasproject.com/
 Test deployment: https://pfas-gov-tracker-test.onrender.com/
 
 To install and run this web tool in a development environment:
