@@ -197,20 +197,20 @@
                                     <div id="advSearch1" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="advanced-search">
                                         <div class="accordion-body">
                                             <form class="form-check">
-                                                <label class="form-check-label" for="stateSelect">
+                                                <label class="form-check-label" for="states">
                                                     State
                                                 </label>
                                                 <!-- <input class="form-check-input" type="checkbox" value="" id="state"> -->
-                                                <select data-width="fit" multiple id="stateSelect" data-selected-text-format="count" data-actions-box="true">
+                                                <select data-width="fit" multiple id="states" data-selected-text-format="count" data-actions-box="true">
                                                     <!--state options-->
                                                 </select>
                                             </form>
                                             <form class="form-check">
-                                                <label class="form-check-label" for="fedSelect">
+                                                <label class="form-check-label" for="agencies">
                                                     Federal
                                                 </label>
                                                 <!-- <input class="form-check-input" type="checkbox" value="" id="federal"> -->
-                                                <select data-width="fit" multiple id="fedSelect" data-selected-text-format="count" data-actions-box="true">
+                                                <select data-width="fit" multiple id="agencies" data-selected-text-format="count" data-actions-box="true">
                                                     <!--federal options-->
                                                 </select>
                                             </form>
@@ -279,7 +279,7 @@
                                     <div id="advOption3" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="advanced-search">
                                         <div class="accordion-body" id="actionTypeBody">
                                             <!--action types injected here-->
-                                            <select data-width="fit" multiple id="typeSelect" data-selected-text-format="count" data-actions-box="true">
+                                            <select data-width="fit" multiple id="types" data-selected-text-format="count" data-actions-box="true">
                                               <!--type options-->
                                             </select>
                                         </div>
@@ -312,7 +312,7 @@
                                     <div id="advOption4" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="advanced-search">
                                           <div class="accordion-body" id="actionTopicBody">
                                               <!--action topics injected here-->
-                                              <select data-width="fit" multiple id="topicSelect" data-selected-text-format="count" data-actions-box="true">
+                                              <select data-width="fit" multiple id="topics" data-selected-text-format="count" data-actions-box="true">
                                                 <!--topic options-->
                                             </select>
                                           </div>
@@ -344,7 +344,7 @@
                                     <div id="advOption5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="advanced-search">
                                           <div class="accordion-body" id="outcomeBody">
                                               <!--outcomes injected here-->
-                                              <select data-width="fit" multiple id="outcomeSelect" data-selected-text-format="count" data-actions-box="true">
+                                              <select data-width="fit" multiple id="outcomes" data-selected-text-format="count" data-actions-box="true">
                                             </select>
                                           </div>
                                   </div>
@@ -589,8 +589,8 @@
       const submitBtn = document.getElementById("submitBtn");      
       const stateSel = document.getElementById("state");
       const fedSel = document.getElementById("federal");
-      var stateSelVal = $('#stateSelect').val(); // default vaules for search
-      var fedSelVal = $('#fedSelect').val();
+      var stateSelVal = $('#states').val(); // default vaules for search
+      var fedSelVal = $('#agencies').val();
       var dateStart = $('#dateStart').val();
       var dateEnd = $('#dateEnd').val();
       var actionTypeVal = [];
@@ -606,23 +606,23 @@
         dateStart = $('#dateStart').val();
         console.log(dateStart);
       })
-      $('#stateSelect').on('change',function() {
+      $('#states').on('change',function() {
           stateSelVal = $(this).val();
           console.log(stateSelVal);
       });
-      $('#fedSelect').on('change',function() {
+      $('#agencies').on('change',function() {
           fedSelVal = $(this).val();
           console.log(fedSelVal);
       });
-      $('#typeSelect').on('change',function() {
+      $('#types').on('change',function() {
           actionTypeVal = $(this).val();
           console.log(actionTypeVal);
       });
-      $('#topicSelect').on('change',function() {
+      $('#topics').on('change',function() {
           actionTopicVal = $(this).val();
           console.log(actionTopicVal);
       });
-      $('#outcomeSelect').on('change',function() {
+      $('#outcomes').on('change',function() {
           actionOutcomeVal = $(this).val();
           console.log(actionOutcomeVal);
       });
@@ -637,7 +637,7 @@
         megaFilter();
       });
 
-      $('#stateSelect, #fedSelect, #dateStart, #dateEnd, #typeSelect, #topicSelect, #outcomeSelect').on('change', function(e){
+      $('#states, #agencies, #dateStart, #dateEnd, #types, #topics, #outcomes').on('change', function(e){
         e.preventDefault();
         megaFilter();
       });
@@ -828,7 +828,7 @@
           const info = await res.json();
           console.log(info);
           metadata = info.metadata;
-
+          console.log(info);
           function makeOptions(items, selectID) {
             items.map((item) =>{
               $(`#${selectID}`).append(
@@ -836,11 +836,14 @@
               )
             });
           }
-          makeOptions(info.states, 'stateSelect');
-          makeOptions(info.agencies, 'fedSelect');
-          makeOptions(info.types, 'typeSelect');
-          makeOptions(info.topics, 'topicSelect');
-          makeOptions(info.outcomes, 'outcomeSelect');
+          // makeOptions(info.states, 'states');
+          // makeOptions(info.agencies, 'agencies');
+          // makeOptions(info.types, 'types');
+          // makeOptions(info.topics, 'topics');
+          // makeOptions(info.outcomes, 'outcomes');
+          for (option in info.options) {
+            makeOptions(info.options[option], option); 
+          }
           createModals(info.helpFiles).then(() => {
             const splashScreen = new bootstrap.Modal('#aboutToolModal');
             splashScreen.show()
